@@ -32,7 +32,7 @@ Because the system uses **Reciprocal Rank Fusion** alongside **FlashRank reranki
 
 <div align="center">
   <img src="assets/frontend.png" alt="Scholar Frontend UI" width="800"/>
-  <p><em>Premium Dark Mode Interface with conversational history and local indexed library.</em></p>
+  <p><em>Interface with conversational history and local indexed library.</em></p>
 </div>
 
 <br/>
