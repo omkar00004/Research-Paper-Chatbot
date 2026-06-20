@@ -9,3 +9,4 @@ groq
 PyMuPDF
 pydantic
 langfuse
+langchain_text_splitters
