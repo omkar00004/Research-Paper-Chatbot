@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-multipart
+rank-bm25
+chromadb
+sentence-transformers
+flashrank
+groq
+PyMuPDF
+pydantic
+langfuse
