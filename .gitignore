@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Project Specific
+logs/
+chroma_db/
+uploads/
+.env
+
+# Large Files
+Research Paper/*.pdf
+

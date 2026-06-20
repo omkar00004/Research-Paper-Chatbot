@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scholar - RAG Research Assistant</title>
+  <meta name="description"
+    content="Upload academic PDFs and ask grounded questions. Every answer cited with hybrid retrieval." />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+</head>
+
+<body class="grain">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <div class="app-layout">
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar scroll-thin" id="sidebar">
+      <!-- Brand -->
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <!-- BookOpen icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </svg>
+        </div>
+        <div>
+          <div class="sidebar-brand-name">Scholar</div>
+          <div class="sidebar-brand-sub mono">RAG · grounded</div>
+        </div>
+        <!-- Theme toggle -->
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+          <!-- Sun icon (shown in dark mode) -->
+          <svg id="sunIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg id="moonIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- New chat -->
+      <div class="new-chat-area">
+        <button class="btn-new-chat" onclick="newConversation()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          New conversation
+        </button>
+      </div>
+
+      <!-- Conversations -->
+      <div class="sidebar-section-label">
+        <span class="mono">Conversations</span>
+      </div>
+      <div class="conversation-list scroll-thin" id="conversationList">
+        <div class="empty-conversations" id="emptyConversations">No conversations yet.</div>
+      </div>
+
+      <!-- Library -->
+      <div class="library-header">
+        <span class="library-header-label mono" id="libraryLabel">Library · 0</span>
+        <label class="library-add-btn mono">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          add
+          <input type="file" accept="application/pdf" multiple onchange="handleFileUpload(this.files)" />
+        </label>
+      </div>
+
+      <!-- Drop zone -->
+      <div class="drop-zone" id="dropZone">
+        <label class="drop-zone-inner">
+          <div class="drop-zone-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+          </div>
+          <div class="drop-zone-text">Drop PDFs to index</div>
+          <input type="file" accept="application/pdf" multiple onchange="handleFileUpload(this.files)" />
+        </label>
+      </div>
+
+      <!-- Paper list -->
+      <div class="paper-list scroll-thin" id="paperList">
+        <div class="no-papers" id="noPapers">No papers indexed yet.</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-card-label mono">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="12" cy="5" rx="9" ry="3" />
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+            </svg>
+            chunks
+          </div>
+          <div class="stat-card-value" id="statChunks">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label mono">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2" />
+              <polyline points="2 17 12 22 22 17" />
+              <polyline points="2 12 12 17 22 12" />
+            </svg>
+            papers
+          </div>
+          <div class="stat-card-value" id="statPapers">0</div>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="status-bar mono">
+        <span class="status-dot"></span>
+        LLAMA-3.3 · CHROMADB · HYBRID
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="main">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="main-header-left">
+          <!-- Mobile menu -->
+          <button class="mobile-menu-btn" onclick="toggleSidebar()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <span class="main-header-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </span>
+          <span class="main-header-title" id="headerTitle">New conversation</span>
+        </div>
+        <div class="main-header-right">
+          <span class="main-header-check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </span>
+          <span class="mono">hybrid · grounded</span>
+        </div>
+      </header>
+
+      <!-- Chat area -->
+      <div class="chat-area scroll-thin" id="chatArea">
+        <!-- Empty state (shown when no messages) -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-inner fade-in">
+            <div class="empty-badge">
+              <span class="empty-badge-dot"></span>
+              <span class="empty-badge-text mono">Local · grounded · cited</span>
+            </div>
+            <h1 class="empty-title serif">
+              Ask your <span class="gradient-text">papers</span>.
+            </h1>
+            <p class="empty-subtitle">
+              Every answer is retrieved from your indexed PDFs and traced back to the exact page.
+              No hallucinations. No outside knowledge.
+            </p>
+            <div class="suggestions-grid" id="suggestionsGrid">
+              <button class="suggestion-btn" onclick="sendSuggestion('Summarize the methodology')">
+                <span>Summarize the methodology</span>
+                <span class="suggestion-btn-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </span>
+              </button>
+              <button class="suggestion-btn" onclick="sendSuggestion('What datasets were used?')">
+                <span>What datasets were used?</span>
+                <span class="suggestion-btn-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </span>
+              </button>
+              <button class="suggestion-btn" onclick="sendSuggestion('Compare the two architectures')">
+                <span>Compare the two architectures</span>
+                <span class="suggestion-btn-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </span>
+              </button>
+              <button class="suggestion-btn" onclick="sendSuggestion('List the key limitations')">
+                <span>List the key limitations</span>
+                <span class="suggestion-btn-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <div class="empty-footer">
+              <span class="empty-footer-item">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                </svg>
+                ChromaDB
+              </span>
+              <span class="empty-footer-item">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+                Hybrid RAG
+              </span>
+              <span class="empty-footer-item">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
+                Llama-3.3
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Messages container (hidden when empty) -->
+        <div class="chat-messages" id="chatMessages" style="display: none;"></div>
+      </div>
+
+      <!-- Composer -->
+      <div class="composer">
+        <div class="composer-inner">
+          <div class="composer-box">
+            <textarea id="composerInput" class="composer-textarea" rows="1"
+              placeholder="Ask anything about your papers…" onkeydown="handleKeyDown(event)"
+              oninput="autoResize(this)"></textarea>
+            <button class="composer-send" id="sendBtn" onclick="sendMessage()" disabled title="Send">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </div>
+          <div class="composer-footer mono">
+            <span>↵ send · ⇧↵ newline</span>
+            <span id="paperCountFooter">answers cited from 0 papers</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+
+</html>
