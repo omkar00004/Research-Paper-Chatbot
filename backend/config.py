@@ -42,7 +42,7 @@ RRF_K = 60                    # reciprocal rank fusion constant
 
 # ── Groq LLM ─────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "qwen/qwen3-27b"
 GROQ_MAX_TOKENS = 3072
 GROQ_TEMPERATURE = 0.4
 
@@ -50,3 +50,11 @@ GROQ_TEMPERATURE = 0.4
 LANGFUSE_PUBLIC_KEY = os.getenv("LANGFUSE_PUBLIC_KEY", "")
 LANGFUSE_SECRET_KEY = os.getenv("LANGFUSE_SECRET_KEY", "")
 LANGFUSE_HOST = os.getenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+
+# ── Semantic Cache ────────────────────────────────────
+CACHE_DB = BASE_DIR / "semantic_cache.db"
+CACHE_SIMILARITY_THRESHOLD = 0.92
+
+# ── Groq Pricing (per million tokens, for cost estimation) ─
+GROQ_INPUT_COST_PER_M = 0.59   # $/M input tokens
+GROQ_OUTPUT_COST_PER_M = 0.79  # $/M output tokens

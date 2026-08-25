@@ -45,78 +45,100 @@ Because the system uses **Reciprocal Rank Fusion** alongside **FlashRank reranki
 ## Architecture
 
 ```mermaid
-flowchart TD
-    %% Styling
-    classDef frontend fill:#1E1E28,stroke:#C4FF3D,stroke-width:2px,color:#ECECF1
-    classDef api fill:#2D7F3A,stroke:#1A1A2E,stroke-width:2px,color:#FFFFFF
-    classDef storage fill:#5B3FD4,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
-    classDef process fill:#2C2C38,stroke:#8A8A99,stroke-width:1px,color:#ECECF1
-    classDef llm fill:#FF4D4D,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+flowchart TB
 
-    subgraph User Interaction
-        UI[Premium Web Interface]:::frontend
-    end
+%% =========================
+%% Styles
+%% =========================
+classDef client fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC
+classDef cache fill:#064E3B,stroke:#34D399,stroke-width:2px,color:#F0FDF4
+classDef ingest fill:#1C1917,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7
+classDef search fill:#1E1B4B,stroke:#818CF8,stroke-width:2px,color:#EEF2FF
+classDef llm fill:#7F1D1D,stroke:#FCA5A5,stroke-width:2px,color:#FEF2F2
+classDef eval fill:#581C87,stroke:#E9D5FF,stroke-width:2px,color:#FAF5FF
 
-    subgraph FastAPI Backend
-        API[REST API Endpoints]:::api
-        
-        %% Ingestion Flow
-        subgraph Document Ingestion
-            Parse[PDF Parsing & Cleaning]:::process
-            Chunk[Sentence-aware Chunking]:::process
-            Embed[MiniLM Embeddings]:::process
-        end
+%% =========================
+%% Main Flow
+%% =========================
 
-        %% Storage Layer
-        subgraph Storage Layer
-            DB[(ChromaDB Vector Store)]:::storage
-            BM[(BM25 Sparse Index)]:::storage
-            SQL[(SQLite Conversations)]:::storage
-        end
-        
-        %% Query Flow
-        subgraph Hybrid Retrieval Pipeline
-            Dense[Dense Semantic Search]:::process
-            Sparse[Sparse Keyword Search]:::process
-            RRF[Reciprocal Rank Fusion]:::process
-            Rerank[FlashRank Reranking]:::process
-        end
+UI["🖥️ Streamlit / Web UI"]:::client
+API["⚙️ FastAPI Backend"]:::client
 
-        %% Generation
-        subgraph Response Generation
-            Gen[Groq LLM Generation]:::llm
-        end
-    end
+CacheCheck{"⚡ Semantic Cache Check<br/>(Similarity ≥ 0.92)"}:::cache
+CacheDB[("💾 SQLite Semantic Cache")]:::cache
 
-    %% Upload Flow
-    UI -- "1. Upload PDFs" --> API
-    API --> Parse
-    Parse --> Chunk
-    Chunk --> Embed
-    Embed --> DB
-    DB -. "Auto-syncs" .-> BM
+RRF["🔀 Reciprocal Rank Fusion"]:::search
+Rerank["🎯 FlashRank Reranker"]:::search
 
-    %% Query Flow
-    UI -- "2. Ask Question" --> API
-    API --> SQL
-    API --> Dense
-    API --> Sparse
-    
-    Dense -- "Vector Matches" --> RRF
-    Sparse -- "Keyword Matches" --> RRF
-    RRF --> Rerank
-    Rerank -- "Top K Context" --> Gen
-    
-    Gen -- "Answer & Citations" --> API
-    API -- "3. Display Results" --> UI
+LLM["🤖 Groq Qwen3-27B<br/>Grounded Generation"]:::llm
+
+UI -->|"1. Question / PDF Upload"| API
+API -->|"2. Check Cache"| CacheCheck
+
+CacheCheck -->|"Cache Hit"| CacheDB
+CacheDB -->|"Fast Response"| UI
+
+CacheCheck -->|"Cache Miss"| RRF
+RRF --> Rerank
+Rerank -->|"Top Context"| LLM
+LLM -->|"3. Answer + Citations"| API
+API -->|"4. Render Answer"| UI
+
+%% =========================
+%% Retrieval Layer
+%% =========================
+
+subgraph Retrieval
+direction LR
+
+ChromaDB[("🗄️ ChromaDB<br/>Dense Index")]:::search
+BM25[("🔤 BM25 Okapi<br/>Sparse Index")]:::search
+
+ChromaDB -->|"Top 30"| RRF
+BM25 -->|"Top 30"| RRF
+
+end
+
+%% =========================
+%% PDF Ingestion
+%% =========================
+
+subgraph Optional PDF Ingestion
+direction TB
+
+PDF["📄 PDF Papers"]:::ingest
+Embed["✂️ Chunk & Embed"]:::ingest
+
+PDF --> Embed
+Embed --> ChromaDB
+
+end
+
+API -.->|"If PDF Upload"| PDF
+
+%% =========================
+%% Observability
+%% =========================
+
+subgraph Monitoring
+direction TB
+
+Langfuse["📊 Langfuse v3 Traces"]:::eval
+RAGAS["🧪 RAGAS Benchmarks"]:::eval
+
+end
+
+API -.->|"Log Trace"| Langfuse
+LLM -.->|"Evaluate"| RAGAS
 ```
+
 
 ## Tech Stack
 - **Frontend**: Vanilla HTML / CSS / JavaScript (No build steps required)
 - **Backend**: FastAPI (Python)
 - **Vector Database**: ChromaDB
 - **Retrieval Engine**: `rank-bm25` (Sparse), `SentenceTransformers` (Dense), `FlashRank` (Reranking)
-- **Language Model**: Groq API (`llama-3.3-70b-versatile`)
+- **Language Model**: Groq API (`qwen/qwen3-27b`)
 - **Conversation Storage**: SQLite
 
 ## Getting Started
@@ -137,3 +159,72 @@ flowchart TD
    python -m uvicorn server:app --reload --port 8000
    ```
 5. **Access the Application**: Open your web browser and navigate to `http://localhost:8000`
+
+## Cost, Latency & Retrieval Quality
+
+### Before/After Comparison
+
+| Metric | Dense-Only | Hybrid (BM25+Dense+RRF) | Delta |
+|--------|-----------|------------------------|-------|
+| Faithfulness | 1.0000 | 1.0000 | 0.0000 |
+| Answer Relevancy | 0.9412 | 0.9412 | 0.0000 |
+| Context Precision | 0.8690 | **0.9167** | **+0.0477 (+5.5%)** |
+| Context Recall | 0.9048 | **0.9524** | **+0.0476 (+5.3%)** |
+
+| Metric | Value |
+|--------|-------|
+| Cache Hit Rate | **50.0%** (100% exact, 66.7% paraphrases) |
+| Avg Latency (cache hit) | **0.0084s** |
+| Avg Latency (cache miss) | **2.2281s** |
+| Speedup on Cache Hit | **264.4x faster** |
+| Est. Cost Saved / 100 queries | **$0.0394** (Groq pricing) |
+
+### Running the Evaluation Harness
+
+```bash
+# 1. Generate candidate Q&A pairs from indexed papers
+python generate_testset.py --num-pairs 25
+
+# 2. Review eval/candidate_qa_pairs.json, then auto-approve:
+python generate_testset.py --approve-all
+
+# 3. Run RAGAS evaluation (hybrid mode — default)
+python run_eval.py
+
+# 4. Run RAGAS evaluation (dense-only — for comparison)
+python run_eval.py --mode dense-only
+
+# 5. View results
+cat eval/eval_results.md
+```
+
+Results are stored with timestamps in `eval/eval_runs.json` and rendered as a markdown table in `eval/eval_results.md`. Each run is also logged to Langfuse with the `evaluation` tag.
+
+### Semantic Cache
+
+A lightweight SQLite-backed semantic cache sits in front of the RAG pipeline. Before every query:
+
+1. The incoming query is embedded with the same `all-MiniLM-L6-v2` model
+2. Cosine similarity is computed against all cached query embeddings
+3. If similarity ≥ **0.92**, the cached response is returned instantly (no LLM call)
+4. On a miss, the full pipeline runs and the result is stored in cache
+
+Every trace in Langfuse is tagged `cache_hit` or `cache_miss` for easy filtering.
+
+```bash
+# Run the 50-query cache performance test
+python test_cache.py
+
+# View results
+cat eval/cache_test_results.json
+```
+
+### Langfuse Trace Tags
+
+| Tag | Meaning |
+|-----|---------|
+| `cache_hit` | Query served from semantic cache |
+| `cache_miss` | Full RAG pipeline executed |
+| `evaluation` | RAGAS evaluation run |
+| `mode:hybrid` | Hybrid retrieval (BM25+Dense+RRF) |
+| `mode:dense-only` | Dense-only retrieval (for comparison) |

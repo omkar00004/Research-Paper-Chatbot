@@ -13,6 +13,13 @@ chroma_db/
 uploads/
 .env
 
+# Semantic Cache
+semantic_cache.db
+
+# Evaluation Data (runtime-generated)
+eval/eval_runs.json
+eval/cache_test_results.json
+
 # Large Files
 Research Paper/*.pdf
 

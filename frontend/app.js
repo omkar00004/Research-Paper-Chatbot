@@ -213,36 +213,58 @@ function appendAssistantBubble(text, sources, pipeline, time) {
   const div = document.createElement('div');
   div.className = 'assistant-bubble';
 
+  // Build a lookup map: source index (1-based) -> source object
+  const sourceMap = {};
+  if (sources && sources.length > 0) {
+    sources.forEach((s, i) => { sourceMap[i + 1] = s; });
+  }
+
+  // Helper: build an inline-cite badge HTML string
+  function citeBadge(num) {
+    const src = sourceMap[parseInt(num)];
+    const tooltip = src
+      ? escapeHtml(src.paper.replace(/\.pdf$/i, '')) + ' \u00b7 p.' + src.page
+      : 'Source ' + num;
+    return `<span class="inline-cite" title="${tooltip}">${num}</span>`;
+  }
+
+  // STEP 1: Render markdown → HTML first (so marked never sees the citation spans)
+  let renderedHtml = formatMarkdown(text);
+
+  // STEP 2: Replace [Source ID: N] citation tokens in the already-rendered HTML
+  renderedHtml = renderedHtml.replace(/\[Source ID:\s*(\d+)\]/g, (_, num) => citeBadge(num));
+
+  // STEP 3: Replace [N] / [N][M] style citation tokens (only if the number maps to a known source)
+  renderedHtml = renderedHtml.replace(/\[(\d+)\]/g, (match, num) => {
+    return sourceMap[parseInt(num)] ? citeBadge(num) : match;
+  });
+
+  // Searching papers indicator
+  const retrievalLabel = sources && sources.length > 0
+    ? `Searching papers \u00b7 ${sources.length} source${sources.length !== 1 ? 's' : ''} found`
+    : 'Searching papers';
+
   let html = `
-    <div class="assistant-avatar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.2 3.6a1 1 0 0 0 .6.6L17.4 8.4 13.8 9.6a1 1 0 0 0-.6.6L12 13.8 10.8 10.2a1 1 0 0 0-.6-.6L6.6 8.4 10.2 7.2a1 1 0 0 0 .6-.6L12 3z"/><path d="M18 14l.8 2.4a.5.5 0 0 0 .3.3L21.5 17.5l-2.4.8a.5.5 0 0 0-.3.3L18 21l-.8-2.4a.5.5 0 0 0-.3-.3L14.5 17.5l2.4-.8a.5.5 0 0 0 .3-.3L18 14z"/></svg>
-    </div>
     <div class="assistant-content">
-      <div class="assistant-text">${formatMarkdown(text)}</div>
+      <div class="perplexity-retrieval-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>${retrievalLabel}</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="assistant-text perplexity-answer">${renderedHtml}</div>
   `;
 
-  // Sources/citations
+  // Compact horizontal source chips grid
   if (sources && sources.length > 0) {
     html += `
-      <div class="citations-section">
-        <div class="citations-label mono">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/></svg>
-          Sources · ${sources.length}
-        </div>
-        <div class="citations-list">
+      <div class="perplexity-sources">
+        <div class="perplexity-sources-label mono">Sources</div>
+        <div class="perplexity-sources-grid">
           ${sources.map((s, i) => `
-            <div class="citation-card">
-              <div class="citation-card-header">
-                <div class="citation-card-left">
-                  <span class="citation-badge mono">${i + 1}</span>
-                  <span class="citation-file-icon">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                  </span>
-                  <span class="citation-paper-name">${escapeHtml(s.paper)}</span>
-                </div>
-                <span class="citation-page mono">p.${s.page}</span>
-              </div>
-              ${s.section ? `<div class="citation-snippet serif">${escapeHtml(s.section)}</div>` : ''}
+            <div class="perplexity-source-chip">
+              <span class="perplexity-source-num">${i + 1}</span>
+              <span class="perplexity-source-name">${escapeHtml(s.paper.replace(/\.pdf$/i, ''))}</span>
+              <span class="perplexity-source-page mono">p.${s.page}</span>
             </div>
           `).join('')}
         </div>
@@ -250,7 +272,7 @@ function appendAssistantBubble(text, sources, pipeline, time) {
     `;
   }
 
-  // Pipeline timings
+  // Pipeline timings (compact)
   if (pipeline && pipeline.length > 0) {
     html += `
       <div class="timings-section">
@@ -275,6 +297,9 @@ function appendAssistantBubble(text, sources, pipeline, time) {
   html += '</div>';
   div.innerHTML = html;
   chatMessages.appendChild(div);
+
+  // STEP 4: Run KaTeX auto-render on the newly inserted answer element (handles $...$ and $$...$$)
+  renderMath(div);
 }
 
 function appendStreamingPlaceholder() {
@@ -283,14 +308,11 @@ function appendStreamingPlaceholder() {
   div.className = 'assistant-bubble';
   div.id = 'streamingBubble';
   div.innerHTML = `
-    <div class="assistant-avatar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.2 3.6a1 1 0 0 0 .6.6L17.4 8.4 13.8 9.6a1 1 0 0 0-.6.6L12 13.8 10.8 10.2a1 1 0 0 0-.6-.6L6.6 8.4 10.2 7.2a1 1 0 0 0 .6-.6L12 3z"/><path d="M18 14l.8 2.4a.5.5 0 0 0 .3.3L21.5 17.5l-2.4.8a.5.5 0 0 0-.3.3L18 21l-.8-2.4a.5.5 0 0 0-.3-.3L14.5 17.5l2.4-.8a.5.5 0 0 0 .3-.3L18 14z"/></svg>
-    </div>
     <div class="assistant-content">
       <div class="streaming-indicator">
         <span class="streaming-label mono">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Retrieving context
+          Searching papers
         </span>
         <span class="pulse-dots">
           <span class="pulse-dot"></span>
@@ -547,8 +569,26 @@ dropZone.addEventListener('drop', (e) => {
   handleFileUpload(e.dataTransfer.files);
 });
 
-// ── Input listener ────────────────────────────────────
-composerInput.addEventListener('input', () => updateSendButton());
+// ── Math rendering (KaTeX) ────────────────────────────
+function renderMath(container) {
+  if (typeof renderMathInElement === 'undefined') return;
+  try {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$',  right: '$',  display: false },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '\\(', right: '\\)', display: false },
+      ],
+      throwOnError: false,
+      errorColor: 'var(--muted)',
+    });
+  } catch (e) {
+    // silently ignore KaTeX errors — fall back to raw text
+  }
+}
+
+
 
 // ── Initialize ────────────────────────────────────────
 

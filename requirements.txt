@@ -10,3 +10,9 @@ PyMuPDF
 pydantic
 langfuse
 langchain_text_splitters
+python-dotenv
+numpy
+ragas
+datasets
+langchain-groq
+langchain-huggingface

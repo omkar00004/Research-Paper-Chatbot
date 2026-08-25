@@ -9,6 +9,8 @@ import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
+import numpy as np
+
 # IMPORTANT: tracing must be imported first to set env vars before any @observe
 import backend.tracing  # noqa: F401 -  configures Langfuse env vars on import
 
@@ -277,7 +279,7 @@ def _generate_step(question: str, reranked_chunks):
     try:
         client_lf = get_client()
         client_lf.update_current_span(
-            model="llama-3.3-70b-versatile",
+            model="qwen/qwen3-27b",
             output=result.get("answer", "")[:500],
             metadata={"source_count": len(result.get("sources", []))},
         )
@@ -292,9 +294,12 @@ def _generate_step(question: str, reranked_chunks):
 @observe(name="rag_query")
 def query(question: str) -> Dict[str, Any]:
     """
-    Full query pipeline: classify → (casual response OR hybrid RAG pipeline).
+    Full query pipeline: cache check → classify → (casual response OR hybrid RAG pipeline).
     Automatically traced with Langfuse v3 @observe.
     """
+    from backend.semantic_cache import check_cache, store_cache
+    from backend.config import GROQ_INPUT_COST_PER_M, GROQ_OUTPUT_COST_PER_M
+
     start_time = time.time()
 
     logger.info(f"═══ Query Pipeline ═══")
@@ -309,6 +314,36 @@ def query(question: str) -> Dict[str, Any]:
     except Exception:
         pass
 
+    # ── Semantic Cache Check ──
+    cached = check_cache(question)
+    if cached:
+        cached["time"] = round(time.time() - start_time, 2)
+        cached["cache_hit"] = True
+        # Estimate tokens saved (avg generation: ~800 input + ~400 output tokens)
+        est_input_tokens = 800
+        est_output_tokens = 400
+        est_cost_saved = (
+            est_input_tokens * GROQ_INPUT_COST_PER_M / 1_000_000
+            + est_output_tokens * GROQ_OUTPUT_COST_PER_M / 1_000_000
+        )
+        try:
+            client_lf = get_client()
+            client_lf.update_current_trace(
+                output={"answer": cached.get("answer", "")[:500], "type": "cache_hit"},
+                tags=["query", "cache_hit"],
+                metadata={
+                    "cache_hit": True,
+                    "cache_similarity": cached.get("cache_similarity", 0),
+                    "estimated_tokens_saved": est_input_tokens + est_output_tokens,
+                    "estimated_cost_saved_usd": round(est_cost_saved, 6),
+                },
+            )
+        except Exception:
+            pass
+        logger.info(f"Cache HIT — returning cached response (saved ~${est_cost_saved:.6f})")
+        backend.tracing.flush()
+        return cached
+
     # ── Classification ──
     is_casual = _is_casual_query(question)
 
@@ -321,6 +356,7 @@ def query(question: str) -> Dict[str, Any]:
             client_lf = get_client()
             client_lf.update_current_trace(
                 output={"answer": result["answer"], "type": "casual"},
+                tags=["query", "cache_miss"],
             )
         except Exception:
             pass
@@ -368,6 +404,10 @@ def query(question: str) -> Dict[str, Any]:
     elapsed = time.time() - start_time
     result["pipeline"] = pipeline_log
     result["time"] = round(elapsed, 2)
+    result["cache_hit"] = False
+
+    # ── Store in Semantic Cache ──
+    store_cache(question, result)
 
     # Update trace with final output
     try:
@@ -378,6 +418,8 @@ def query(question: str) -> Dict[str, Any]:
                 "source_count": len(result.get("sources", [])),
                 "total_time": result["time"],
             },
+            tags=["query", "cache_miss"],
+            metadata={"cache_hit": False},
         )
     except Exception:
         pass

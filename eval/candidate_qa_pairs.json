@@ -1,0 +1,191 @@
+[
+  {
+    "question": "What type of documents is the research focused on analyzing and extracting text from?",
+    "ground_truth": "The research is focused on analyzing and extracting text from academic PDFs, which contain complex elements such as two-column formats, mathematical formulas, and section headings.",
+    "source_chunk": "1. Introduction\nRobust PDF Layout Analysis and Text Extraction for Academic Papers\nAbstract:\nAcademic PDFs contain two-column formats, mathematical formulas, and section headings. We evaluate PyMuP\n2. Methodology and Architecture\nWe describe the detailed methodology for Robust PDF Layout Analysis and Text Extraction for Academic Papers\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Data_Preprocessing_PDF_Extraction.pdf",
+    "page": "1",
+    "chunk_id": "8f0efda56711a92732c1dd308aba2aad",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the main focus of the paper 'Fine_Tuning_Cross_Encoders_For_RAG.pdf'?",
+    "ground_truth": "The main focus of the paper is Fine-Tuning Cross-Encoders for Domain-Specific Passage Reranking. This involves using cross-encoder rerankers to compute fine-grained attention across candidates. The paper describes the methodology and architecture for this approach, and presents experimental results. The goal is to achieve superior performance benchmarks across multiple datasets.",
+    "source_chunk": "1. Introduction\nFine-Tuning Cross-Encoders for Domain-Specific Passage Reranking\nAbstract:\nBi-encoder retrieval fast-selects candidates, while cross-encoder rerankers compute fine-grained attention acros\n2. Methodology and Architecture\nWe describe the detailed methodology for Fine-Tuning Cross-Encoders for Domain-Specific Passage Reranking\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Wo",
+    "source_paper": "Fine_Tuning_Cross_Encoders_For_RAG.pdf",
+    "page": "1",
+    "chunk_id": "f5c77e811e3b2279759d002344e5aae9",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the main advantage of Groq LPUs for LLM inference according to the introduction?",
+    "ground_truth": "The main advantage of Groq LPUs is that they deliver high throughput and low latency for LLM inference by utilizing deterministic tensor processing.",
+    "source_chunk": "1. Introduction\nLanguage Processing Units: Fast Deterministic LLM Inference Engine\nAbstract:\nGroq LPUs deliver high throughput and low latency for LLM inference by utilizing deterministic tensor processing\n2. Methodology and Architecture\nWe describe the detailed methodology for Language Processing Units: Fast Deterministic LLM Inference Engine\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Futur",
+    "source_paper": "Groq_LPU_Inference_Engine.pdf",
+    "page": "1",
+    "chunk_id": "1dd2a2cf5475dc54b1bd1531623fdc52",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What are the drawbacks of LLM API calls mentioned in the introduction?",
+    "ground_truth": "LLM API calls incur monetary cost and latency penalties. This suggests that using LLM APIs can be expensive and may lead to slow performance, highlighting the need for strategies like semantic caching to mitigate these issues.",
+    "source_chunk": "1. Introduction\nSemantic Caching Strategies for Low-Latency LLM Serving\nAbstract:\nLLM API calls incur monetary cost and latency penalties. Semantic caching stores past query embeddings and re\n2. Methodology and Architecture\nWe describe the detailed methodology for Semantic Caching Strategies for Low-Latency LLM Serving. The syste\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Semantic_Caching_For_LLM_Queries.pdf",
+    "page": "1",
+    "chunk_id": "d686b0d27c443b1795181c55e275e120",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the primary benefit of model quantization according to the excerpt?",
+    "ground_truth": "Model quantization reduces memory bandwidth and memory footprint. This is mentioned in the introduction of the paper, highlighting the importance of quantization in optimizing model performance.",
+    "source_chunk": "1. Introduction\nLLM Quantization: FP16 to INT4 Post-Training Quantization\nAbstract:\nModel quantization reduces memory bandwidth and memory footprint. We analyze smoothquant, AWQ, and GPT\n2. Methodology and Architecture\nWe describe the detailed methodology for LLM Quantization: FP16 to INT4 Post-Training Quantization. The syst\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Quantization_Methods_LLM_Inference.pdf",
+    "page": "1",
+    "chunk_id": "f6e72825d7d84f0f9d16675fa7ef10b4",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What does the proposed model achieve according to the performance benchmarks in Table 1?",
+    "ground_truth": "The proposed model achieves superior performance across multiple datasets, as shown in Table 1. This suggests that the model is effective in language understanding tasks. The exact performance metrics are not specified in the excerpt, but the model's superiority is highlighted. This indicates a significant improvement in language understanding capabilities.",
+    "source_chunk": "Table 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work\nIn conclusion, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding provides a sc",
+    "source_paper": "BERT_Pretraining_Deep_Bidirectional_Transformers.pdf",
+    "page": "1",
+    "chunk_id": "e981b818c92cb08452984632d6c5d7ef",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the main focus of the ChromaDB architecture described in the paper?",
+    "ground_truth": "The main focus of the ChromaDB architecture is to provide scalable open-source vector storage for embeddings, which is critical infrastructure for modern AI applications. The paper describes the detailed methodology and architecture of ChromaDB. The architecture is designed to support modern AI applications. The focus is on vector databases and their performance.",
+    "source_chunk": "1. Introduction\nChromaDB: Scalable Open-Source Vector Storage for Embeddings\nAbstract:\nVector databases are critical infrastructure for modern AI applications. We describe ChromaDB architecture, sup\n2. Methodology and Architecture\nWe describe the detailed methodology for ChromaDB: Scalable Open-Source Vector Storage for Embeddings. T\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "ChromaDB_Vector_Database_Architecture.pdf",
+    "page": "1",
+    "chunk_id": "aa20961c03515a9adfcb467a937968ad",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What type of content does ConvoEase's multimodal content moderation involve analyzing?",
+    "ground_truth": "ConvoEase's multimodal content moderation involves analyzing text, images, and audio in tandem to facilitate secure communication.",
+    "source_chunk": "1. Introduction\nConvoEase: Camera-Ready Architecture for Secure Enterprise Communication\nAbstract:\nMultimodal content moderation involves analyzing text, images, and audio in tandem to facilitate secure commun\n2. Methodology and Architecture\nWe describe the detailed methodology for ConvoEase: Camera-Ready Architecture for Secure Enterprise Comm\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Futu",
+    "source_paper": "ConvoEase_Multimodal_Chat_Systems.pdf",
+    "page": "1",
+    "chunk_id": "1eec4129a7dc48016eb85029aa69a9f6",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What technique is used to combine BM25 keyword matching with dense vector embeddings?",
+    "ground_truth": "The technique used to combine BM25 keyword matching with dense vector embeddings is Reciprocal Rank Fusion (RRF). This approach is utilized in the context of Hybrid Dense-Sparse Retrieval. The use of RRF allows for the integration of different retrieval methods, potentially enhancing the overall performance of the system.",
+    "source_chunk": "1. Introduction\nReciprocal Rank Fusion in Hybrid Dense-Sparse Retrieval\nAbstract:\nCombining BM25 keyword matching with dense vector embeddings via Reciprocal Rank Fusion (RRF) overcome\n2. Methodology and Architecture\nWe describe the detailed methodology for Reciprocal Rank Fusion in Hybrid Dense-Sparse Retrieval. The system\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "BM25_Hybrid_Search_Fusion.pdf",
+    "page": "1",
+    "chunk_id": "0022209aca5f61c2b5c2cae62362713e",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What type of language model is Llama 3 and how many tokens was it trained on?",
+    "ground_truth": "Llama 3 is an auto-regressive language model that was trained on over 15 trillion tokens. This training enables the model to learn patterns and relationships within large datasets, allowing for more accurate and informative responses.",
+    "source_chunk": "1. Introduction\nLlama 3: Open Foundation and Fine-Tuned Chat Models\nAbstract:\nLlama 3 is an auto-regressive language model trained on over 15 trillion tokens. We detail its architecture, group\n2. Methodology and Architecture\nWe describe the detailed methodology for Llama 3: Open Foundation and Fine-Tuned Chat Models. The system \n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Llama_3_Architecture_And_Training.pdf",
+    "page": "1",
+    "chunk_id": "6dfbef86082a6efae1a64df7157cf240",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What does Table 1 in the paper show?",
+    "ground_truth": "Table 1 shows the performance benchmarks across multiple datasets. This suggests that the paper is comparing the performance of different models or methods across various datasets to evaluate their effectiveness. The table likely provides a summary of the results, allowing for easy comparison and analysis. This information is crucial for understanding the paper's methodology and findings.",
+    "source_chunk": "Table 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work\nIn conclusion, Beyond Text Review: Multimodal Content Moderation in Enterprise Workflows provides a scalable",
+    "source_paper": "Content_Moderation_Beyond_Text.pdf",
+    "page": "1",
+    "chunk_id": "4f979cc0c3f946bcf3be86d6c2ffb9bd",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What does BERT stand for according to the introduction of the paper?",
+    "ground_truth": "BERT stands for Bidirectional Encoder Representations. It is a new language representation model introduced in the paper. The full form of BERT is mentioned in the abstract section of the paper. This model is designed for language understanding.",
+    "source_chunk": "1. Introduction\nBERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\nAbstract:\nWe introduce a new language representation model called BERT, which stands for Bidirectional Encoder Repres\n2. Methodology and Architecture\nWe describe the detailed methodology for BERT: Pre-training of Deep Bidirectional Transformers for Language U\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr",
+    "source_paper": "BERT_Pretraining_Deep_Bidirectional_Transformers.pdf",
+    "page": "1",
+    "chunk_id": "0a9d78cb00f841572862e2e44fca011a",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What type of models are the dominant sequence transduction models based on?",
+    "ground_truth": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks.",
+    "source_chunk": "1. Introduction\nAttention Is All You Need\nAbstract:\nThe dominant sequence transduction models are based on complex recurrent or convolutional neural networks t\n2. Methodology and Architecture\nWe describe the detailed methodology for Attention Is All You Need. The system utilizes state-of-the-art algorithm\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Attention_Is_All_You_Need.pdf",
+    "page": "1",
+    "chunk_id": "a68941cd1ef38c453d7e775ed380ad09",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What does the process of content moderation involve according to the excerpt?",
+    "ground_truth": "The process of content moderation involves analyzing and regulating text, images, and audio. This is a key aspect of the Beyond Text Review approach discussed in the paper. The moderation process is crucial for managing content in enterprise workflows. It encompasses multiple forms of media, not just text.",
+    "source_chunk": "1. Introduction\nBeyond Text Review: Multimodal Content Moderation in Enterprise Workflows\nAbstract:\nContent moderation refers to the process of analyzing and regulating text, images, and audio. Traditional paradig\n2. Methodology and Architecture\nWe describe the detailed methodology for Beyond Text Review: Multimodal Content Moderation in Enterprise Wo\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr",
+    "source_paper": "Content_Moderation_Beyond_Text.pdf",
+    "page": "1",
+    "chunk_id": "c0cacb588246e38c60abecf52ad7f963",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the role of neural reranking in information retrieval systems according to the paper?",
+    "ground_truth": "Neural reranking plays a vital role in two-stage information retrieval systems. The paper introduces FlashRank, a method for ultra-fast neural reranking for search and RAG. This suggests that neural reranking is a crucial component in improving the efficiency and effectiveness of information retrieval. The paper highlights its importance in the context of FlashRank.",
+    "source_chunk": "1. Introduction\nFlashRank: Ultra-Fast Neural Reranking for Search and RAG\nAbstract:\nNeural reranking plays a vital role in two-stage information retrieval systems. FlashRank introduces lightweight c\n2. Methodology and Architecture\nWe describe the detailed methodology for FlashRank: Ultra-Fast Neural Reranking for Search and RAG. The sys\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "FlashRank_Reranking_Optimizations.pdf",
+    "page": "1",
+    "chunk_id": "dc3b76a115a504f11c6cfc7abadf0a66",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the main focus of the Retrieval-Augmented Generation approach described in the paper?",
+    "ground_truth": "The main focus of the Retrieval-Augmented Generation approach is to improve the ability of large language models to access and precisely retrieve factual knowledge for Knowledge-Intensive NLP Tasks.",
+    "source_chunk": "1. Introduction\nRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks\nAbstract:\nLarge language models can store factual knowledge in parameters. However, their ability to access and precisely\n2. Methodology and Architecture\nWe describe the detailed methodology for Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Wor",
+    "source_paper": "Retrieval_Augmented_Generation_NLP.pdf",
+    "page": "1",
+    "chunk_id": "a502a627b7ff13655c0b29816275bf50",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What aspects of RAG pipelines does the RAGAS framework aim to evaluate?",
+    "ground_truth": "The RAGAS framework aims to evaluate faithfulness, answer relevancy, context precision, and context recall of RAG pipelines. This suggests a comprehensive approach to assessing the performance of Retrieval Augmented Generation systems. The evaluation framework is designed to provide a detailed assessment of these key aspects. This is crucial for understanding the effectiveness of RAG pipelines.",
+    "source_chunk": "1. Introduction\nRAGAS: Automated Evaluation Framework for Retrieval Augmented Generation\nAbstract:\nEvaluating RAG pipelines requires measuring faithfulness, answer relevancy, context precision, and context reca\n2. Methodology and Architecture\nWe describe the detailed methodology for RAGAS: Automated Evaluation Framework for Retrieval Augmented G\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Fut",
+    "source_paper": "RAGAS_Automated_Evaluation_RAG.pdf",
+    "page": "1",
+    "chunk_id": "49e1779ca3d23d0095b313b464eba00c",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What type of vectors are used for mapping onto high-dimensional unit hyperspheres?",
+    "ground_truth": "L2-normalized embedding vectors are used for mapping onto high-dimensional unit hyperspheres, where the dot product equals cosine similarity.",
+    "source_chunk": "1. Introduction\nGeometric Properties of High-Dimensional Cosine Similarity\nAbstract:\nL2-normalized embedding vectors map onto high-dimensional unit hyperspheres, where dot product equals cosin\n2. Methodology and Architecture\nWe describe the detailed methodology for Geometric Properties of High-Dimensional Cosine Similarity. The syst\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Cosine_Similarity_In_High_Dimensions.pdf",
+    "page": "1",
+    "chunk_id": "a481f2941807f383342d1b5ec7ce8bc5",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the main focus of the paper's methodology and architecture section?",
+    "ground_truth": "The methodology and architecture section describes the detailed methodology for Sentence-Boundary Aware Recursive Text Chunking Strategies. This section outlines the approach used for recursive text chunking. The focus is on the strategies employed for text chunking, specifically with sentence-boundary awareness.",
+    "source_chunk": "1. Introduction\nSentence-Boundary Aware Recursive Text Chunking Strategies\nAbstract:\nText chunking critically impacts retrieval accuracy. Recursive character splitting with overlapping windows preser\n2. Methodology and Architecture\nWe describe the detailed methodology for Sentence-Boundary Aware Recursive Text Chunking Strategies. The s\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Recursive_Chunking_Overlapping_Windows.pdf",
+    "page": "1",
+    "chunk_id": "7bc3644b47228d1a43e531431615e27e",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What is the main focus of the paper in terms of In-Context Learning and System Prompt Design?",
+    "ground_truth": "The paper focuses on examining system prompt constraints and designing system prompts for In-Context Learning in Modern Large Language Models (LLMs), enabling zero-shot and few-shot task adaptation.",
+    "source_chunk": "1. Introduction\nIn-Context Learning and System Prompt Design in Modern LLMs\nAbstract:\nIn-context learning enables zero-shot and few-shot task adaptation. We examine system prompt constraints, cita\n2. Methodology and Architecture\nWe describe the detailed methodology for In-Context Learning and System Prompt Design in Modern LLMs. The\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Prompt_Engineering_And_In_Context_Learning.pdf",
+    "page": "1",
+    "chunk_id": "3cf3cceb4f7901a3b2ae9dea9f65a74d",
+    "flagged_for_review": true
+  },
+  {
+    "question": "What aspects of LLM applications are required to be tracked for observability?",
+    "ground_truth": "Observability in LLM applications requires tracking latency, token cost, prompt versions, and output quality. This indicates that a comprehensive approach to monitoring is necessary for effective observability. The aspects mentioned are key factors that can impact the performance and reliability of LLM applications. By tracking these aspects, developers can gain insights into the behavior and efficiency of their models.",
+    "source_chunk": "1. Introduction\nLangfuse: Open Source LLM Engineering Platform and Tracing\nAbstract:\nObservability in LLM applications requires tracking latency, token cost, prompt versions, and output quality. Lang\n2. Methodology and Architecture\nWe describe the detailed methodology for Langfuse: Open Source LLM Engineering Platform and Tracing. The s\n3. Experimental Results\nTable 1 shows the performance benchmarks across multiple datasets. Our proposed model achieves superior pr\n4. Conclusion and Future Work",
+    "source_paper": "Langfuse_Observability_Framework.pdf",
+    "page": "1",
+    "chunk_id": "dab03b93a730142f80c4efd1457c40d0",
+    "flagged_for_review": true
+  }
+]

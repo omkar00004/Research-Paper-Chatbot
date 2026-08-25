@@ -8,6 +8,7 @@
   <meta name="description"
     content="Upload academic PDFs and ask grounded questions. Every answer cited with hybrid retrieval." />
   <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
 </head>
@@ -144,7 +145,7 @@
       <!-- Status -->
       <div class="status-bar mono">
         <span class="status-dot"></span>
-        LLAMA-3.3 · CHROMADB · HYBRID
+        QWEN3-27B · CHROMADB · HYBRID
       </div>
     </aside>
 
@@ -264,7 +265,7 @@
                   <path d="M2 17l10 5 10-5" />
                   <path d="M2 12l10 5 10-5" />
                 </svg>
-                Llama-3.3
+                Qwen3-27B
               </span>
             </div>
           </div>
@@ -299,6 +300,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
   <script src="/static/app.js"></script>
 </body>
 
