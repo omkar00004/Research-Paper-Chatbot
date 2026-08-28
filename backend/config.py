@@ -42,7 +42,7 @@ RRF_K = 60                    # reciprocal rank fusion constant
 
 # ── Groq LLM ─────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL = "qwen/qwen3-27b"
+GROQ_MODEL = "openai/gpt-oss-20b"
 GROQ_MAX_TOKENS = 3072
 GROQ_TEMPERATURE = 0.4
 
