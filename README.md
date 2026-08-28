@@ -1,3 +1,13 @@
+---
+title: Research Paper Chatbot
+emoji: 📚
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+app_file: app.py
+pinned: false
+---
+
 # Scholar - RAG Research Assistant
 
 Scholar is a highly accurate, locally-indexed Research Paper QA Chatbot. It is designed specifically to extract and synthesize information exclusively from uploaded PDFs, ensuring completely grounded answers with no hallucinations. 
