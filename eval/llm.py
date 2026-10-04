@@ -120,7 +120,7 @@ def retry_hint(text, headers):
 
 def _base(m):
     """Normalise a returned model string so provider aliases of one model compare equal: drop provider prefix, '-latest', trailing date/version."""
-    return re.sub(r"-(latest|\d{4,8})$", "", m.lower().split("/")[-1])
+    return re.sub(r"-(latest|\d{4,8})$", "", re.sub(r":free$", "", m.lower().split("/")[-1]))
 
 
 class LLM:

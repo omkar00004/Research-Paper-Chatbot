@@ -3,7 +3,7 @@
 The 21 queries were generated from the old index (20 templated stub PDFs + Attention Is All You Need), so they are run against that
 corpus, not the 23 new papers. All RAGAS LLM calls go through the shared cached/budgeted client (judge model, temperature 0).
 """
-import asyncio, json
+import asyncio, faulthandler, json, time
 import numpy as np
 from langchain_core.outputs import Generation, LLMResult
 from ragas import EvaluationDataset, evaluate
@@ -22,9 +22,12 @@ README_CLAIM = {"dense_only_context_precision": 0.8690, "hybrid_context_precisio
 class SharedLLM(BaseRagasLLM):
     """RAGAS LLM backed by eval.llm.LLM (cache, ledger, budget, quota exit). Always temperature 0, JSON mode."""
     def __init__(self, llm):
-        super().__init__(); self.llm = llm
+        super().__init__(); self.llm = llm; self.fatal = None
     def generate_text(self, prompt, n=1, temperature=0.01, stop=None, callbacks=None):
-        r = self.llm.chat(JUDGE_MODEL, [{"role": "user", "content": prompt.to_string()}], max_tokens=1500, json_mode=True)
+        try:
+            r = self.llm.chat(JUDGE_MODEL, [{"role": "user", "content": prompt.to_string()}], max_tokens=1500, json_mode=True)
+        except (L.QuotaExit, L.BudgetExceeded, L.ModelDrift) as e:   # ragas swallows job exceptions: remember it and re-raise after evaluate()
+            self.fatal = e; raise
         return LLMResult(generations=[[Generation(text=r.text)]])
     async def agenerate_text(self, prompt, n=1, temperature=0.01, stop=None, callbacks=None):
         return await asyncio.to_thread(self.generate_text, prompt, n, temperature, stop, callbacks)
@@ -49,9 +52,16 @@ def run(llm, state, limit=None, extras=False):
             samples.append(SingleTurnSample(user_input=q["question"], retrieved_contexts=[c["text"] for c in chunks], response=res.text.strip(), reference=q["gold_answer"]))
             meta.append({"qid": q["id"], "answer": res.text.strip(), "chunk_ids": [c["id"] for c in chunks]})
         cp, fa = LLMContextPrecisionWithReference(llm=shared), Faithfulness(llm=shared)
-        result = evaluate(EvaluationDataset(samples), metrics=[cp, fa], llm=shared, run_config=RunConfig(max_workers=4, timeout=600, max_retries=1, max_wait=30),
-                          raise_exceptions=False, show_progress=False)
-        df = result.to_pandas()
+        for attempt in range(4):      # failed jobs (gateway 429/502) are retried; finished calls come from the cache, so a pass only repeats the missing ones
+            faulthandler.dump_traceback_later(1200, exit=False)       # diagnose a hang instead of sitting silent
+            result = evaluate(EvaluationDataset(samples), metrics=[cp, fa], llm=shared, run_config=RunConfig(max_workers=4, timeout=240, max_retries=1, max_wait=30),
+                              raise_exceptions=False, show_progress=False)
+            faulthandler.cancel_dump_traceback_later()
+            if shared.fatal: raise shared.fatal
+            df = result.to_pandas()
+            if not df[["llm_context_precision_with_reference", "faithfulness"]].isna().any().any(): break
+            print(f"  {cond.name}: pass {attempt + 1} left {int(df[['llm_context_precision_with_reference', 'faithfulness']].isna().any(axis=1).sum())} NaN rows; retrying from cache")
+            time.sleep(60)
         for m, row in zip(meta, df.to_dict("records")):
             m["context_precision"] = None if row.get("llm_context_precision_with_reference") is None or np.isnan(row.get("llm_context_precision_with_reference")) else float(row["llm_context_precision_with_reference"])
             m["faithfulness"] = None if row.get("faithfulness") is None or np.isnan(row.get("faithfulness")) else float(row["faithfulness"])
