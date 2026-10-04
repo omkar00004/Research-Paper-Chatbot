@@ -190,9 +190,10 @@ class LLM:
                 # the gateway labels short cooldowns 'daily_quota_exhausted' too: trust an advertised reset <= 15 min, exit otherwise
                 if (hint is not None and hint > 900) or (daily and hint is None):
                     raise QuotaExit(PROVIDER, f"{'daily quota exhausted' if daily else 'reset in %ds' % hint}: {text[:240]}", hint)
-                wait = (hint + 1 if hint is not None else min(60, 2 * 2 ** attempt)) + random.random() * 2
+                wait = (hint + 1 if hint is not None else min(60, (2 if r.status_code == 429 else 1) * 2 ** attempt)) + random.random() * 2
                 if slept + wait > 900: raise QuotaExit(PROVIDER, f"cumulative wait > 15 min on {model}: {text[:200]}", wait)
-                self.cool[model] = time.time() + wait; slept += wait
+                if r.status_code == 429: self.cool[model] = time.time() + wait   # shared cooldown only for rate limits; a 502 only delays this thread
+                slept += wait
                 Ledger.log("retry", model=model, why=last, wait=round(wait, 1))
                 continue
             raise LLMError(f"HTTP {r.status_code}: {text[:300]}")
