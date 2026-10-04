@@ -16,6 +16,7 @@ BASE_URL = os.getenv("FREELLMAPI_BASE_URL", "http://127.0.0.1:31415/v1").rstrip(
 LEDGER = CACHE / "ledger.jsonl"
 FROZEN = CACHE / "frozen_models.json"
 MAX_CONCURRENCY = 4
+RPM = float(os.getenv("EVAL_RPM", "36"))   # 10% under the 40 RPM limit of the NVIDIA route
 RUN = os.getenv("EVAL_RUN", "full")   # "dry" for dry runs: separates ledger rows, shares the cache
 STAGE = "misc"
 def set_stage(s):
@@ -131,7 +132,7 @@ class LLM:
         self.sem = threading.Semaphore(MAX_CONCURRENCY)
         self.max_calls, self.max_cost = max_calls, max_cost
         self.calls = 0; self.cost = 0.0; self.lock = threading.Lock()
-        self.consec_fail = 0; self.reset_at = 0.0
+        self.consec_fail = 0; self.reset_at = 0.0; self.next_slot = 0.0; self.pace_lock = threading.Lock()
         self.p_in = float(os.getenv("PRICE_IN_PER_M", "0")); self.p_out = float(os.getenv("PRICE_OUT_PER_M", "0"))
         self.frozen = {k: ([v] if isinstance(v, str) else v) for k, v in read_json(FROZEN, {}).items()}
 
@@ -144,7 +145,15 @@ class LLM:
                 raise BudgetExceeded(f"--max-cost {self.max_cost} reached for {PROVIDER}")
             self.calls += 1
 
+    def _pace(self):
+        """Global client-side pacing under the provider limit (NVIDIA NIM: 40 requests/min). Every HTTP attempt counts."""
+        with self.pace_lock:
+            now = time.time(); wait = self.next_slot - now
+            self.next_slot = max(now, self.next_slot) + 60.0 / RPM
+        if wait > 0: time.sleep(wait)
+
     def _gate(self, model):
+        self._pace()
         # shared cooldown (set after a 429/5xx) so concurrent threads wait instead of burning tries; never wait > 15 min
         w = self.cool.get(model, 0) - time.time()
         if w > 0: time.sleep(w + random.random())
