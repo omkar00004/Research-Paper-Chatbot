@@ -25,10 +25,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stage"); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--max-calls", type=int); ap.add_argument("--max-cost", type=float)
     ap.add_argument("--extras", action="store_true")
+    ap.add_argument("--ragas-test", action="store_true", help="enable the optional S4b stage (RAGAS on a 30-question test subset)")
     a = ap.parse_args()
     state = State(CACHE / "state_dry.json" if a.dry_run else EVAL / "state.json")
     llm = L.LLM(a.max_calls, a.max_cost); limit = DRY_N if a.dry_run else None
-    stages = ["s1", "s2", "s3", "s4", "s5", "s6", "report"] if a.stage == "all" else [a.stage]
+    stages = ["s1", "s2", "s3", "s4", "s5", "s6", "report"] + (["s4b", "report"] if a.ragas_test else []) if a.stage == "all" else [a.stage]
+    if "s4b" in stages and (not a.ragas_test or a.dry_run): raise SystemExit("s4b is optional: run it with --ragas-test (and without --dry-run).")
     cmd = "python -m eval.run " + " ".join(sys.argv[1:])
     try:
         t0 = time.time()
@@ -42,12 +44,15 @@ def main():
             elif s == "s4": from eval import s4_ragas as m; m.run(llm, state, limit)
             elif s == "s5": from eval import s5_errors as m; m.run(llm, state, limit)
             elif s == "s6": from eval import s6_human as m; m.run(limit)
+            elif s == "s4b": from eval import s4b_ragas_test as m; m.run(llm, state, a.max_calls)
             elif s == "report": from eval import report as m; m.run(limit)
             else: raise SystemExit(f"unknown stage {s}")
             state.flush(); dt = time.time() - t; print(f"[{s}] {dt:.1f}s")
             if s != "report":
                 tp = RESULTS / "raw" / "stage_times.json"; tt = read_json(tp, []); tt.append({"stage": s, "seconds": round(dt, 1), "run": L.RUN}); write_json(tp, tt)
             if s not in ("report",): L.render_ledger_md(); 
+    except SystemExit as e:
+        state.flush(); L.render_ledger_md(); raise
     except L.QuotaExit as e:
         state.flush(); L.render_ledger_md()
         print(f"\nQUOTA/OUTAGE on provider '{e.provider}': {e.reason}\nCheckpoint saved ({state.path.name}). Resume later with:\n    {cmd}"); sys.exit(EXIT_QUOTA)

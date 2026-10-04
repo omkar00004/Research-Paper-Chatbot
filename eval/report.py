@@ -80,6 +80,8 @@ def run(limit=None):
         em.append(f"\nProgrammatic pool facts: {s5['programmatic_pool_facts']}\n\n| qid | type | category | rationale | question |\n|---|---|---|---|---|")
         em += [f"| {r['qid']} | {r['type']} | {r['category']} | {r['rationale']} | {r['question']} |" for r in s5["items"]]
         atomic_write(d / "error_analysis.md", "\n".join(em)); md.append("\n## S5 Error analysis: see error_analysis.md\n")
+    s4b = read_json(RESULTS / "s4b_ragas_test.json") if not limit else None
+    if s4b: md.append("\n" + (RESULTS / "s4b_ragas_test.md").read_text())
     atomic_write(d / "results.md", "\n".join(md))
     # per-question CSV (S2 + S3)
     rows = []
@@ -136,6 +138,14 @@ def paste(S, d):
             if x: o.append(f"  {k}: abs {x['abs_diff']:+.4f} [{x['abs_lo']:+.4f},{x['abs_hi']:+.4f}] rel {pct(x['rel_diff'])} [{pct(x['rel_lo'])},{pct(x['rel_hi'])}]")
         o.append("  Provenance of the old '+25%': not found in repo/git/logs. README table: CP 0.8690 -> 0.9167 (+0.0477 absolute, +5.5% relative), 'Dense-Only'=dense+FlashRank vs 'Hybrid'=hybrid+FlashRank, no saved run; the only saved run (2026-08-01) has all scores None; judge then = llama-3.3-70b-versatile (README era: qwen/qwen3-27b, inferred).")
     if s5: o.append(f"\nERROR ANALYSIS (C2 misses in top 5: {s5['n_failures_c2_top5']}/{s5['n_answerable_test']}; analysed {s5['n_analysed']}): {s5['counts']}; programmatic pool facts {s5['programmatic_pool_facts']}")
+    s4b = read_json(RESULTS / "s4b_ragas_test.json")
+    if s4b:
+        o.append(f"\nRAGAS ON TEST SUBSET S4b (n={s4b['n_subset']} single-passage questions; single LLM judge {s4b['judge']}; NaN excluded, never 0):")
+        for c, ms in s4b["metrics"].items():
+            o.append(f"  {c}: " + "; ".join(f"{m}={f(v, 4)} (NaN excluded {v['nan_excluded']}{', UNRELIABLE' if v['unreliable'] else ''})" for m, v in ms.items()))
+        for m, p in s4b["paired"].items():
+            x = p["C2-C1"]
+            if x: o.append(f"  C2-C1 {m}: abs {x['abs_diff']:+.4f} [{x['abs_lo']:+.4f},{x['abs_hi']:+.4f}] rel {pct(x['rel_diff'])} [{pct(x['rel_lo'])},{pct(x['rel_hi'])}] (pairs={p['n_pairs']}){' UNRELIABLE' if p['unreliable'] else ''}")
     t = S["ledger_totals"]
     o.append(f"\nLEDGER: HTTP calls={int(t.get('calls', 0))}, cache hits={int(t.get('cache_hits', 0))}, retries={int(t.get('retries', 0))}, 429s={int(t.get('http_429', 0))}, 5xx={int(t.get('http_5xx', 0))}, truncation retries={int(t.get('truncations', 0))}, failed={int(t.get('failed', 0))}, invalid JSON={int(t.get('invalid_json', 0))}, tokens in/out={int(t.get('prompt_tokens', 0))}/{int(t.get('completion_tokens', 0))}, cost=$0.00 (free tier), measured stage runtime={S['runtime_s']:.0f}s (excludes time waiting between resumed sessions)")
     ch = read_json(RESULTS / "s2_chroma_hit_check.json")
