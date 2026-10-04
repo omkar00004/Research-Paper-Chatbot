@@ -1,0 +1,585 @@
+id,type,question,gold_span,top5_chunks,your_category (chunk_boundary_split / vocabulary_mismatch / reranker_demoted / pdf_extraction_problem / multi_hop / other)
+tm001,multi,"According to the Ji 2026 survey, what granularity hyperparameters are noted as typically hand‑tuned, and how does Stop‑RAG determine the optimal hyperparameter configuration?","[10_Ji_2026_survey_2601.00536.pdf] hand-tuned
+hyperparameters for granularity (e.g., cluster size,
+unit length, and graph pruning)
+[04_Stop-RAG_2510.14337.pdf] We provide the complete list
+of training hyperparameters in Section B.
+After training, we select the best checkpoint on the validation set.","[1] (04_Stop-RAG_2510.14337.pdf) • Search-o1: Uses QwQ-32B (Qwen Team, 2025a,b) as the generator and the Bing Web Search
+API as the retriever.
+B
+Hyperparameters
+We train the Stop-RAG Q-network with standard settings. The full list is provided in Table 5.
+Table 4: Reported performance of existing iterative RAG methods on MuSiQue, HotpotQA, and
+2WikiMultihopQA. Gray-highlighted text denotes results from lower-spec models that outperform
+larger variants. Missing results (‘–’) indicate those not reported in the corresponding sources.
+Method
+---
+[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) to TABVER’s models, to ﬁne-tune the instruction-tuned CLM classiﬁer baselines with LoRA,
+we use Huggingface’s SFTTrainer.
+We do not consider a validation set for hyperparameter-tuning, following the real-world few-shot
+learning setting of Alex et al. (2021) and instead use largely default hyperparameters. Details on
+hyperparameters and prompts are shown in Appendix A.4. Results are averaged over ﬁve runs
+with the standard deviation indicated. In all other cases, results are reported using default seed
+42.
+---
+[3] (10_Ji_2026_survey_2601.00536.pdf) 2025)
+RAPTOR
+R/I
+H
+R
+B
+Long-doc QA, Hotpot variants
+(Sarthi et al., 2024)
+LongRAG
+R/I
+L
+R
+B/H
+HotpotQA, ODQA (Jiang et al.,
+2024; Zhao et al., 2024)
+GraphRAG
+I
+G
+R/P
+B
+Sensemaking, MHQA (Edge et al.,
+2024)
+KG-o1
+P/I
+G
+P/V
+B
+2Wiki,
+KGQA (Wang et al.,
+2025a)
+SIM-RAG
+I
+F
+P/V
+C/L
+Multi-round RAG (Xu et al., 2025)
+Stop-RAG
+I/P
+F
+P
+L
+Iterative RAG / MHQA (Park et al.,
+2025)
+Table 1:
+Representative systems mapped into our
+four-axis framework.
+A: overall execution plan
+---
+[4] (09_Sufficient_Context_ICLR2025.pdf) Therefore, we use it in Section 4 as our main method for analyzing datasets and model responses.
+Later, in Section 5.1, we use FLAMe as a computationally efficient autorater to provide a signal for
+selective generation. Our comparison with TRUE-NLI and Contains GT confirms that classifying
+sufficient context is a different (and more complex) task than determining entailment.
+4
+A NEW LENS ON RAG PERFORMANCE
+We set out to understand RAG performance by looking at sufficient context. We first analyze datasets
+---
+[5] (11_HALT_2608.02009.pdf) ∆loops
+Method
+n
+2Wiki
+HotpotQA
+MuSiQue
+EM outcome
+Frontier?
+(A) Verifier-based stopping (ours)
+HALT ALL_MATCH (gold)
+1000
+−37%
+−45%
+−20%
+NI (2/3 gold; 5/6 family)
+Yes
+HALT ALL_MATCH (gen, comparator)
+1000
+−17%
+−18%
+−2%
+NI (3/3 gen PASS)
+Yes(gen)
+(B) Trained adaptive-stopping baselines (gen-claim)
+V-StopRAG (combined-3 train)
+1000
+∼0%
+∼0%
+∼0%
+tie
+No†
+V-SIMRAG
+1000
+∼0%
+∼0%
+∼0%
+tie
+No†
+V-StopRAG (2Wiki-only train)
+500
+−21%
+(n/a)
+(n/a)
+−1.2 pp
+No‡
+V-LLM-judge (zero-shot)
+1000
+−13%
+−28%
+−10%
+HALT NI vs judge 3/3",
+tm005,multi,"How does the AVeriTeC shared task select qualified annotators based on specific performance thresholds, and what approach does the AMBIFC study use to model annotator disagreement caused by linguistic ambiguity?","[13_AmbiFC_TACL2024.pdf] We develop models for predicting veracity handling this ambiguity via soft labels,
+and find that a pipeline that learns the label
+distribution for sentence-level evidence selection and veracity prediction yields the best
+performance.
+[06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf] We select qualified annotators based on their performance on 3
+tasks: (1) claim type and fact-checking strategies
+over 70%+ F-1 scores; (2) 2+ QA pairs per claim;
+(3) veracity prediction over 50%+ accuracy.","[1] (13_AmbiFC_TACL2024.pdf) Implicature
+Coreference
+Probability
+Presupposition
+Underspecification
+Vagueness
+None
+0
+20
+40
+60
+80
+DistCS
+Trained on AmbiFCC
+Trained on AmbiFC
+Figure 5: Performance of the Annotation Distillation
+model on different linguistic categories, separated by
+the training data used: AMBIFCC and AMBIFC.
+analysis in §5.2, as the smallest difference between
+the models trained on AMBIFCC and AMBIFC is
+seen with items without linguistic cues for ambiguity. Furthermore, the largest difference appears
+---
+[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) We only consider the first 10 questions generated
+by each system, so as to avoid rewarding sheer
+volume. We then calculate total AVERITEC score
+as verdict accuracy given that srecall > t, where
+we choose t = 0.5 so as to ensure high agreement on the 100 double-annotated AVERITEC
+claims following the methodology discussed in
+Schlichtkrull et al. (2023a).
+3
+Results
+The results for the shared task are shown in Table 2.
+We received seven fully reproducible systems. This
+---
+[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) lists of frequent errors, and FAQs. Subsequently, the relevance of the calibration score diminishes
+throughout the annotation process. Yet, annotators with a calibration score of above 0.9 maintain
+higher agreement throughout the entire annotation process.
+Further analysing the cases of disagreement, we observe that in a third of two-way IAA disagreement cases one annotator selected NEI. This is disproportionately high considering NEI
+81
+---
+[4] (13_AmbiFC_TACL2024.pdf) ambiguity rather than noise and provide explanations for this phenomenon through an analysis of
+linguistic phenomena. We establish baselines for
+fact-checking ambiguous claims, leaving room for
+improvement, particularly in the area of evidence
+selection. By publishing AMBIFC along with its
+annotations, we aim to contribute to research integrating annotations into trained models.
+Limitations
+Claims in AMBIFC are based on
+---
+[5] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) of the task. Looking into the IAA between each annotator pair shows an overall consistent
+annotation quality with a standard deviation of 0.07 and a total of 10 annotators with an average
+IAA of below 0.60, and 8 being higher than 0.70.
+Dataset Artifacts & Biases:
+To counteract against possible dataset artifacts, we measured the
+association between several variables, using normalised PMI throughout the annotation process.",
+tm010,multi,How do the SCoRe self-correct RL approach and the REAL framework each recommend ensuring that model outputs depend on external evidence rather than internal memorization?,"[16_SCoRe_self-correct_RL_2409.12917.pdf] leveraging on-policy
+samples is especially critical in the self-correction setting, which presents a multi-turn problem that
+admits potentially spurious solutions.
+[14_REAL_2609.08943.pdf] verification decisions
+are expected to be grounded in the evidence cited as their justification. This expectation demands that the decision should be sensitive
+to changes in the cited evidence, especially when that evidence is
+no longer available.","[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) accuracy@t2, we saw that standard RL leads to a collapse to non-correcting behavior. Hence, our key
+insight in SCoRe is that we must more explicitly encourage self-correction behavior, which we accomplish
+via a two-stage approach. The first stage (Stage I) serves the role of initialization where we train
+the model to decouple its behavior across the two attempts by attempting to optimize second-attempt
+accuracy while explicitly constraining the distribution of first attempts to the base model. From here,
+---
+[2] (14_REAL_2609.08943.pdf) dependency rather than as a lightweight large-scale evaluation
+protocol. In addition, evidence redundancy and incomplete annotations in existing fact-checking benchmarks may still allow models
+to preserve correct predictions after ‘gold’ evidence removal, making it difficult to perfectly separate evidence-grounded verification
+from parametric recall. Although REAL partially mitigates this issue
+through evidence enhancement, complete isolation of all supporting
+evidence cannot always be guaranteed.
+---
+[3] (16_SCoRe_self-correct_RL_2409.12917.pdf) makes in turn 1. In the lower example, the model is able to correct a reasoning error.
+3. Preliminaries and Problem Setup
+Our goal is to develop an approach for training LLMs to improve their own predictions entirely on selfgenerated data. As discussed so far, we situate ourselves in the intrinsic self-correction setting (Huang
+et al., 2023), where models attempt to correct their initial responses without any external feedback.
+Concretely, given a dataset 𝒟= {(𝒙𝑖, 𝒚∗
+𝑖)}𝑁
+𝑖=1 of problems 𝒙𝑖and responses 𝒚∗
+---
+[4] (16_SCoRe_self-correct_RL_2409.12917.pdf) final response.
+Our main contribution is SCoRe, a multi-turn RL approach for teaching LLMs how to correct their own
+mistakes. To the best of our knowledge, SCoRe is the first approach to attain significantly positive
+intrinsic self-correction: relative to base Gemini models, our method attains an absolute 15.6% gain on
+self-correction for reasoning problems from MATH (Hendrycks et al., 2021) and an absolute 9.1% gain
+2
+---
+[5] (16_SCoRe_self-correct_RL_2409.12917.pdf) Training Language Models to Self-Correct via Reinforcement Learning
+on coding problems from HumanEval (Chen et al., 2021). We additionally motivate the design of SCoRe
+by extensively studying the failure modes of SFT and standard RL approaches, which broadly indicate
+that reinforcement learning plays an essential role in self-trained self-correction.
+2. Related Work
+Prior works study self-correction for LLMs under a variety of assumptions and problem settings. The most",
+tm016,multi,How does the accuracy improvement of QA-NatVer over baselines on the Danish DanFEVER dataset compare to the inter‑annotator agreement scores (Hungarian METEOR) reported for question‑answer pairs in the AVeriTeC dataset?,"[07b_QA-NatVer_EMNLP2023.pdf] our system outperforms all baselines by 1.8 accuracy points, highlighting the potential of the question-answering
+formulation for low-resource languages.
+[02_AVeriTeC_2023_dataset_paper.pdf] At 0.28 for questions and 0.22 for questions and answers, these
+results are quite low, highlighting the difficulty of automatic evaluation for this task.","[1] (07b_QA-NatVer_EMNLP2023.pdf) models, improving scores by about 4.9 accuracy
+points to reach an accuracy of 85.8 ± 0.9.
+Varying sample sizes.
+Table 4 compares our approach against the baselines when trained with
+varying amounts of data in a few-shot setting, ranging between 16, 32, and 64 samples. QA-NatVer
+consistently outperforms our baselines across sample sizes. Notably, while DeBERTav3 sees improvements with 64 samples, ProoFVer’s improvements are marginal, indicating a larger need for
+---
+[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) models, improving scores by about 4.9 accuracy points to reach an accuracy of 85.8 ± 0.9.
+Varying sample sizes:
+Table 5.3 compares our approach against the baselines when trained
+with varying amounts of data in a few-shot setting, ranging between 16, 32, and 64 samples.
+QA-NATVER consistently outperforms our baselines across sample sizes. Notably, while
+---
+[3] (07c_Zero-NatVer_Findings-EMNLP2024.pdf) Figure 4: The averaged Macro-F1 scores for different
+ensemble sizes, calculated from 20 independent runs for
+each size.
+across all datasets but falls behind QA-NatVer
+on DanFEVER, where QA-NatVer achieves 5.86
+more accuracy points. Nonetheless, our results
+show strong performance, especially given that the
+baselines use multilingual models and are directly
+trained on NatLog data.
+5.4
+Further Experiments
+Ensemble Size
+To assess the impact of prompt
+---
+[4] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) R is METEOR score (Banerjee and Lavie, 2005)
+using the NLTK implementation (Bird et al., 2009).
+To compute the AVERITEC score, we applied a cutoff of uf( ˆY , Y ) ≥0.25 to determine
+whether adequate evidence has been retrieved, using the Q + A Hungarian METEOR score. Any
+claim for which this score is lower then 0.25 receives an AVERITEC score of 0.
+For claims
+where the evidence score is higher than 0.25, the
+AVERITEC score is defined as the accuracy of the
+predicted verdict (veracity). As also discussed in
+---
+[5] (06c_Papelo_FEVER2024_2411.05762.pdf) the ground truth and the evidence is adequate. The
+AVeriTeC score determines evidence adequacy by
+thresholding an average of METEOR scores between each gold QA pair and the corresponding
+submitted QA pair in the best assignment of QA
+pairs.
+This task may involve retrieval and reasoning
+skills at a level for which professional journalists
+are sometimes employed. The reasoning may involve quote verification, stance detection, or numerical comparisons. The retrieval challenge goes",
+ts019,single,"At which stage does the Graph-of-Thoughts (GoT) framework typically expand to its maximum width, demanding substantial processing resources?","[06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf] The computational burden becomes especially acute near the evidence retrieval
+stage, where the GoT typically expands to its maximum width, demanding substantial processing resources.","[1] (06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf) thoughts as vertices and their dependencies as
+edges. An edge (t1, t2) signifies that t1 serves
+as input for generating t2. Unlike other prompting
+methods, GoT uniquely permits the construction of
+an arbitrary directed graph, enabling the aggregation of individual thoughts and even entire thought
+chains.
+The GoT framework involves two distinct graphs.
+The GoT itself is the central data structure that
+records execution results, as illustrated in Figure 2.
+---
+[2] (10_Ji_2026_survey_2601.00536.pdf) in our framework are instantiated across the 104
+multi-hop QA / RAG papers in our Topic 4 sample.
+Along Axis A (overall execution plan), more than
+half of the systems (56/104, 53.8%) still follow
+a frozen-pool “retrieve–then–read” pattern, while
+39/104 (37.5%) explicitly interleave retrieval and
+reasoning, 18/104 (17.3%) implement plan–then–
+execute strategies, and 13/104 (12.5%) scale testtime search (e.g., Tree-of-Thoughts or MCTS) on
+top of these patterns.
+Axis B (index structure) shows that graph- or
+---
+[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Proceedings of the 2023 IEEE/ACM International Conference on Advances in Social Networks
+Analysis and Mining, ASONAM ’23, pages 164–170, New York, NY, USA. Association for
+Computing Machinery.
+Franz Nowak, Anej Svete, Alexandra Butoi, and Ryan Cotterell. 2024. On the Representational
+Capacity of Neural Language Models with Chain-of-Thought Reasoning. In Proceedings of
+the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long
+---
+[4] (06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf) theoretical GoT that illustrates these algorithmic
+stages within the data structure.
+Figure 1: Control flow of the algorithm (Graph-ofOperations) used for generating and managing the
+Graph-of-Thoughts (GoT). Nodes indicate operations
+producing LLM-generated thoughts or their assessment
+through scoring, verification, and ranking. Color coding indicates branching operations (light blue), branch
+termination (red), and merging of branches (yellow)
+3.2
+Core Components and Training Data
+Preparation
+---
+[5] (10_Ji_2026_survey_2601.00536.pdf) 2025)
+Table 1:
+Representative systems mapped into our
+four-axis framework.
+A: overall execution plan
+(R=retrieve–then–read, I=interleaved, P=plan–then–
+execute,
+S=search scaling).
+B: index structure
+(F=flat, H=hierarchical, G=graph/KG, L=long-context).
+C: control (R=rules, P=learned policy, V=verifiergated, S=search-based).
+D: stopping (B=budget,
+C=confidence-based, L=learned/value-based).
+coarse segments and lets the LLM decide which
+parts to attend to, effectively creating a two-level",
+ts026,single,What does the SCoRe self-correct RL approach aim to teach LLMs to do on-the-fly?,[16_SCoRe_self-correct_RL_2409.12917.pdf] training LLMs to perform self-correction to fix their mistakes “on-the-fly”,"[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) Training Language Models to Self-Correct via Reinforcement Learning
+on coding problems from HumanEval (Chen et al., 2021). We additionally motivate the design of SCoRe
+by extensively studying the failure modes of SFT and standard RL approaches, which broadly indicate
+that reinforcement learning plays an essential role in self-trained self-correction.
+2. Related Work
+Prior works study self-correction for LLMs under a variety of assumptions and problem settings. The most
+---
+[2] (04_Stop-RAG_2510.14337.pdf) modular and compatible with black-box LLMs. These results demonstrate the effectiveness of
+value-based stopping control for iterative RAG and highlight the potential for adaptive decision
+making in broader LLM-driven systems.
+References
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi. Self-RAG: Learning to Retrieve,
+Generate, and Critique through Self-Reflection. In The Twelfth International Conference on Learning
+Representations, 2024.
+---
+[3] (16_SCoRe_self-correct_RL_2409.12917.pdf) final response.
+Our main contribution is SCoRe, a multi-turn RL approach for teaching LLMs how to correct their own
+mistakes. To the best of our knowledge, SCoRe is the first approach to attain significantly positive
+intrinsic self-correction: relative to base Gemini models, our method attains an absolute 15.6% gain on
+self-correction for reasoning problems from MATH (Hendrycks et al., 2021) and an absolute 9.1% gain
+2
+---
+[4] (16_SCoRe_self-correct_RL_2409.12917.pdf) admits potentially spurious solutions.
+7. Discussion, Limitations, and Conclusion
+In this work, we investigated how to imbue LLMs with self-correction behavior that enables them to
+correct their own responses on the fly. To accomplish this, we proposed SCoRe, a multi-turn RL approach,
+and demonstrated through extensive evaluations that it is one of the first methods to attain significantly
+positive intrinsic self-correction performance. To do so, we rigorously analyzed the behavior of various SFT
+---
+[5] (16_SCoRe_self-correct_RL_2409.12917.pdf) shift, and (2) behavior collapse. Training on on-policy data can fix (1), but not (2).
+5. SCoRe: Self-Correction via Multi-Turn Reinforcement Learning
+The above results highlight that an effective approach for training LLMs to self-correct entirely via
+self-generated data must address both distribution shift and behavior collapse. Utilizing on-policy RL is a
+natural way to address distribution shift, and our method will do so by extending Equation 2 to multiple",
+ts042,single,What is the purpose of Stage I in the SCoRe method?,"[16_SCoRe_self-correct_RL_2409.12917.pdf] The first stage (Stage I) serves the role of initialization where we train
+the model to decouple its behavior across the two attempts by attempting to optimize second-attempt
+accuracy while explicitly constraining the distribution of first attempts to the base model.","[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) performance improvements without Stage I or without reward shaping in SCoRe are small when measured by the difference in
+accuracy over the two attempts. Utilizing STaR generally leads to worse performance even when it is run from an effective
+Stage I checkpoint.
+Method
+Accuracy@t1
+Accuracy@t2
+Δ(t1, t2)
+SCoRe (Ours)
+60.0%
+64.4%
+4.4%
+w/o multi-turn training
+61.8%
+59.4%
+-2.4%
+w/o Stage I
+59.2%
+61.4%
+2.2%
+w/o reward shaping
+60.0%
+62.6%
+2.6%
+w/ STaR instead of REINFORCE Stage II
+56.2%
+58.4%
+2.2%
+---
+[2] (12b_Ev2R_2411.05375.pdf) The scorer computes a score s as follows:
+s = log p(y | P(I, c, ˆE), θ)
+where P(I, c, ˆE) is the prompt including an instruction I, the input claim c, and the retrieved
+evidence ˆE, and θ denotes the parameters of the
+LLM. We apply chain-of-thought prompting (Wei
+et al., 2022) and instruct the model to generate intermediate reasoning steps before selecting a final label. The prompt includes few-shot examples and reasoning steps as demonstrations to improve prediction quality. For the proxy-reference
+---
+[3] (04_Stop-RAG_2510.14337.pdf) on that state, and scoring the outputs against A0. Formally, for t = 1, . . . , T −1:
+r(st, STOP) = 1
+N
+N
+X
+i=1
+S
+
+ˆA(i)
+0 (st), A0
+
+,
+(13)
+r(st, CONT) =
+(
+1
+N
+PN
+i=1 S
+
+ˆA(i)
+0 (sT ), A0
+
+,
+(t = T −1),
+0,
+(otherwise),
+(14)
+where S is an arbitrary scoring function and ˆA(i)
+0 (s) indicates the prediction generated from state
+s at the i-th trial. In our experiments, we use F1 scores for S and N = 8.
+---
+[4] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) (i.e. excluding claims where evidence is exclusively sentences). The scores in brackets are
+for two-way classiﬁcation when excluding claims labelled as NEI. Full Supervision results (in
+gray) are included for reference as an upper bound of performance when large-scale data is
+available. TABVER+T scores better than all few-shot baselines, including BlendSQL, which
+uses a substantially more powerful and proprietary language model.
+---
+[5] (16_SCoRe_self-correct_RL_2409.12917.pdf) The goal of Stage I of SCoRe is to obtain an initialization by improving the base model’s coverage over
+second attempts given the first attempt, so that subsequent training for self-correction is less prone to
+behavior collapse. While this would typically be done via SFT, our results in Section 4 show that SFT
+itself suffers from collapse. Therefore, we use RL in this stage to decouple the two attempts. To do so,",
+ts053,single,What does Ev2R jointly assess?,"[12b_Ev2R_2411.05375.pdf] Ev2R jointly assesses how well the evidence aligns with
+the gold references and how reliably it
+supports the verdict, addressing the shortcomings of prior methods.","[1] (12b_Ev2R_2411.05375.pdf) 6
+Conclusion
+This paper introduces Ev2R, a weighted evidence
+evaluation scorer for AFC. Ev2R consists of a
+reference-based and a verdict-level proxy evaluation component and addresses limitations in previous evaluation approaches by jointly assessing
+how well evidence aligns with gold references
+and how reliably the evidence supports the verdict. We assessed Ev2R against three baseline approaches for evidence evaluation approaches and
+find that Ev2R correlates strongly with human
+---
+[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) between South Africa and other countries. However, the token-level overlap between both evidence
+is low and may result in a higher METEOR score
+for one evidence alternative compared to the other.
+Thus we decided to use Ev2R (Akhtar et al.,
+2024) for evaluation. Ev2R (Akhtar et al., 2024)
+is a prompt-based LLM-as-judge approach that assesses the quality of retrieved evidence by decomposing both the retrieved and reference evidence
+---
+[3] (12b_Ev2R_2411.05375.pdf) 3
+Ev2R: A Weighted Scorer for Evidence
+Evaluation
+This section introduces Ev2R, a weighted scorer
+for evaluating evidence in the context of AFC. The
+scorer combines two distinct but complementary
+parts: a reference-based component, which decomposes the comparison between retrieved and
+reference evidence into precision and recall (see
+Section 3.1); and a proxy-based component, which
+assesses alignment between the predicted and reference verdict labels, where the verdict label acts
+---
+[4] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) evidence even when it differs from the reference
+and has low coverage. Compared to the previous
+year’s AVeriTeC shared task, the relevance scores
+increased while the scores for semantic coverage
+remained roughly equal.
+To assess the relationship between human scoring and the Ev2R score (see Sec 2.5), we computed both the Spearman correlation coefficient
+(ρ (Spearman, 1987)) and the Pearson correlation
+coefficient (r (Pearson, 1896)) as shown in Table 7.
+Correlations were calculated using both the entire
+---
+[5] (12b_Ev2R_2411.05375.pdf) obtained insights support the practical usefulness
+of the Ev2R scorer for evaluating evidence in realistic AFC scenarios.
+Further analysis across all datasets demonstrates that the evaluated Ev2R scorer components result in statistically significant correlations across backbone models selected for
+reference-based scoring.
+We assessed statistical significance using two-sided hypothesis tests on the correlation coefficients, as implemented in scipy.stats.pearsonr and",
+ts066,single,"In the AVeriTeC shared task 2024, what scale did annotators use to rate retrieved evidence?","[06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf] Annotators rated the evidence on a scale
+from 1 to 5 across five dimensions:","[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) AVeriTeC shared task (Schlichtkrull et al., 2024),
+we conducted human evaluation of the evidence
+retrieved by the systems participating in the shared
+task, motivated by two concerns. First, the incompleteness of the gold evidence annotation, since it is
+often the case that adequate evidence to determine
+the verdict for a claim can be found in multiple
+webpages, as shown in the inter-annotation agreement study of Schlichtkrull et al. (2023a). Second,
+the inaccuracies of automatic evaluation metrics of
+---
+[2] (12b_Ev2R_2411.05375.pdf) retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test
+sample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This resulted in 200 annotations while the overall rating
+for each annotated sample and dimension was calculated as the average of both annotations. If the annotators disagreed on the verdict assigned to the retrieved evidence, hence interpreted the relationship
+---
+[3] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) answering, providing a structured representation of
+the evidential reasoning process. The annotation
+process for AVERITEC was designed to ensure (1)
+that claims are understandable independently of the
+fact-checking articles they were sourced from, (2)
+that the evidence given is sufficient to support the
+verdicts, and (3) that all evidence used would have
+been available on the web before the claim was
+made. This avoids common problems found in previous datasets (Ousidhoum et al., 2022; Glockner
+---
+[4] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) required, for example identical information that should have been assigned to two different
+evidence sets.
+We further measured the relationship between the annotator calibration score and verdict agreement, ω. Figure 3.4 shows the ω score over annotator calibration scores for the ﬁrst 100 full-scale
+annotations and for the entire dataset. For the ﬁrst 100 annotations, we observe that agreement
+for annotators with a calibration score of over 0.9 is very high (ω = 0.76). In contrast, annotators
+---
+[5] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) MultiFC (Augenstein et al., 2019) the evidence is
+annotated automatically and thus cannot be relied
+upon for evaluation (Glockner et al., 2022).
+The
+recently
+proposed
+AVERITEC
+dataset (Schlichtkrull et al., 2023a) addressed these
+limitations. It consists of real-world claims where
+the evidence is manually annotated in the form
+of questions and answers sourced from the Web
+(see Figure 1 for an example). This evidence had
+to be available before the claim was made, and",
+ts078,single,What three baseline versions are reported in the AVeriTeC 2023 dataset paper?,"[02_AVeriTeC_2023_dataset_paper.pdf] We report results for three versions
+of the baseline, as discussed in Section 7.2: a version that uses no evidence (no search), a version that
+uses gold evidence (gold evidence), and the full pipeline described in Section 7.1 (AVERITEC).","[1] (12b_Ev2R_2411.05375.pdf) retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test
+sample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This resulted in 200 annotations while the overall rating
+for each annotated sample and dimension was calculated as the average of both annotations. If the annotators disagreed on the verdict assigned to the retrieved evidence, hence interpreted the relationship
+---
+[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 2.1
+Dataset
+Similarly to the shared task of previous years, we
+ask participants to train and validate their system
+on the public AVERITEC dataset and evaluate
+their performance on our new test set (2025). The
+2025 test set consists of 1,000 instances, which
+temporally succeed the previous data (original
+AVERITEC and 2024 test set).
+Annotation of 2025 New Test Set
+Following
+AVERITEC (Schlichtkrull et al., 2023a), we first
+collect fact-checking articles from ClaimReview
+---
+[3] (03_OpenFC_2609.33579.pdf) is excluded consistently from trajectory construction and difficulty filtering, so every reported AVeriTeC training statistic
+uses 3,067 as its denominator; the complete 500-claim development evaluation split is unaffected.
+QuanTemp++.
+QuanTemp++ targets naturally occurring
+numerical claims whose verification may require temporal, interval, statistical, or comparison reasoning (Venktesh, Prabhu, and Anand 2025). It contains 9,935 training,
+3,084 validation, and 2,495 test claims, together with an
+---
+[4] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) Sets
+Table 1 presents the statistics of our new
+test set in comparison with the original AVERITEC
+dataset. Our new test set (with claims up to 2023)
+is temporally further removed from the training set
+(ending in 2020). As such, there can be a domain
+shift between new and old data, regarding the factchecking content. However, the majority (66.5%)
+of claim labels are refuted, which is consistent with
+previous data. Additionally, the distributions of
+---
+[5] (02_AVeriTeC_2023_dataset_paper.pdf) A
+Dataset Access
+We release our dataset and baseline at https://github.com/MichSchli/AVeriTeC, and will
+maintain it there. As we anticipate using the dataset in a future shared task, we are as of submission
+time only releasing the training and development splits. We will make the test split available privately
+to reviewers upon request.
+B
+Author Statement
+The authors of this paper bear all responsibility in case of violation of copyrights associated with the
+AVERITECdataset.
+C
+Annotation Details",
