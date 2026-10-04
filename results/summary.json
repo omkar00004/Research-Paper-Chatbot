@@ -1,0 +1,5279 @@
+{
+  "s1": {
+    "test-single": {
+      "requested": 100,
+      "accepted": 100,
+      "candidates_tried": 136,
+      "outcomes": {
+        "ok": 100,
+        "answer_in_question": 15,
+        "banned_phrase": 14,
+        "quote_length": 1,
+        "empty_or_short": 1,
+        "writer_skip": 2,
+        "llm_error": 3
+      }
+    },
+    "test-multi": {
+      "requested": 20,
+      "accepted": 20,
+      "candidates_tried": 30,
+      "outcomes": {
+        "ok": 20,
+        "llm_error": 8,
+        "quote_not_verbatim": 1,
+        "banned_phrase": 1
+      }
+    },
+    "dev-single": {
+      "requested": 40,
+      "accepted": 40,
+      "candidates_tried": 59,
+      "outcomes": {
+        "ok": 40,
+        "banned_phrase": 8,
+        "answer_in_question": 9,
+        "quote_not_verbatim": 1,
+        "llm_error": 1
+      }
+    },
+    "test-unanswerable": {
+      "requested": 20,
+      "accepted": 20,
+      "rejected": {
+        "key_term_in_corpus": 5
+      }
+    },
+    "counts": {
+      "test/single": 100,
+      "test/multi": 20,
+      "dev/single": 40,
+      "test/unanswerable": 20,
+      "dev_legacy/legacy": 21
+    },
+    "per_paper_test_single": {
+      "12a_TSVer_EMNLP2025.pdf": 5,
+      "15_Calibrated_Selective_Fact-Checking_2607.18240.pdf": 2,
+      "14_REAL_2609.08943.pdf": 6,
+      "06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf": 4,
+      "01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf": 4,
+      "07c_Zero-NatVer_Findings-EMNLP2024.pdf": 4,
+      "12b_Ev2R_2411.05375.pdf": 6,
+      "10_Ji_2026_survey_2601.00536.pdf": 5,
+      "06c_Papelo_FEVER2024_2411.05762.pdf": 6,
+      "16_SCoRe_self-correct_RL_2409.12917.pdf": 5,
+      "04_Stop-RAG_2510.14337.pdf": 2,
+      "02_AVeriTeC_2023_dataset_paper.pdf": 6,
+      "13_AmbiFC_TACL2024.pdf": 5,
+      "11_HALT_2608.02009.pdf": 5,
+      "07a_TabVer_TACL2024.pdf": 4,
+      "08_ProoFVer_TACL2022.pdf": 5,
+      "06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf": 3,
+      "07b_QA-NatVer_EMNLP2023.pdf": 4,
+      "05_FIRE_2411.00784.pdf": 3,
+      "03_OpenFC_2609.33579.pdf": 5,
+      "06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf": 4,
+      "09_Sufficient_Context_ICLR2025.pdf": 3,
+      "Attention Is All You Need.pdf": 4
+    },
+    "section_mix": {
+      "method": 22,
+      "intro": 38,
+      "results": 16,
+      "other": 37,
+      "front": 3,
+      "discussion": 15,
+      "related": 9
+    },
+    "eligible_passages": {
+      "test": 690,
+      "multi": 312,
+      "dev": 234
+    },
+    "multi_pairs_available": 33
+  },
+  "grid": {
+    "grid": [
+      {
+        "name": "g|256|0|all-MiniLM-L6-v2|off",
+        "cond": {
+          "name": "g|256|0|all-MiniLM-L6-v2|off",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.525,
+        "recall@1": 0.525,
+        "mrr@1": 0.525,
+        "ndcg@1": 0.525,
+        "hit@3": 0.65,
+        "recall@3": 0.65,
+        "mrr@3": 0.5833333333333333,
+        "ndcg@3": 0.6005929753571457,
+        "hit@5": 0.7,
+        "recall@5": 0.7,
+        "mrr@5": 0.5933333333333334,
+        "ndcg@5": 0.6199356157188729,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6016666666666668,
+        "ndcg@10": 0.637745975074274,
+        "ci": {
+          "ndcg@5": [
+            0.48150911298460575,
+            0.7543107832165822
+          ],
+          "hit@5": [
+            0.55,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|all-MiniLM-L6-v2|pool10",
+        "cond": {
+          "name": "g|256|0|all-MiniLM-L6-v2|pool10",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.575,
+        "recall@1": 0.575,
+        "mrr@1": 0.575,
+        "ndcg@1": 0.575,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.5958333333333333,
+        "ndcg@3": 0.6032732438392865,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.6083333333333333,
+        "ndcg@5": 0.6248070717429561,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6194444444444445,
+        "ndcg@10": 0.6501431809899568,
+        "ci": {
+          "ndcg@5": [
+            0.48403382790366967,
+            0.7655803155822426
+          ],
+          "hit@5": [
+            0.525,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|all-MiniLM-L6-v2|pool20",
+        "cond": {
+          "name": "g|256|0|all-MiniLM-L6-v2|pool20",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.575,
+        "recall@1": 0.575,
+        "mrr@1": 0.575,
+        "ndcg@1": 0.575,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.5875,
+        "ndcg@3": 0.5907732438392864,
+        "hit@5": 0.6,
+        "recall@5": 0.6,
+        "mrr@5": 0.5875,
+        "ndcg@5": 0.5907732438392864,
+        "hit@10": 0.725,
+        "recall@10": 0.725,
+        "mrr@10": 0.604265873015873,
+        "ndcg@10": 0.6313107505812063,
+        "ci": {
+          "ndcg@5": [
+            0.44077324383928645,
+            0.7407732438392864
+          ],
+          "hit@5": [
+            0.45,
+            0.75
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|all-MiniLM-L6-v2|pool50",
+        "cond": {
+          "name": "g|256|0|all-MiniLM-L6-v2|pool50",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.6,
+        "recall@1": 0.6,
+        "mrr@1": 0.6,
+        "ndcg@1": 0.6,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.6125,
+        "ndcg@3": 0.6157732438392864,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.6125,
+        "ndcg@5": 0.6157732438392864,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.6152777777777778,
+        "ndcg@10": 0.6232989937308859,
+        "ci": {
+          "ndcg@5": [
+            0.4657732438392864,
+            0.7657732438392865
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|bge-small-en-v1.5|off",
+        "cond": {
+          "name": "g|256|0|bge-small-en-v1.5|off",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.525,
+        "recall@1": 0.525,
+        "mrr@1": 0.525,
+        "ndcg@1": 0.525,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.55,
+        "ndcg@3": 0.5625,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.55625,
+        "ndcg@5": 0.5732669139518348,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.5590277777777778,
+        "ndcg@10": 0.5807926638434344,
+        "ci": {
+          "ndcg@5": [
+            0.425,
+            0.7125
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|bge-small-en-v1.5|pool10",
+        "cond": {
+          "name": "g|256|0|bge-small-en-v1.5|pool10",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.55,
+        "recall@1": 0.55,
+        "mrr@1": 0.55,
+        "ndcg@1": 0.55,
+        "hit@3": 0.575,
+        "recall@3": 0.575,
+        "mrr@3": 0.5583333333333333,
+        "ndcg@3": 0.5625,
+        "hit@5": 0.6,
+        "recall@5": 0.6,
+        "mrr@5": 0.5633333333333332,
+        "ndcg@5": 0.5721713201808635,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.5716666666666667,
+        "ndcg@10": 0.5899816795362647,
+        "ci": {
+          "ndcg@5": [
+            0.4221713201808635,
+            0.7221713201808635
+          ],
+          "hit@5": [
+            0.45,
+            0.75
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|bge-small-en-v1.5|pool20",
+        "cond": {
+          "name": "g|256|0|bge-small-en-v1.5|pool20",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.625,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.625,
+        "ndcg@5": 0.625,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6404761904761904,
+        "ndcg@10": 0.6642439163414652,
+        "ci": {
+          "ndcg@5": [
+            0.475,
+            0.775
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|0|bge-small-en-v1.5|pool50",
+        "cond": {
+          "name": "g|256|0|bge-small-en-v1.5|pool50",
+          "size": 256,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 9978,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.625,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.625,
+        "ndcg@5": 0.625,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.6275000000000001,
+        "ndcg@10": 0.6322266206579472,
+        "ci": {
+          "ndcg@5": [
+            0.475,
+            0.775
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|all-MiniLM-L6-v2|off",
+        "cond": {
+          "name": "g|256|26|all-MiniLM-L6-v2|off",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.575,
+        "recall@1": 0.575,
+        "mrr@1": 0.575,
+        "ndcg@1": 0.575,
+        "hit@3": 0.65,
+        "recall@3": 0.65,
+        "mrr@3": 0.6041666666666666,
+        "ndcg@3": 0.6157732438392864,
+        "hit@5": 0.7,
+        "recall@5": 0.7,
+        "mrr@5": 0.6154166666666667,
+        "ndcg@5": 0.6362114779719847,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6227083333333333,
+        "ndcg@10": 0.6530032795693286,
+        "ci": {
+          "ndcg@5": [
+            0.4936888723407627,
+            0.7721824342813671
+          ],
+          "hit@5": [
+            0.55,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|all-MiniLM-L6-v2|pool10",
+        "cond": {
+          "name": "g|256|26|all-MiniLM-L6-v2|pool10",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.625,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.6375,
+        "ndcg@5": 0.6465338279036696,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.648611111111111,
+        "ndcg@10": 0.6718699371506703,
+        "ci": {
+          "ndcg@5": [
+            0.4965338279036697,
+            0.7857669139518348
+          ],
+          "hit@5": [
+            0.525,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|all-MiniLM-L6-v2|pool20",
+        "cond": {
+          "name": "g|256|26|all-MiniLM-L6-v2|pool20",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.625,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.625,
+        "ndcg@5": 0.625,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6409920634920635,
+        "ndcg@10": 0.6647523705495467,
+        "ci": {
+          "ndcg@5": [
+            0.475,
+            0.775
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|all-MiniLM-L6-v2|pool50",
+        "cond": {
+          "name": "g|256|26|all-MiniLM-L6-v2|pool50",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.625,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.625,
+        "ndcg@5": 0.625,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.6275000000000001,
+        "ndcg@10": 0.6322266206579472,
+        "ci": {
+          "ndcg@5": [
+            0.475,
+            0.775
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|bge-small-en-v1.5|off",
+        "cond": {
+          "name": "g|256|26|bge-small-en-v1.5|off",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.475,
+        "recall@1": 0.475,
+        "mrr@1": 0.475,
+        "ndcg@1": 0.475,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.5333333333333333,
+        "ndcg@3": 0.5505929753571458,
+        "hit@5": 0.6,
+        "recall@5": 0.6,
+        "mrr@5": 0.5333333333333333,
+        "ndcg@5": 0.5505929753571458,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.5399999999999999,
+        "ndcg@10": 0.5667247756927936,
+        "ci": {
+          "ndcg@5": [
+            0.40386621919643223,
+            0.6940613120625013
+          ],
+          "hit@5": [
+            0.45,
+            0.75
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|bge-small-en-v1.5|pool10",
+        "cond": {
+          "name": "g|256|26|bge-small-en-v1.5|pool10",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.55,
+        "recall@1": 0.55,
+        "mrr@1": 0.55,
+        "ndcg@1": 0.55,
+        "hit@3": 0.55,
+        "recall@3": 0.55,
+        "mrr@3": 0.55,
+        "ndcg@3": 0.55,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.56875,
+        "ndcg@5": 0.5823007418555045,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.5729166666666666,
+        "ndcg@10": 0.5912059215332051,
+        "ci": {
+          "ndcg@5": [
+            0.43230074185550454,
+            0.725
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|bge-small-en-v1.5|pool20",
+        "cond": {
+          "name": "g|256|26|bge-small-en-v1.5|pool20",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.6,
+        "recall@1": 0.6,
+        "mrr@1": 0.6,
+        "ndcg@1": 0.6,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.6125,
+        "ndcg@3": 0.6157732438392864,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.6125,
+        "ndcg@5": 0.6157732438392864,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6289186507936508,
+        "ndcg@10": 0.6559498785531626,
+        "ci": {
+          "ndcg@5": [
+            0.4657732438392864,
+            0.7657732438392865
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|256|26|bge-small-en-v1.5|pool50",
+        "cond": {
+          "name": "g|256|26|bge-small-en-v1.5|pool50",
+          "size": 256,
+          "overlap": 26,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 10095,
+        "hit@1": 0.6,
+        "recall@1": 0.6,
+        "mrr@1": 0.6,
+        "ndcg@1": 0.6,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.6125,
+        "ndcg@3": 0.6157732438392864,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.6125,
+        "ndcg@5": 0.6157732438392864,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.615,
+        "ndcg@10": 0.6229998644972337,
+        "ci": {
+          "ndcg@5": [
+            0.4657732438392864,
+            0.7657732438392865
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|all-MiniLM-L6-v2|off",
+        "cond": {
+          "name": "g|512|0|all-MiniLM-L6-v2|off",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.525,
+        "recall@1": 0.525,
+        "mrr@1": 0.525,
+        "ndcg@1": 0.525,
+        "hit@3": 0.65,
+        "recall@3": 0.65,
+        "mrr@3": 0.5833333333333333,
+        "ndcg@3": 0.6005929753571457,
+        "hit@5": 0.65,
+        "recall@5": 0.65,
+        "mrr@5": 0.5833333333333333,
+        "ndcg@5": 0.6005929753571457,
+        "hit@10": 0.7,
+        "recall@10": 0.7,
+        "mrr@10": 0.5894047619047619,
+        "ndcg@10": 0.6161529293484262,
+        "ci": {
+          "ndcg@5": [
+            0.4571394630357187,
+            0.7380929753571458
+          ],
+          "hit@5": [
+            0.5,
+            0.8
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|all-MiniLM-L6-v2|pool10",
+        "cond": {
+          "name": "g|512|0|all-MiniLM-L6-v2|pool10",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.625,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.63625,
+        "ndcg@5": 0.6454382341326983,
+        "hit@10": 0.7,
+        "recall@10": 0.7,
+        "mrr@10": 0.639375,
+        "ndcg@10": 0.6533248560523417,
+        "ci": {
+          "ndcg@5": [
+            0.4965338279036697,
+            0.7846713201808635
+          ],
+          "hit@5": [
+            0.525,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|all-MiniLM-L6-v2|pool20",
+        "cond": {
+          "name": "g|512|0|all-MiniLM-L6-v2|pool20",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.675,
+        "recall@1": 0.675,
+        "mrr@1": 0.675,
+        "ndcg@1": 0.675,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.675,
+        "ndcg@3": 0.675,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.6849999999999999,
+        "ndcg@5": 0.6943426403617271,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.688125,
+        "ndcg@10": 0.7022292622813703,
+        "ci": {
+          "ndcg@5": [
+            0.5540139605425907,
+            0.825
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|all-MiniLM-L6-v2|pool50",
+        "cond": {
+          "name": "g|512|0|all-MiniLM-L6-v2|pool50",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.7,
+        "recall@1": 0.7,
+        "mrr@1": 0.7,
+        "ndcg@1": 0.7,
+        "hit@3": 0.7,
+        "recall@3": 0.7,
+        "mrr@3": 0.7,
+        "ndcg@3": 0.7,
+        "hit@5": 0.7,
+        "recall@5": 0.7,
+        "mrr@5": 0.7,
+        "ndcg@5": 0.7,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.7055555555555555,
+        "ndcg@10": 0.715051499783199,
+        "ci": {
+          "ndcg@5": [
+            0.55,
+            0.825
+          ],
+          "hit@5": [
+            0.55,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|bge-small-en-v1.5|off",
+        "cond": {
+          "name": "g|512|0|bge-small-en-v1.5|off",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.575,
+        "recall@1": 0.575,
+        "mrr@1": 0.575,
+        "ndcg@1": 0.575,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.6208333333333333,
+        "ndcg@3": 0.6348197315178593,
+        "hit@5": 0.775,
+        "recall@5": 0.775,
+        "mrr@5": 0.6433333333333333,
+        "ndcg@5": 0.675696199783256,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.6469047619047619,
+        "ndcg@10": 0.6840295331165894,
+        "ci": {
+          "ndcg@5": [
+            0.5428586094660153,
+            0.800845724043253
+          ],
+          "hit@5": [
+            0.65,
+            0.9
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|bge-small-en-v1.5|pool10",
+        "cond": {
+          "name": "g|512|0|bge-small-en-v1.5|pool10",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.75,
+        "recall@1": 0.75,
+        "mrr@1": 0.75,
+        "ndcg@1": 0.75,
+        "hit@3": 0.75,
+        "recall@3": 0.75,
+        "mrr@3": 0.75,
+        "ndcg@3": 0.75,
+        "hit@5": 0.8,
+        "recall@5": 0.8,
+        "mrr@5": 0.7625,
+        "ndcg@5": 0.7715338279036696,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.7625,
+        "ndcg@10": 0.7715338279036696,
+        "ci": {
+          "ndcg@5": [
+            0.6430676558073393,
+            0.8857669139518348
+          ],
+          "hit@5": [
+            0.675,
+            0.925
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|bge-small-en-v1.5|pool20",
+        "cond": {
+          "name": "g|512|0|bge-small-en-v1.5|pool20",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.725,
+        "recall@1": 0.725,
+        "mrr@1": 0.725,
+        "ndcg@1": 0.725,
+        "hit@3": 0.725,
+        "recall@3": 0.725,
+        "mrr@3": 0.725,
+        "ndcg@3": 0.725,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.725,
+        "ndcg@5": 0.725,
+        "hit@10": 0.825,
+        "recall@10": 0.825,
+        "mrr@10": 0.7398809523809524,
+        "ndcg@10": 0.7589051796777004,
+        "ci": {
+          "ndcg@5": [
+            0.575,
+            0.85
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|512|0|bge-small-en-v1.5|pool50",
+        "cond": {
+          "name": "g|512|0|bge-small-en-v1.5|pool50",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4701,
+        "hit@1": 0.725,
+        "recall@1": 0.725,
+        "mrr@1": 0.725,
+        "ndcg@1": 0.725,
+        "hit@3": 0.725,
+        "recall@3": 0.725,
+        "mrr@3": 0.725,
+        "ndcg@3": 0.725,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.725,
+        "ndcg@5": 0.725,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.7275,
+        "ndcg@10": 0.7322266206579472,
+        "ci": {
+          "ndcg@5": [
+            0.575,
+            0.85
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|all-MiniLM-L6-v2|off",
+        "cond": {
+          "name": "g|512|51|all-MiniLM-L6-v2|off",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.45,
+        "recall@1": 0.45,
+        "mrr@1": 0.45,
+        "ndcg@1": 0.45,
+        "hit@3": 0.65,
+        "recall@3": 0.65,
+        "mrr@3": 0.5416666666666666,
+        "ndcg@3": 0.5599681428548552,
+        "hit@5": 0.7,
+        "recall@5": 0.7,
+        "mrr@5": 0.5516666666666666,
+        "ndcg@5": 0.5793107832165821,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.5651587301587302,
+        "ndcg@10": 0.6118365331081816,
+        "ci": {
+          "ndcg@5": [
+            0.4453801797390229,
+            0.7074356157188728
+          ],
+          "hit@5": [
+            0.55,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|all-MiniLM-L6-v2|pool10",
+        "cond": {
+          "name": "g|512|51|all-MiniLM-L6-v2|pool10",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.7,
+        "recall@3": 0.7,
+        "mrr@3": 0.6541666666666667,
+        "ndcg@3": 0.6561019236584229,
+        "hit@5": 0.775,
+        "recall@5": 0.775,
+        "mrr@5": 0.6716666666666666,
+        "ndcg@5": 0.687307071742956,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.6747916666666667,
+        "ndcg@10": 0.6951936936625993,
+        "ci": {
+          "ndcg@5": [
+            0.5526357515620925,
+            0.810573985694791
+          ],
+          "hit@5": [
+            0.65,
+            0.9
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|all-MiniLM-L6-v2|pool20",
+        "cond": {
+          "name": "g|512|51|all-MiniLM-L6-v2|pool20",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.65,
+        "recall@1": 0.65,
+        "mrr@1": 0.65,
+        "ndcg@1": 0.65,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.6625,
+        "ndcg@3": 0.6561019236584229,
+        "hit@5": 0.75,
+        "recall@5": 0.75,
+        "mrr@5": 0.6775,
+        "ndcg@5": 0.6851158842010135,
+        "hit@10": 0.825,
+        "recall@10": 0.825,
+        "mrr@10": 0.6872916666666666,
+        "ndcg@10": 0.7091343064563045,
+        "ci": {
+          "ndcg@5": [
+            0.545231768402027,
+            0.8101158842010137
+          ],
+          "hit@5": [
+            0.6,
+            0.875
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|all-MiniLM-L6-v2|pool50",
+        "cond": {
+          "name": "g|512|51|all-MiniLM-L6-v2|pool50",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.675,
+        "recall@1": 0.675,
+        "mrr@1": 0.675,
+        "ndcg@1": 0.675,
+        "hit@3": 0.7,
+        "recall@3": 0.7,
+        "mrr@3": 0.6875,
+        "ndcg@3": 0.6907732438392864,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.69375,
+        "ndcg@5": 0.6973749469036011,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.7032242063492063,
+        "ndcg@10": 0.7211206520481773,
+        "ci": {
+          "ndcg@5": [
+            0.5566017030643147,
+            0.8315464876785729
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|bge-small-en-v1.5|off",
+        "cond": {
+          "name": "g|512|51|bge-small-en-v1.5|off",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.575,
+        "recall@1": 0.575,
+        "mrr@1": 0.575,
+        "ndcg@1": 0.575,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.6208333333333333,
+        "ndcg@3": 0.6348197315178593,
+        "hit@5": 0.775,
+        "recall@5": 0.775,
+        "mrr@5": 0.6445833333333333,
+        "ndcg@5": 0.6726265826667073,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.647361111111111,
+        "ndcg@10": 0.6801523325583068,
+        "ci": {
+          "ndcg@5": [
+            0.5393560595593772,
+            0.8000677888664922
+          ],
+          "hit@5": [
+            0.65,
+            0.9
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|bge-small-en-v1.5|pool10",
+        "cond": {
+          "name": "g|512|51|bge-small-en-v1.5|pool10",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.7,
+        "recall@3": 0.7,
+        "mrr@3": 0.6541666666666666,
+        "ndcg@3": 0.6609375837488547,
+        "hit@5": 0.775,
+        "recall@5": 0.775,
+        "mrr@5": 0.6716666666666666,
+        "ndcg@5": 0.6921427318333878,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.6758333333333333,
+        "ndcg@10": 0.7010479115110885,
+        "ci": {
+          "ndcg@5": [
+            0.5574714116525243,
+            0.8167898793368341
+          ],
+          "hit@5": [
+            0.65,
+            0.9
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|bge-small-en-v1.5|pool20",
+        "cond": {
+          "name": "g|512|51|bge-small-en-v1.5|pool20",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.65,
+        "recall@1": 0.65,
+        "mrr@1": 0.65,
+        "ndcg@1": 0.65,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.6625,
+        "ndcg@3": 0.6657732438392865,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.67375,
+        "ndcg@5": 0.6820462670844647,
+        "hit@10": 0.85,
+        "recall@10": 0.85,
+        "mrr@10": 0.6929464285714285,
+        "ndcg@10": 0.7249817613705429,
+        "ci": {
+          "ndcg@5": [
+            0.5386479701487795,
+            0.8157732438392864
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|512|51|bge-small-en-v1.5|pool50",
+        "cond": {
+          "name": "g|512|51|bge-small-en-v1.5|pool50",
+          "size": 512,
+          "overlap": 51,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 4845,
+        "hit@1": 0.675,
+        "recall@1": 0.675,
+        "mrr@1": 0.675,
+        "ndcg@1": 0.675,
+        "hit@3": 0.7,
+        "recall@3": 0.7,
+        "mrr@3": 0.6875,
+        "ndcg@3": 0.6907732438392864,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.6925,
+        "ndcg@5": 0.6967031866585188,
+        "hit@10": 0.775,
+        "recall@10": 0.775,
+        "mrr@10": 0.6984027777777777,
+        "ndcg@10": 0.7121155584697616,
+        "ci": {
+          "ndcg@5": [
+            0.5559299428192324,
+            0.8309299428192324
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|all-MiniLM-L6-v2|off",
+        "cond": {
+          "name": "g|1024|0|all-MiniLM-L6-v2|off",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.25,
+        "recall@1": 0.25,
+        "mrr@1": 0.25,
+        "ndcg@1": 0.25,
+        "hit@3": 0.425,
+        "recall@3": 0.425,
+        "mrr@3": 0.3291666666666666,
+        "ndcg@3": 0.35386621919643224,
+        "hit@5": 0.55,
+        "recall@5": 0.55,
+        "mrr@5": 0.3566666666666667,
+        "ndcg@5": 0.4044140076426925,
+        "hit@10": 0.55,
+        "recall@10": 0.55,
+        "mrr@10": 0.3566666666666667,
+        "ndcg@10": 0.4044140076426925,
+        "ci": {
+          "ndcg@5": [
+            0.27742446262499515,
+            0.5346719732932501
+          ],
+          "hit@5": [
+            0.4,
+            0.7
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|all-MiniLM-L6-v2|pool10",
+        "cond": {
+          "name": "g|1024|0|all-MiniLM-L6-v2|pool10",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.4,
+        "recall@1": 0.4,
+        "mrr@1": 0.4,
+        "ndcg@1": 0.4,
+        "hit@3": 0.475,
+        "recall@3": 0.475,
+        "mrr@3": 0.4291666666666666,
+        "ndcg@3": 0.44077324383928645,
+        "hit@5": 0.525,
+        "recall@5": 0.525,
+        "mrr@5": 0.43916666666666665,
+        "ndcg@5": 0.4601158842010135,
+        "hit@10": 0.55,
+        "recall@10": 0.55,
+        "mrr@10": 0.4427380952380952,
+        "ndcg@10": 0.4684492175343468,
+        "ci": {
+          "ndcg@5": [
+            0.31294456402015,
+            0.6068537544622307
+          ],
+          "hit@5": [
+            0.375,
+            0.675
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|all-MiniLM-L6-v2|pool20",
+        "cond": {
+          "name": "g|1024|0|all-MiniLM-L6-v2|pool20",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.475,
+        "recall@1": 0.475,
+        "mrr@1": 0.475,
+        "ndcg@1": 0.475,
+        "hit@3": 0.55,
+        "recall@3": 0.55,
+        "mrr@3": 0.5125,
+        "ndcg@3": 0.5223197315178594,
+        "hit@5": 0.575,
+        "recall@5": 0.575,
+        "mrr@5": 0.5175,
+        "ndcg@5": 0.5319910516987228,
+        "hit@10": 0.7,
+        "recall@10": 0.7,
+        "mrr@10": 0.5362500000000001,
+        "ndcg@10": 0.574479834571111,
+        "ci": {
+          "ndcg@5": [
+            0.382869065638519,
+            0.6819910516987229
+          ],
+          "hit@5": [
+            0.425,
+            0.725
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|all-MiniLM-L6-v2|pool50",
+        "cond": {
+          "name": "g|1024|0|all-MiniLM-L6-v2|pool50",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.5,
+        "recall@1": 0.5,
+        "mrr@1": 0.5,
+        "ndcg@1": 0.5,
+        "hit@3": 0.575,
+        "recall@3": 0.575,
+        "mrr@3": 0.5375,
+        "ndcg@3": 0.5473197315178593,
+        "hit@5": 0.6,
+        "recall@5": 0.6,
+        "mrr@5": 0.5425,
+        "ndcg@5": 0.5569910516987229,
+        "hit@10": 0.65,
+        "recall@10": 0.65,
+        "mrr@10": 0.5480555555555555,
+        "ndcg@10": 0.5720425514819218,
+        "ci": {
+          "ndcg@5": [
+            0.40699105169872285,
+            0.7065464876785729
+          ],
+          "hit@5": [
+            0.45,
+            0.75
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|bge-small-en-v1.5|off",
+        "cond": {
+          "name": "g|1024|0|bge-small-en-v1.5|off",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.375,
+        "recall@1": 0.375,
+        "mrr@1": 0.375,
+        "ndcg@1": 0.375,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.4666666666666666,
+        "ndcg@3": 0.5005929753571458,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.48291666666666666,
+        "ndcg@5": 0.5307025296707077,
+        "hit@10": 0.775,
+        "recall@10": 0.775,
+        "mrr@10": 0.496875,
+        "ndcg@10": 0.5636261316036991,
+        "ci": {
+          "ndcg@5": [
+            0.40113818319275324,
+            0.6616126379950878
+          ],
+          "hit@5": [
+            0.525,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|bge-small-en-v1.5|pool10",
+        "cond": {
+          "name": "g|1024|0|bge-small-en-v1.5|pool10",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.525,
+        "recall@1": 0.525,
+        "mrr@1": 0.525,
+        "ndcg@1": 0.525,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.5833333333333333,
+        "ndcg@3": 0.6065464876785729,
+        "hit@5": 0.75,
+        "recall@5": 0.75,
+        "mrr@5": 0.6008333333333333,
+        "ndcg@5": 0.6377516357631061,
+        "hit@10": 0.775,
+        "recall@10": 0.775,
+        "mrr@10": 0.6044047619047619,
+        "ndcg@10": 0.6460849690964394,
+        "ci": {
+          "ndcg@5": [
+            0.5048134016304078,
+            0.7662178078594364
+          ],
+          "hit@5": [
+            0.6,
+            0.875
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|bge-small-en-v1.5|pool20",
+        "cond": {
+          "name": "g|1024|0|bge-small-en-v1.5|pool20",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.525,
+        "recall@1": 0.525,
+        "mrr@1": 0.525,
+        "ndcg@1": 0.525,
+        "hit@3": 0.575,
+        "recall@3": 0.575,
+        "mrr@3": 0.55,
+        "ndcg@3": 0.5565464876785728,
+        "hit@5": 0.6,
+        "recall@5": 0.6,
+        "mrr@5": 0.5549999999999999,
+        "ndcg@5": 0.5662178078594364,
+        "hit@10": 0.775,
+        "recall@10": 0.775,
+        "mrr@10": 0.5787797619047619,
+        "ndcg@10": 0.6232479869650477,
+        "ci": {
+          "ndcg@5": [
+            0.4162178078594364,
+            0.7162178078594363
+          ],
+          "hit@5": [
+            0.45,
+            0.75
+          ]
+        }
+      },
+      {
+        "name": "g|1024|0|bge-small-en-v1.5|pool50",
+        "cond": {
+          "name": "g|1024|0|bge-small-en-v1.5|pool50",
+          "size": 1024,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2447,
+        "hit@1": 0.525,
+        "recall@1": 0.525,
+        "mrr@1": 0.525,
+        "ndcg@1": 0.525,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.5625,
+        "ndcg@3": 0.5723197315178593,
+        "hit@5": 0.625,
+        "recall@5": 0.625,
+        "mrr@5": 0.5675,
+        "ndcg@5": 0.5819910516987228,
+        "hit@10": 0.675,
+        "recall@10": 0.675,
+        "mrr@10": 0.5731249999999999,
+        "ndcg@10": 0.5971042942763132,
+        "ci": {
+          "ndcg@5": [
+            0.4319910516987228,
+            0.7288662191964322
+          ],
+          "hit@5": [
+            0.475,
+            0.775
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|all-MiniLM-L6-v2|off",
+        "cond": {
+          "name": "g|1024|102|all-MiniLM-L6-v2|off",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.175,
+        "recall@1": 0.175,
+        "mrr@1": 0.175,
+        "ndcg@1": 0.175,
+        "hit@3": 0.475,
+        "recall@3": 0.475,
+        "mrr@3": 0.3,
+        "ndcg@3": 0.33853753937729575,
+        "hit@5": 0.55,
+        "recall@5": 0.55,
+        "mrr@5": 0.315,
+        "ndcg@5": 0.3675514999198864,
+        "hit@10": 0.675,
+        "recall@10": 0.675,
+        "mrr@10": 0.33141865079365074,
+        "ndcg@10": 0.4048167771616522,
+        "ci": {
+          "ndcg@5": [
+            0.25088912804029995,
+            0.48645393978595475
+          ],
+          "hit@5": [
+            0.4,
+            0.7
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|all-MiniLM-L6-v2|pool10",
+        "cond": {
+          "name": "g|1024|102|all-MiniLM-L6-v2|pool10",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.55,
+        "recall@1": 0.55,
+        "mrr@1": 0.55,
+        "ndcg@1": 0.55,
+        "hit@3": 0.575,
+        "recall@3": 0.575,
+        "mrr@3": 0.5583333333333333,
+        "ndcg@3": 0.5431573596382729,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.5833333333333334,
+        "ndcg@5": 0.5862250154456122,
+        "hit@10": 0.675,
+        "recall@10": 0.675,
+        "mrr@10": 0.5833333333333334,
+        "ndcg@10": 0.5862250154456122,
+        "ci": {
+          "ndcg@5": [
+            0.44425071081347084,
+            0.7191654921740839
+          ],
+          "hit@5": [
+            0.525,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|all-MiniLM-L6-v2|pool20",
+        "cond": {
+          "name": "g|1024|102|all-MiniLM-L6-v2|pool20",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.6,
+        "recall@1": 0.6,
+        "mrr@1": 0.6,
+        "ndcg@1": 0.6,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.6,
+        "ndcg@3": 0.5709860394574093,
+        "hit@5": 0.65,
+        "recall@5": 0.65,
+        "mrr@5": 0.61,
+        "ndcg@5": 0.5903286798191365,
+        "hit@10": 0.775,
+        "recall@10": 0.775,
+        "mrr@10": 0.6291964285714285,
+        "ndcg@10": 0.6332641741052146,
+        "ci": {
+          "ndcg@5": [
+            0.4443426403617271,
+            0.7306573596382729
+          ],
+          "hit@5": [
+            0.5,
+            0.8
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|all-MiniLM-L6-v2|pool50",
+        "cond": {
+          "name": "g|1024|102|all-MiniLM-L6-v2|pool50",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.625,
+        "recall@1": 0.625,
+        "mrr@1": 0.625,
+        "ndcg@1": 0.625,
+        "hit@3": 0.625,
+        "recall@3": 0.625,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.5959860394574094,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.63625,
+        "ndcg@5": 0.6164242735901077,
+        "hit@10": 0.75,
+        "recall@10": 0.75,
+        "mrr@10": 0.6449305555555556,
+        "ndcg@10": 0.63936239529295,
+        "ci": {
+          "ndcg@5": [
+            0.47098603945740936,
+            0.7511092889040889
+          ],
+          "hit@5": [
+            0.525,
+            0.825
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|bge-small-en-v1.5|off",
+        "cond": {
+          "name": "g|1024|102|bge-small-en-v1.5|off",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.45,
+        "recall@1": 0.45,
+        "mrr@1": 0.45,
+        "ndcg@1": 0.45,
+        "hit@3": 0.6,
+        "recall@3": 0.6,
+        "mrr@3": 0.5166666666666667,
+        "ndcg@3": 0.5174840714274276,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.5454166666666667,
+        "ndcg@5": 0.5691274536446591,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.5554861111111111,
+        "ndcg@10": 0.5934450051336024,
+        "ci": {
+          "ndcg@5": [
+            0.44002566290195333,
+            0.6976322370597244
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|bge-small-en-v1.5|pool10",
+        "cond": {
+          "name": "g|1024|102|bge-small-en-v1.5|pool10",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.6,
+        "recall@1": 0.6,
+        "mrr@1": 0.6,
+        "ndcg@1": 0.6,
+        "hit@3": 0.675,
+        "recall@3": 0.675,
+        "mrr@3": 0.625,
+        "ndcg@3": 0.6084860394574093,
+        "hit@5": 0.75,
+        "recall@5": 0.75,
+        "mrr@5": 0.64375,
+        "ndcg@5": 0.6407867813129139,
+        "hit@10": 0.8,
+        "recall@10": 0.8,
+        "mrr@10": 0.6520833333333333,
+        "ndcg@10": 0.658597140668315,
+        "ci": {
+          "ndcg@5": [
+            0.5089304458180689,
+            0.7640536952647486
+          ],
+          "hit@5": [
+            0.6,
+            0.875
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|bge-small-en-v1.5|pool20",
+        "cond": {
+          "name": "g|1024|102|bge-small-en-v1.5|pool20",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.65,
+        "recall@1": 0.65,
+        "mrr@1": 0.65,
+        "ndcg@1": 0.65,
+        "hit@3": 0.65,
+        "recall@3": 0.65,
+        "mrr@3": 0.65,
+        "ndcg@3": 0.6209860394574094,
+        "hit@5": 0.725,
+        "recall@5": 0.725,
+        "mrr@5": 0.6649999999999999,
+        "ndcg@5": 0.65,
+        "hit@10": 0.875,
+        "recall@10": 0.875,
+        "mrr@10": 0.6851388888888889,
+        "ndcg@10": 0.6986351029778866,
+        "ci": {
+          "ndcg@5": [
+            0.5096713201808635,
+            0.775
+          ],
+          "hit@5": [
+            0.575,
+            0.85
+          ]
+        }
+      },
+      {
+        "name": "g|1024|102|bge-small-en-v1.5|pool50",
+        "cond": {
+          "name": "g|1024|102|bge-small-en-v1.5|pool50",
+          "size": 1024,
+          "overlap": 102,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 50,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "n_chunks": 2577,
+        "hit@1": 0.65,
+        "recall@1": 0.65,
+        "mrr@1": 0.65,
+        "ndcg@1": 0.65,
+        "hit@3": 0.65,
+        "recall@3": 0.65,
+        "mrr@3": 0.65,
+        "ndcg@3": 0.6209860394574094,
+        "hit@5": 0.675,
+        "recall@5": 0.675,
+        "mrr@5": 0.655,
+        "ndcg@5": 0.630657359638273,
+        "hit@10": 0.7,
+        "recall@10": 0.7,
+        "mrr@10": 0.6575,
+        "ndcg@10": 0.6378839802962201,
+        "ci": {
+          "ndcg@5": [
+            0.4846713201808635,
+            0.7653286798191365
+          ],
+          "hit@5": [
+            0.525,
+            0.8
+          ]
+        }
+      }
+    ],
+    "selected": {
+      "name": "S",
+      "size": 512,
+      "overlap": 0,
+      "embedder": "BAAI/bge-small-en-v1.5",
+      "mode": "dense",
+      "pool": 10,
+      "rerank": true,
+      "diversity": true,
+      "top_k": 10
+    },
+    "selected_dev_ndcg5": 0.7715338279036696,
+    "default_config_dev_reference": {
+      "hit@1": 0.675,
+      "recall@1": 0.675,
+      "mrr@1": 0.675,
+      "ndcg@1": 0.675,
+      "hit@3": 0.725,
+      "recall@3": 0.725,
+      "mrr@3": 0.7,
+      "ndcg@3": 0.6001619656890739,
+      "hit@5": 0.8,
+      "recall@5": 0.8,
+      "mrr@5": 0.7162499999999999,
+      "ndcg@5": 0.628294874572717,
+      "hit@10": 0.825,
+      "recall@10": 0.825,
+      "mrr@10": 0.7204166666666667,
+      "ndcg@10": 0.6479099950219738
+    },
+    "n_dev": 40
+  },
+  "s2": {
+    "conditions": {
+      "C1": {
+        "cond": {
+          "name": "C1",
+          "size": 512,
+          "overlap": 128,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": false,
+          "diversity": true,
+          "top_k": 10
+        },
+        "key": "dense|512|128|all-MiniLM-L6-v2|pool-|rr0|div1",
+        "n_chunks": 5569,
+        "single": {
+          "hit@1": {
+            "mean": 0.36,
+            "lo": 0.27,
+            "hi": 0.46,
+            "n": 100
+          },
+          "recall@1": {
+            "mean": 0.36,
+            "lo": 0.27,
+            "hi": 0.46,
+            "n": 100
+          },
+          "mrr@1": {
+            "mean": 0.36,
+            "lo": 0.27,
+            "hi": 0.46,
+            "n": 100
+          },
+          "ndcg@1": {
+            "mean": 0.36,
+            "lo": 0.27,
+            "hi": 0.46,
+            "n": 100
+          },
+          "hit@3": {
+            "mean": 0.55,
+            "lo": 0.45,
+            "hi": 0.65,
+            "n": 100
+          },
+          "recall@3": {
+            "mean": 0.55,
+            "lo": 0.45,
+            "hi": 0.65,
+            "n": 100
+          },
+          "mrr@3": {
+            "mean": 0.44333333333333336,
+            "lo": 0.355,
+            "hi": 0.5316666666666666,
+            "n": 100
+          },
+          "ndcg@3": {
+            "mean": 0.4224734305975189,
+            "lo": 0.3403612054097654,
+            "hi": 0.5051841896301508,
+            "n": 100
+          },
+          "hit@5": {
+            "mean": 0.61,
+            "lo": 0.51,
+            "hi": 0.7,
+            "n": 100
+          },
+          "recall@5": {
+            "mean": 0.61,
+            "lo": 0.51,
+            "hi": 0.7,
+            "n": 100
+          },
+          "mrr@5": {
+            "mean": 0.4563333333333333,
+            "lo": 0.3698291666666667,
+            "hi": 0.5429999999999999,
+            "n": 100
+          },
+          "ndcg@5": {
+            "mean": 0.4500771814571348,
+            "lo": 0.36948141956834507,
+            "hi": 0.5310552091697596,
+            "n": 100
+          },
+          "hit@10": {
+            "mean": 0.71,
+            "lo": 0.62,
+            "hi": 0.8,
+            "n": 100
+          },
+          "recall@10": {
+            "mean": 0.71,
+            "lo": 0.62,
+            "hi": 0.8,
+            "n": 100
+          },
+          "mrr@10": {
+            "mean": 0.4699404761904763,
+            "lo": 0.38619999999999993,
+            "hi": 0.5541919642857143,
+            "n": 100
+          },
+          "ndcg@10": {
+            "mean": 0.4851135259077985,
+            "lo": 0.40830404213146815,
+            "hi": 0.5613876429571186,
+            "n": 100
+          }
+        },
+        "multi": {
+          "hit@1": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n": 20
+          },
+          "recall@1": {
+            "mean": 0.15,
+            "lo": 0.05,
+            "hi": 0.25,
+            "n": 20
+          },
+          "mrr@1": {
+            "mean": 0.3,
+            "lo": 0.1,
+            "hi": 0.5,
+            "n": 20
+          },
+          "ndcg@1": {
+            "mean": 0.3,
+            "lo": 0.1,
+            "hi": 0.5,
+            "n": 20
+          },
+          "hit@3": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n": 20
+          },
+          "recall@3": {
+            "mean": 0.225,
+            "lo": 0.125,
+            "hi": 0.325,
+            "n": 20
+          },
+          "mrr@3": {
+            "mean": 0.36666666666666664,
+            "lo": 0.175,
+            "hi": 0.5666666666666667,
+            "n": 20
+          },
+          "ndcg@3": {
+            "mean": 0.22810981651139178,
+            "lo": 0.11543601521595659,
+            "hi": 0.3465159904980935,
+            "n": 20
+          },
+          "hit@5": {
+            "mean": 0.05,
+            "lo": 0.0,
+            "hi": 0.15,
+            "n": 20
+          },
+          "recall@5": {
+            "mean": 0.275,
+            "lo": 0.15,
+            "hi": 0.4,
+            "n": 20
+          },
+          "mrr@5": {
+            "mean": 0.37666666666666665,
+            "lo": 0.19166666666666665,
+            "hi": 0.5683333333333334,
+            "n": 20
+          },
+          "ndcg@5": {
+            "mean": 0.2490467917767242,
+            "lo": 0.12946889853028112,
+            "hi": 0.3741604729052638,
+            "n": 20
+          },
+          "hit@10": {
+            "mean": 0.25,
+            "lo": 0.1,
+            "hi": 0.45,
+            "n": 20
+          },
+          "recall@10": {
+            "mean": 0.425,
+            "lo": 0.25,
+            "hi": 0.6,
+            "n": 20
+          },
+          "mrr@10": {
+            "mean": 0.39125,
+            "lo": 0.20958333333333332,
+            "hi": 0.5812499999999999,
+            "n": 20
+          },
+          "ndcg@10": {
+            "mean": 0.29984067972243833,
+            "lo": 0.1753676490933482,
+            "hi": 0.42794715453229654,
+            "n": 20
+          }
+        },
+        "latency": {
+          "retrieval": {
+            "mean_ms": 42.59994655100551,
+            "p50_ms": 22.40395800617989,
+            "p95_ms": 94.95799999567674,
+            "n": 60
+          },
+          "rerank": null
+        }
+      },
+      "C2": {
+        "cond": {
+          "name": "C2",
+          "size": 512,
+          "overlap": 128,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "key": "dense|512|128|all-MiniLM-L6-v2|pool20|rr1|div1",
+        "n_chunks": 5569,
+        "single": {
+          "hit@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "recall@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "mrr@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "ndcg@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "hit@3": {
+            "mean": 0.68,
+            "lo": 0.58,
+            "hi": 0.77,
+            "n": 100
+          },
+          "recall@3": {
+            "mean": 0.68,
+            "lo": 0.58,
+            "hi": 0.77,
+            "n": 100
+          },
+          "mrr@3": {
+            "mean": 0.635,
+            "lo": 0.5416666666666667,
+            "hi": 0.7217083333333327,
+            "n": 100
+          },
+          "ndcg@3": {
+            "mean": 0.5802750050215044,
+            "lo": 0.49241275492144343,
+            "hi": 0.6628950775063949,
+            "n": 100
+          },
+          "hit@5": {
+            "mean": 0.74,
+            "lo": 0.65,
+            "hi": 0.82,
+            "n": 100
+          },
+          "recall@5": {
+            "mean": 0.74,
+            "lo": 0.65,
+            "hi": 0.82,
+            "n": 100
+          },
+          "mrr@5": {
+            "mean": 0.6485,
+            "lo": 0.5581666666666666,
+            "hi": 0.7328416666666665,
+            "n": 100
+          },
+          "ndcg@5": {
+            "mean": 0.6057754828514602,
+            "lo": 0.521254603568706,
+            "hi": 0.6848248644637157,
+            "n": 100
+          },
+          "hit@10": {
+            "mean": 0.81,
+            "lo": 0.73,
+            "hi": 0.88,
+            "n": 100
+          },
+          "recall@10": {
+            "mean": 0.81,
+            "lo": 0.73,
+            "hi": 0.88,
+            "n": 100
+          },
+          "mrr@10": {
+            "mean": 0.6560396825396826,
+            "lo": 0.5677597222222223,
+            "hi": 0.7390569444444444,
+            "n": 100
+          },
+          "ndcg@10": {
+            "mean": 0.6370810477978948,
+            "lo": 0.5576731340206591,
+            "hi": 0.7116053443827782,
+            "n": 100
+          }
+        },
+        "multi": {
+          "hit@1": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n": 20
+          },
+          "recall@1": {
+            "mean": 0.225,
+            "lo": 0.125,
+            "hi": 0.325,
+            "n": 20
+          },
+          "mrr@1": {
+            "mean": 0.45,
+            "lo": 0.25,
+            "hi": 0.65,
+            "n": 20
+          },
+          "ndcg@1": {
+            "mean": 0.45,
+            "lo": 0.25,
+            "hi": 0.65,
+            "n": 20
+          },
+          "hit@3": {
+            "mean": 0.2,
+            "lo": 0.05,
+            "hi": 0.4,
+            "n": 20
+          },
+          "recall@3": {
+            "mean": 0.375,
+            "lo": 0.2,
+            "hi": 0.55,
+            "n": 20
+          },
+          "mrr@3": {
+            "mean": 0.5,
+            "lo": 0.3,
+            "hi": 0.7,
+            "n": 20
+          },
+          "ndcg@3": {
+            "mean": 0.3450442063125431,
+            "lo": 0.19132972802530485,
+            "hi": 0.5041212959394107,
+            "n": 20
+          },
+          "hit@5": {
+            "mean": 0.2,
+            "lo": 0.05,
+            "hi": 0.4,
+            "n": 20
+          },
+          "recall@5": {
+            "mean": 0.425,
+            "lo": 0.275,
+            "hi": 0.575,
+            "n": 20
+          },
+          "mrr@5": {
+            "mean": 0.52,
+            "lo": 0.32,
+            "hi": 0.72,
+            "n": 20
+          },
+          "ndcg@5": {
+            "mean": 0.36876397758947277,
+            "lo": 0.22342960248054403,
+            "hi": 0.5224712225920578,
+            "n": 20
+          },
+          "hit@10": {
+            "mean": 0.3,
+            "lo": 0.1,
+            "hi": 0.5,
+            "n": 20
+          },
+          "recall@10": {
+            "mean": 0.525,
+            "lo": 0.35,
+            "hi": 0.675,
+            "n": 20
+          },
+          "mrr@10": {
+            "mean": 0.5305555555555556,
+            "lo": 0.3355555555555556,
+            "hi": 0.725,
+            "n": 20
+          },
+          "ndcg@10": {
+            "mean": 0.42023596494368115,
+            "lo": 0.27429722871837664,
+            "hi": 0.5681225928323705,
+            "n": 20
+          }
+        },
+        "latency": {
+          "retrieval": {
+            "mean_ms": 23.485989533461787,
+            "p50_ms": 21.48122850485379,
+            "p95_ms": 36.714697894785786,
+            "n": 60
+          },
+          "rerank": {
+            "mean_ms": 92.62108614905931,
+            "p50_ms": 83.48520849540364,
+            "p95_ms": 149.63876905603684,
+            "n": 60
+          }
+        }
+      },
+      "C3": {
+        "cond": {
+          "name": "C3",
+          "size": 512,
+          "overlap": 128,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "hybrid",
+          "pool": 20,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "key": "hybrid|512|128|all-MiniLM-L6-v2|pool20|rr1|div1",
+        "n_chunks": 5569,
+        "single": {
+          "hit@1": {
+            "mean": 0.63,
+            "lo": 0.53,
+            "hi": 0.72,
+            "n": 100
+          },
+          "recall@1": {
+            "mean": 0.63,
+            "lo": 0.53,
+            "hi": 0.72,
+            "n": 100
+          },
+          "mrr@1": {
+            "mean": 0.63,
+            "lo": 0.53,
+            "hi": 0.72,
+            "n": 100
+          },
+          "ndcg@1": {
+            "mean": 0.63,
+            "lo": 0.53,
+            "hi": 0.72,
+            "n": 100
+          },
+          "hit@3": {
+            "mean": 0.7,
+            "lo": 0.61,
+            "hi": 0.79,
+            "n": 100
+          },
+          "recall@3": {
+            "mean": 0.7,
+            "lo": 0.61,
+            "hi": 0.79,
+            "n": 100
+          },
+          "mrr@3": {
+            "mean": 0.66,
+            "lo": 0.5683333333333334,
+            "hi": 0.7466666666666666,
+            "n": 100
+          },
+          "ndcg@3": {
+            "mean": 0.6075379488768136,
+            "lo": 0.5210777971300226,
+            "hi": 0.6900079769790731,
+            "n": 100
+          },
+          "hit@5": {
+            "mean": 0.75,
+            "lo": 0.66,
+            "hi": 0.83,
+            "n": 100
+          },
+          "recall@5": {
+            "mean": 0.75,
+            "lo": 0.66,
+            "hi": 0.83,
+            "n": 100
+          },
+          "mrr@5": {
+            "mean": 0.671,
+            "lo": 0.5814958333333333,
+            "hi": 0.7544999999999998,
+            "n": 100
+          },
+          "ndcg@5": {
+            "mean": 0.6327697226087365,
+            "lo": 0.5504325878489911,
+            "hi": 0.7119230374808738,
+            "n": 100
+          },
+          "hit@10": {
+            "mean": 0.89,
+            "lo": 0.82,
+            "hi": 0.95,
+            "n": 100
+          },
+          "recall@10": {
+            "mean": 0.89,
+            "lo": 0.82,
+            "hi": 0.95,
+            "n": 100
+          },
+          "mrr@10": {
+            "mean": 0.6887142857142858,
+            "lo": 0.6051446428571429,
+            "hi": 0.766675,
+            "n": 100
+          },
+          "ndcg@10": {
+            "mean": 0.6936981470580845,
+            "lo": 0.6224274397967591,
+            "hi": 0.7603208407127316,
+            "n": 100
+          }
+        },
+        "multi": {
+          "hit@1": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n": 20
+          },
+          "recall@1": {
+            "mean": 0.25,
+            "lo": 0.15,
+            "hi": 0.35,
+            "n": 20
+          },
+          "mrr@1": {
+            "mean": 0.5,
+            "lo": 0.3,
+            "hi": 0.7,
+            "n": 20
+          },
+          "ndcg@1": {
+            "mean": 0.5,
+            "lo": 0.3,
+            "hi": 0.7,
+            "n": 20
+          },
+          "hit@3": {
+            "mean": 0.15,
+            "lo": 0.0,
+            "hi": 0.3,
+            "n": 20
+          },
+          "recall@3": {
+            "mean": 0.4,
+            "lo": 0.25,
+            "hi": 0.55,
+            "n": 20
+          },
+          "mrr@3": {
+            "mean": 0.575,
+            "lo": 0.375,
+            "hi": 0.775,
+            "n": 20
+          },
+          "ndcg@3": {
+            "mean": 0.37116302113738214,
+            "lo": 0.23024011076424983,
+            "hi": 0.5092335393584401,
+            "n": 20
+          },
+          "hit@5": {
+            "mean": 0.25,
+            "lo": 0.1,
+            "hi": 0.45,
+            "n": 20
+          },
+          "recall@5": {
+            "mean": 0.5,
+            "lo": 0.35,
+            "hi": 0.65,
+            "n": 20
+          },
+          "mrr@5": {
+            "mean": 0.595,
+            "lo": 0.40499999999999997,
+            "hi": 0.7849999999999999,
+            "n": 20
+          },
+          "ndcg@5": {
+            "mean": 0.42624037779667656,
+            "lo": 0.2888010450565043,
+            "hi": 0.5606119821521071,
+            "n": 20
+          },
+          "hit@10": {
+            "mean": 0.4,
+            "lo": 0.2,
+            "hi": 0.6,
+            "n": 20
+          },
+          "recall@10": {
+            "mean": 0.6,
+            "lo": 0.425,
+            "hi": 0.75,
+            "n": 20
+          },
+          "mrr@10": {
+            "mean": 0.6012500000000001,
+            "lo": 0.41125000000000006,
+            "hi": 0.7849999999999999,
+            "n": 20
+          },
+          "ndcg@10": {
+            "mean": 0.47827573929852,
+            "lo": 0.33663385934770745,
+            "hi": 0.6155312901493285,
+            "n": 20
+          }
+        },
+        "latency": {
+          "retrieval": {
+            "mean_ms": 69.94021320157724,
+            "p50_ms": 66.95283400040353,
+            "p95_ms": 104.52894373956948,
+            "n": 60
+          },
+          "rerank": {
+            "mean_ms": 128.89020003325035,
+            "p50_ms": 121.10502099676523,
+            "p95_ms": 205.63136249984382,
+            "n": 60
+          }
+        }
+      },
+      "S": {
+        "cond": {
+          "name": "S",
+          "size": 512,
+          "overlap": 0,
+          "embedder": "BAAI/bge-small-en-v1.5",
+          "mode": "dense",
+          "pool": 10,
+          "rerank": true,
+          "diversity": true,
+          "top_k": 10
+        },
+        "key": "dense|512|0|BAAI/bge-small-en-v1.5|pool10|rr1|div1",
+        "n_chunks": 4701,
+        "single": {
+          "hit@1": {
+            "mean": 0.53,
+            "lo": 0.43,
+            "hi": 0.63,
+            "n": 100
+          },
+          "recall@1": {
+            "mean": 0.53,
+            "lo": 0.43,
+            "hi": 0.63,
+            "n": 100
+          },
+          "mrr@1": {
+            "mean": 0.53,
+            "lo": 0.43,
+            "hi": 0.63,
+            "n": 100
+          },
+          "ndcg@1": {
+            "mean": 0.53,
+            "lo": 0.43,
+            "hi": 0.63,
+            "n": 100
+          },
+          "hit@3": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "recall@3": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "mrr@3": {
+            "mean": 0.5616666666666668,
+            "lo": 0.4683333333333334,
+            "hi": 0.655,
+            "n": 100
+          },
+          "ndcg@3": {
+            "mean": 0.5715464876785729,
+            "lo": 0.477849855460716,
+            "hi": 0.6652371901428583,
+            "n": 100
+          },
+          "hit@5": {
+            "mean": 0.7,
+            "lo": 0.61,
+            "hi": 0.79,
+            "n": 100
+          },
+          "recall@5": {
+            "mean": 0.7,
+            "lo": 0.61,
+            "hi": 0.79,
+            "n": 100
+          },
+          "mrr@5": {
+            "mean": 0.5836666666666667,
+            "lo": 0.494,
+            "hi": 0.6725,
+            "n": 100
+          },
+          "ndcg@5": {
+            "mean": 0.6119847184355811,
+            "lo": 0.5245852387426561,
+            "hi": 0.6976230339602503,
+            "n": 100
+          },
+          "hit@10": {
+            "mean": 0.75,
+            "lo": 0.66,
+            "hi": 0.83,
+            "n": 100
+          },
+          "recall@10": {
+            "mean": 0.75,
+            "lo": 0.66,
+            "hi": 0.83,
+            "n": 100
+          },
+          "mrr@10": {
+            "mean": 0.5908571428571429,
+            "lo": 0.5032113095238095,
+            "hi": 0.6784291666666666,
+            "n": 100
+          },
+          "ndcg@10": {
+            "mean": 0.6286661771075871,
+            "lo": 0.5438433588249197,
+            "hi": 0.7118891341292832,
+            "n": 100
+          }
+        },
+        "multi": {
+          "hit@1": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n": 20
+          },
+          "recall@1": {
+            "mean": 0.15,
+            "lo": 0.05,
+            "hi": 0.25,
+            "n": 20
+          },
+          "mrr@1": {
+            "mean": 0.3,
+            "lo": 0.1,
+            "hi": 0.5,
+            "n": 20
+          },
+          "ndcg@1": {
+            "mean": 0.3,
+            "lo": 0.1,
+            "hi": 0.5,
+            "n": 20
+          },
+          "hit@3": {
+            "mean": 0.05,
+            "lo": 0.0,
+            "hi": 0.15,
+            "n": 20
+          },
+          "recall@3": {
+            "mean": 0.275,
+            "lo": 0.15,
+            "hi": 0.4,
+            "n": 20
+          },
+          "mrr@3": {
+            "mean": 0.4,
+            "lo": 0.2,
+            "hi": 0.6,
+            "n": 20
+          },
+          "ndcg@3": {
+            "mean": 0.2766433990956823,
+            "lo": 0.14991783004521594,
+            "hi": 0.41058755692531984,
+            "n": 20
+          },
+          "hit@5": {
+            "mean": 0.1,
+            "lo": 0.0,
+            "hi": 0.25,
+            "n": 20
+          },
+          "recall@5": {
+            "mean": 0.325,
+            "lo": 0.175,
+            "hi": 0.475,
+            "n": 20
+          },
+          "mrr@5": {
+            "mean": 0.4125,
+            "lo": 0.225,
+            "hi": 0.6,
+            "n": 20
+          },
+          "ndcg@5": {
+            "mean": 0.3030502113529414,
+            "lo": 0.1693367256907665,
+            "hi": 0.4447857034293369,
+            "n": 20
+          },
+          "hit@10": {
+            "mean": 0.15,
+            "lo": 0.0,
+            "hi": 0.3012499999999818,
+            "n": 20
+          },
+          "recall@10": {
+            "mean": 0.45,
+            "lo": 0.325,
+            "hi": 0.6,
+            "n": 20
+          },
+          "mrr@10": {
+            "mean": 0.4376388888888889,
+            "lo": 0.26179513888888883,
+            "hi": 0.6230555555555555,
+            "n": 20
+          },
+          "ndcg@10": {
+            "mean": 0.35059461689209637,
+            "lo": 0.2242068408961515,
+            "hi": 0.4851045879427164,
+            "n": 20
+          }
+        },
+        "latency": {
+          "retrieval": {
+            "mean_ms": 71.10528195092532,
+            "p50_ms": 68.87777049996657,
+            "p95_ms": 100.42212354674118,
+            "n": 60
+          },
+          "rerank": {
+            "mean_ms": 59.84867638180731,
+            "p50_ms": 55.337792000500485,
+            "p95_ms": 116.83029615232952,
+            "n": 60
+          }
+        }
+      },
+      "C2-nodiv": {
+        "cond": {
+          "name": "C2-nodiv",
+          "size": 512,
+          "overlap": 128,
+          "embedder": "all-MiniLM-L6-v2",
+          "mode": "dense",
+          "pool": 20,
+          "rerank": true,
+          "diversity": false,
+          "top_k": 10
+        },
+        "key": "dense|512|128|all-MiniLM-L6-v2|pool20|rr1|div0",
+        "n_chunks": 5569,
+        "single": {
+          "hit@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "recall@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "mrr@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "ndcg@1": {
+            "mean": 0.6,
+            "lo": 0.5,
+            "hi": 0.69,
+            "n": 100
+          },
+          "hit@3": {
+            "mean": 0.77,
+            "lo": 0.68,
+            "hi": 0.85,
+            "n": 100
+          },
+          "recall@3": {
+            "mean": 0.77,
+            "lo": 0.68,
+            "hi": 0.85,
+            "n": 100
+          },
+          "mrr@3": {
+            "mean": 0.6766666666666665,
+            "lo": 0.5916666666666667,
+            "hi": 0.7583333333333333,
+            "n": 100
+          },
+          "ndcg@3": {
+            "mean": 0.653276222706037,
+            "lo": 0.5722076561006947,
+            "hi": 0.7293498142122633,
+            "n": 100
+          },
+          "hit@5": {
+            "mean": 0.79,
+            "lo": 0.71,
+            "hi": 0.87,
+            "n": 100
+          },
+          "recall@5": {
+            "mean": 0.79,
+            "lo": 0.71,
+            "hi": 0.87,
+            "n": 100
+          },
+          "mrr@5": {
+            "mean": 0.6816666666666665,
+            "lo": 0.5975,
+            "hi": 0.7608333333333333,
+            "n": 100
+          },
+          "ndcg@5": {
+            "mean": 0.6602236695124968,
+            "lo": 0.580139228906491,
+            "hi": 0.7344715943222104,
+            "n": 100
+          },
+          "hit@10": {
+            "mean": 0.83,
+            "lo": 0.75,
+            "hi": 0.9,
+            "n": 100
+          },
+          "recall@10": {
+            "mean": 0.83,
+            "lo": 0.75,
+            "hi": 0.9,
+            "n": 100
+          },
+          "mrr@10": {
+            "mean": 0.6871111111111111,
+            "lo": 0.6041666666666666,
+            "hi": 0.7646111111111111,
+            "n": 100
+          },
+          "ndcg@10": {
+            "mean": 0.6795511742470118,
+            "lo": 0.6029876393380951,
+            "hi": 0.7504265940336438,
+            "n": 100
+          }
+        },
+        "multi": {
+          "hit@1": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n": 20
+          },
+          "recall@1": {
+            "mean": 0.225,
+            "lo": 0.125,
+            "hi": 0.325,
+            "n": 20
+          },
+          "mrr@1": {
+            "mean": 0.45,
+            "lo": 0.25,
+            "hi": 0.65,
+            "n": 20
+          },
+          "ndcg@1": {
+            "mean": 0.45,
+            "lo": 0.25,
+            "hi": 0.65,
+            "n": 20
+          },
+          "hit@3": {
+            "mean": 0.1,
+            "lo": 0.0,
+            "hi": 0.25,
+            "n": 20
+          },
+          "recall@3": {
+            "mean": 0.325,
+            "lo": 0.175,
+            "hi": 0.475,
+            "n": 20
+          },
+          "mrr@3": {
+            "mean": 0.5,
+            "lo": 0.3,
+            "hi": 0.7,
+            "n": 20
+          },
+          "ndcg@3": {
+            "mean": 0.3236786070947781,
+            "lo": 0.18519590445170672,
+            "hi": 0.4701919142079511,
+            "n": 20
+          },
+          "hit@5": {
+            "mean": 0.2,
+            "lo": 0.05,
+            "hi": 0.4,
+            "n": 20
+          },
+          "recall@5": {
+            "mean": 0.4,
+            "lo": 0.25,
+            "hi": 0.575,
+            "n": 20
+          },
+          "mrr@5": {
+            "mean": 0.5125,
+            "lo": 0.3125,
+            "hi": 0.7125,
+            "n": 20
+          },
+          "ndcg@5": {
+            "mean": 0.36482631701016527,
+            "lo": 0.21752516370066988,
+            "hi": 0.5174725346025874,
+            "n": 20
+          },
+          "hit@10": {
+            "mean": 0.35,
+            "lo": 0.15,
+            "hi": 0.55,
+            "n": 20
+          },
+          "recall@10": {
+            "mean": 0.525,
+            "lo": 0.35,
+            "hi": 0.7,
+            "n": 20
+          },
+          "mrr@10": {
+            "mean": 0.5291666666666666,
+            "lo": 0.33333333333333337,
+            "hi": 0.725,
+            "n": 20
+          },
+          "ndcg@10": {
+            "mean": 0.41114247642113844,
+            "lo": 0.2692117141553327,
+            "hi": 0.5517094808191383,
+            "n": 20
+          }
+        },
+        "latency": {
+          "retrieval": {
+            "mean_ms": 34.44683538449075,
+            "p50_ms": 33.26160400320077,
+            "p95_ms": 50.090929155703634,
+            "n": 60
+          },
+          "rerank": {
+            "mean_ms": 155.4062937493048,
+            "p50_ms": 150.07387500372715,
+            "p95_ms": 264.30837079897174,
+            "n": 60
+          }
+        }
+      }
+    },
+    "paired_diffs": {
+      "C2-C1|single": {
+        "hit@1": {
+          "n": 100,
+          "mean_a": 0.6,
+          "mean_b": 0.36,
+          "abs_diff": 0.24,
+          "abs_lo": 0.14000000000000007,
+          "abs_hi": 0.33999999999999997,
+          "rel_diff": 0.6666666666666666,
+          "rel_lo": 0.34210526315789475,
+          "rel_hi": 1.153846153846154
+        },
+        "recall@1": {
+          "n": 100,
+          "mean_a": 0.6,
+          "mean_b": 0.36,
+          "abs_diff": 0.24,
+          "abs_lo": 0.14000000000000007,
+          "abs_hi": 0.33999999999999997,
+          "rel_diff": 0.6666666666666666,
+          "rel_lo": 0.34210526315789475,
+          "rel_hi": 1.153846153846154
+        },
+        "mrr@1": {
+          "n": 100,
+          "mean_a": 0.6,
+          "mean_b": 0.36,
+          "abs_diff": 0.24,
+          "abs_lo": 0.14000000000000007,
+          "abs_hi": 0.33999999999999997,
+          "rel_diff": 0.6666666666666666,
+          "rel_lo": 0.34210526315789475,
+          "rel_hi": 1.153846153846154
+        },
+        "ndcg@1": {
+          "n": 100,
+          "mean_a": 0.6,
+          "mean_b": 0.36,
+          "abs_diff": 0.24,
+          "abs_lo": 0.14000000000000007,
+          "abs_hi": 0.33999999999999997,
+          "rel_diff": 0.6666666666666666,
+          "rel_lo": 0.34210526315789475,
+          "rel_hi": 1.153846153846154
+        },
+        "hit@3": {
+          "n": 100,
+          "mean_a": 0.68,
+          "mean_b": 0.55,
+          "abs_diff": 0.13,
+          "abs_lo": 0.040000000000000036,
+          "abs_hi": 0.21999999999999997,
+          "rel_diff": 0.23636363636363636,
+          "rel_lo": 0.07272727272727258,
+          "rel_hi": 0.4468085106382981
+        },
+        "recall@3": {
+          "n": 100,
+          "mean_a": 0.68,
+          "mean_b": 0.55,
+          "abs_diff": 0.13,
+          "abs_lo": 0.040000000000000036,
+          "abs_hi": 0.21999999999999997,
+          "rel_diff": 0.23636363636363636,
+          "rel_lo": 0.07272727272727258,
+          "rel_hi": 0.4468085106382981
+        },
+        "mrr@3": {
+          "n": 100,
+          "mean_a": 0.635,
+          "mean_b": 0.44333333333333336,
+          "abs_diff": 0.19166666666666665,
+          "abs_lo": 0.1116666666666668,
+          "abs_hi": 0.2733333333333333,
+          "rel_diff": 0.4323308270676691,
+          "rel_lo": 0.229156454248366,
+          "rel_hi": 0.708003349282296
+        },
+        "ndcg@3": {
+          "n": 100,
+          "mean_a": 0.5802750050215044,
+          "mean_b": 0.4224734305975189,
+          "abs_diff": 0.1578015744239855,
+          "abs_lo": 0.08100978133122634,
+          "abs_hi": 0.2384857324871491,
+          "rel_diff": 0.3735183398416351,
+          "rel_lo": 0.17393733511688617,
+          "rel_hi": 0.6487108904986499
+        },
+        "hit@5": {
+          "n": 100,
+          "mean_a": 0.74,
+          "mean_b": 0.61,
+          "abs_diff": 0.13,
+          "abs_lo": 0.040000000000000036,
+          "abs_hi": 0.21999999999999997,
+          "rel_diff": 0.21311475409836067,
+          "rel_lo": 0.06451612903225812,
+          "rel_hi": 0.3999999999999999
+        },
+        "recall@5": {
+          "n": 100,
+          "mean_a": 0.74,
+          "mean_b": 0.61,
+          "abs_diff": 0.13,
+          "abs_lo": 0.040000000000000036,
+          "abs_hi": 0.21999999999999997,
+          "rel_diff": 0.21311475409836067,
+          "rel_lo": 0.06451612903225812,
+          "rel_hi": 0.3999999999999999
+        },
+        "mrr@5": {
+          "n": 100,
+          "mean_a": 0.6485,
+          "mean_b": 0.4563333333333333,
+          "abs_diff": 0.19216666666666665,
+          "abs_lo": 0.11383333333333329,
+          "abs_hi": 0.2723333333333333,
+          "rel_diff": 0.42111029948867784,
+          "rel_lo": 0.226725921023537,
+          "rel_hi": 0.6793453758445445
+        },
+        "ndcg@5": {
+          "n": 100,
+          "mean_a": 0.6057754828514602,
+          "mean_b": 0.4500771814571348,
+          "abs_diff": 0.1556983013943254,
+          "abs_lo": 0.08128911789569507,
+          "abs_hi": 0.23328463887146064,
+          "rel_diff": 0.34593689217980056,
+          "rel_lo": 0.16719465771931424,
+          "rel_hi": 0.5888456724379136
+        },
+        "hit@10": {
+          "n": 100,
+          "mean_a": 0.81,
+          "mean_b": 0.71,
+          "abs_diff": 0.10000000000000009,
+          "abs_lo": 0.030000000000000027,
+          "abs_hi": 0.17000000000000004,
+          "rel_diff": 0.14084507042253536,
+          "rel_lo": 0.040000000000000036,
+          "rel_hi": 0.2622950819672132
+        },
+        "recall@10": {
+          "n": 100,
+          "mean_a": 0.81,
+          "mean_b": 0.71,
+          "abs_diff": 0.10000000000000009,
+          "abs_lo": 0.030000000000000027,
+          "abs_hi": 0.17000000000000004,
+          "rel_diff": 0.14084507042253536,
+          "rel_lo": 0.040000000000000036,
+          "rel_hi": 0.2622950819672132
+        },
+        "mrr@10": {
+          "n": 100,
+          "mean_a": 0.6560396825396826,
+          "mean_b": 0.4699404761904763,
+          "abs_diff": 0.1860992063492063,
+          "abs_lo": 0.11209523809523825,
+          "abs_hi": 0.26168313492063483,
+          "rel_diff": 0.39600591091408044,
+          "rel_lo": 0.21786050126013545,
+          "rel_hi": 0.6267175517166527
+        },
+        "ndcg@10": {
+          "n": 100,
+          "mean_a": 0.6370810477978948,
+          "mean_b": 0.4851135259077985,
+          "abs_diff": 0.15196752189009627,
+          "abs_lo": 0.0877930741744891,
+          "abs_hi": 0.21863442768303695,
+          "rel_diff": 0.31326177023350915,
+          "rel_lo": 0.1680678481554507,
+          "rel_hi": 0.49871693128265004
+        }
+      },
+      "C2-C1|multi": {
+        "hit@1": {
+          "n": 20,
+          "mean_a": 0.0,
+          "mean_b": 0.0,
+          "abs_diff": 0.0,
+          "abs_lo": 0.0,
+          "abs_hi": 0.0,
+          "rel_diff": null,
+          "rel_lo": null,
+          "rel_hi": null
+        },
+        "recall@1": {
+          "n": 20,
+          "mean_a": 0.225,
+          "mean_b": 0.15,
+          "abs_diff": 0.07500000000000001,
+          "abs_lo": -0.05000000000000002,
+          "abs_hi": 0.2,
+          "rel_diff": 0.5000000000000001,
+          "rel_lo": -0.25000000000000006,
+          "rel_hi": 2.666666666666667
+        },
+        "mrr@1": {
+          "n": 20,
+          "mean_a": 0.45,
+          "mean_b": 0.3,
+          "abs_diff": 0.15000000000000002,
+          "abs_lo": -0.10000000000000003,
+          "abs_hi": 0.4,
+          "rel_diff": 0.5000000000000001,
+          "rel_lo": -0.25000000000000006,
+          "rel_hi": 2.666666666666667
+        },
+        "ndcg@1": {
+          "n": 20,
+          "mean_a": 0.45,
+          "mean_b": 0.3,
+          "abs_diff": 0.15000000000000002,
+          "abs_lo": -0.10000000000000003,
+          "abs_hi": 0.4,
+          "rel_diff": 0.5000000000000001,
+          "rel_lo": -0.25000000000000006,
+          "rel_hi": 2.666666666666667
+        },
+        "hit@3": {
+          "n": 20,
+          "mean_a": 0.2,
+          "mean_b": 0.0,
+          "abs_diff": 0.2,
+          "abs_lo": 0.05,
+          "abs_hi": 0.4,
+          "rel_diff": null,
+          "rel_lo": null,
+          "rel_hi": null
+        },
+        "recall@3": {
+          "n": 20,
+          "mean_a": 0.375,
+          "mean_b": 0.225,
+          "abs_diff": 0.15,
+          "abs_lo": 0.0,
+          "abs_hi": 0.30000000000000004,
+          "rel_diff": 0.6666666666666666,
+          "rel_lo": 0.0,
+          "rel_hi": 1.9999999999999998
+        },
+        "mrr@3": {
+          "n": 20,
+          "mean_a": 0.5,
+          "mean_b": 0.36666666666666664,
+          "abs_diff": 0.13333333333333336,
+          "abs_lo": -0.08333333333333326,
+          "abs_hi": 0.35,
+          "rel_diff": 0.36363636363636376,
+          "rel_lo": -0.17743592576226255,
+          "rel_hi": 1.5
+        },
+        "ndcg@3": {
+          "n": 20,
+          "mean_a": 0.3450442063125431,
+          "mean_b": 0.22810981651139178,
+          "abs_diff": 0.11693438980115134,
+          "abs_lo": -0.03031787005867377,
+          "abs_hi": 0.2614644430647016,
+          "rel_diff": 0.5126232250303513,
+          "rel_lo": -0.11477084379261657,
+          "rel_hi": 1.6818274053037452
+        },
+        "hit@5": {
+          "n": 20,
+          "mean_a": 0.2,
+          "mean_b": 0.05,
+          "abs_diff": 0.15000000000000002,
+          "abs_lo": -0.05,
+          "abs_hi": 0.35000000000000003,
+          "rel_diff": 3.0000000000000004,
+          "rel_lo": -0.6666666666666666,
+          "rel_hi": 5.999999999999999
+        },
+        "recall@5": {
+          "n": 20,
+          "mean_a": 0.425,
+          "mean_b": 0.275,
+          "abs_diff": 0.14999999999999997,
+          "abs_lo": 0.024999999999999967,
+          "abs_hi": 0.3,
+          "rel_diff": 0.5454545454545453,
+          "rel_lo": 0.06249999999999992,
+          "rel_hi": 1.5
+        },
+        "mrr@5": {
+          "n": 20,
+          "mean_a": 0.52,
+          "mean_b": 0.37666666666666665,
+          "abs_diff": 0.14333333333333337,
+          "abs_lo": -0.04999999999999999,
+          "abs_hi": 0.3333333333333333,
+          "rel_diff": 0.3805309734513275,
+          "rel_lo": -0.10526315789473682,
+          "rel_hi": 1.3864084928229659
+        },
+        "ndcg@5": {
+          "n": 20,
+          "mean_a": 0.36876397758947277,
+          "mean_b": 0.2490467917767242,
+          "abs_diff": 0.11971718581274857,
+          "abs_lo": -0.01918276570434585,
+          "abs_hi": 0.25754790124935767,
+          "rel_diff": 0.4807015780395099,
+          "rel_lo": -0.06636296234950036,
+          "rel_hi": 1.4724550675720613
+        },
+        "hit@10": {
+          "n": 20,
+          "mean_a": 0.3,
+          "mean_b": 0.25,
+          "abs_diff": 0.04999999999999999,
+          "abs_lo": -0.10000000000000003,
+          "abs_hi": 0.24999999999999997,
+          "rel_diff": 0.19999999999999996,
+          "rel_lo": -0.4,
+          "rel_hi": 1.9999999999999998
+        },
+        "recall@10": {
+          "n": 20,
+          "mean_a": 0.525,
+          "mean_b": 0.425,
+          "abs_diff": 0.10000000000000003,
+          "abs_lo": 0.0,
+          "abs_hi": 0.20000000000000007,
+          "rel_diff": 0.2352941176470589,
+          "rel_lo": 0.0,
+          "rel_hi": 0.6666666666666667
+        },
+        "mrr@10": {
+          "n": 20,
+          "mean_a": 0.5305555555555556,
+          "mean_b": 0.39125,
+          "abs_diff": 0.13930555555555557,
+          "abs_lo": -0.04722569444444455,
+          "abs_hi": 0.32167013888888885,
+          "rel_diff": 0.3560525381611644,
+          "rel_lo": -0.0969414664600019,
+          "rel_hi": 1.220222956956349
+        },
+        "ndcg@10": {
+          "n": 20,
+          "mean_a": 0.42023596494368115,
+          "mean_b": 0.29984067972243833,
+          "abs_diff": 0.12039528522124282,
+          "abs_lo": -0.0021487991906000495,
+          "abs_hi": 0.2346279123891092,
+          "rel_diff": 0.40153085742966027,
+          "rel_lo": -0.005951609194403182,
+          "rel_hi": 1.0110394439291697
+        }
+      },
+      "C3-C2|single": {
+        "hit@1": {
+          "n": 100,
+          "mean_a": 0.63,
+          "mean_b": 0.6,
+          "abs_diff": 0.030000000000000027,
+          "abs_lo": -0.020000000000000018,
+          "abs_hi": 0.08000000000000007,
+          "rel_diff": 0.050000000000000044,
+          "rel_lo": -0.03333333333333337,
+          "rel_hi": 0.14814814814814806
+        },
+        "recall@1": {
+          "n": 100,
+          "mean_a": 0.63,
+          "mean_b": 0.6,
+          "abs_diff": 0.030000000000000027,
+          "abs_lo": -0.020000000000000018,
+          "abs_hi": 0.08000000000000007,
+          "rel_diff": 0.050000000000000044,
+          "rel_lo": -0.03333333333333337,
+          "rel_hi": 0.14814814814814806
+        },
+        "mrr@1": {
+          "n": 100,
+          "mean_a": 0.63,
+          "mean_b": 0.6,
+          "abs_diff": 0.030000000000000027,
+          "abs_lo": -0.020000000000000018,
+          "abs_hi": 0.08000000000000007,
+          "rel_diff": 0.050000000000000044,
+          "rel_lo": -0.03333333333333337,
+          "rel_hi": 0.14814814814814806
+        },
+        "ndcg@1": {
+          "n": 100,
+          "mean_a": 0.63,
+          "mean_b": 0.6,
+          "abs_diff": 0.030000000000000027,
+          "abs_lo": -0.020000000000000018,
+          "abs_hi": 0.08000000000000007,
+          "rel_diff": 0.050000000000000044,
+          "rel_lo": -0.03333333333333337,
+          "rel_hi": 0.14814814814814806
+        },
+        "hit@3": {
+          "n": 100,
+          "mean_a": 0.7,
+          "mean_b": 0.68,
+          "abs_diff": 0.019999999999999907,
+          "abs_lo": -0.040000000000000036,
+          "abs_hi": 0.08000000000000007,
+          "rel_diff": 0.029411764705882214,
+          "rel_lo": -0.05797101449275352,
+          "rel_hi": 0.12903225806451607
+        },
+        "recall@3": {
+          "n": 100,
+          "mean_a": 0.7,
+          "mean_b": 0.68,
+          "abs_diff": 0.019999999999999907,
+          "abs_lo": -0.040000000000000036,
+          "abs_hi": 0.08000000000000007,
+          "rel_diff": 0.029411764705882214,
+          "rel_lo": -0.05797101449275352,
+          "rel_hi": 0.12903225806451607
+        },
+        "mrr@3": {
+          "n": 100,
+          "mean_a": 0.66,
+          "mean_b": 0.635,
+          "abs_diff": 0.025000000000000022,
+          "abs_lo": -0.026666666666666727,
+          "abs_hi": 0.07999999999999996,
+          "rel_diff": 0.039370078740157514,
+          "rel_lo": -0.04166908352668203,
+          "rel_hi": 0.1337410963740751
+        },
+        "ndcg@3": {
+          "n": 100,
+          "mean_a": 0.6075379488768136,
+          "mean_b": 0.5802750050215044,
+          "abs_diff": 0.02726294385530914,
+          "abs_lo": -0.02547411228938168,
+          "abs_hi": 0.08226294385530908,
+          "rel_diff": 0.04698279887878128,
+          "rel_lo": -0.0425766005612571,
+          "rel_hi": 0.1507644537585658
+        },
+        "hit@5": {
+          "n": 100,
+          "mean_a": 0.75,
+          "mean_b": 0.74,
+          "abs_diff": 0.010000000000000009,
+          "abs_lo": -0.050000000000000044,
+          "abs_hi": 0.07000000000000006,
+          "rel_diff": 0.013513513513513526,
+          "rel_lo": -0.07229352191374185,
+          "rel_hi": 0.10769230769230762
+        },
+        "recall@5": {
+          "n": 100,
+          "mean_a": 0.75,
+          "mean_b": 0.74,
+          "abs_diff": 0.010000000000000009,
+          "abs_lo": -0.050000000000000044,
+          "abs_hi": 0.07000000000000006,
+          "rel_diff": 0.013513513513513526,
+          "rel_lo": -0.07229352191374185,
+          "rel_hi": 0.10769230769230762
+        },
+        "mrr@5": {
+          "n": 100,
+          "mean_a": 0.671,
+          "mean_b": 0.6485,
+          "abs_diff": 0.022500000000000075,
+          "abs_lo": -0.027170833333333335,
+          "abs_hi": 0.07683333333333342,
+          "rel_diff": 0.03469545104086365,
+          "rel_lo": -0.040852014524374536,
+          "rel_hi": 0.12544961447862726
+        },
+        "ndcg@5": {
+          "n": 100,
+          "mean_a": 0.6327697226087365,
+          "mean_b": 0.6057754828514602,
+          "abs_diff": 0.026994239757276328,
+          "abs_lo": -0.023371814235881153,
+          "abs_hi": 0.08161659839843083,
+          "rel_diff": 0.04456145968504882,
+          "rel_lo": -0.03715685040082649,
+          "rel_hi": 0.14352911412805716
+        },
+        "hit@10": {
+          "n": 100,
+          "mean_a": 0.89,
+          "mean_b": 0.81,
+          "abs_diff": 0.07999999999999996,
+          "abs_lo": 0.009999999999999898,
+          "abs_hi": 0.16000000000000003,
+          "rel_diff": 0.09876543209876537,
+          "rel_lo": 0.010869565217391313,
+          "rel_hi": 0.21621621621621626
+        },
+        "recall@10": {
+          "n": 100,
+          "mean_a": 0.89,
+          "mean_b": 0.81,
+          "abs_diff": 0.07999999999999996,
+          "abs_lo": 0.009999999999999898,
+          "abs_hi": 0.16000000000000003,
+          "rel_diff": 0.09876543209876537,
+          "rel_lo": 0.010869565217391313,
+          "rel_hi": 0.21621621621621626
+        },
+        "mrr@10": {
+          "n": 100,
+          "mean_a": 0.6887142857142858,
+          "mean_b": 0.6560396825396826,
+          "abs_diff": 0.032674603174603245,
+          "abs_lo": -0.017714087301587318,
+          "abs_hi": 0.08724206349206354,
+          "rel_diff": 0.049805833464390804,
+          "rel_lo": -0.02568353327242938,
+          "rel_hi": 0.14173523604580726
+        },
+        "ndcg@10": {
+          "n": 100,
+          "mean_a": 0.6936981470580845,
+          "mean_b": 0.6370810477978948,
+          "abs_diff": 0.05661709926018976,
+          "abs_lo": 0.004139764581172792,
+          "abs_hi": 0.11210296281393002,
+          "rel_diff": 0.08886953937162287,
+          "rel_lo": 0.006178920781436937,
+          "rel_hi": 0.1900795045424384
+        }
+      },
+      "C3-C2|multi": {
+        "hit@1": {
+          "n": 20,
+          "mean_a": 0.0,
+          "mean_b": 0.0,
+          "abs_diff": 0.0,
+          "abs_lo": 0.0,
+          "abs_hi": 0.0,
+          "rel_diff": null,
+          "rel_lo": null,
+          "rel_hi": null
+        },
+        "recall@1": {
+          "n": 20,
+          "mean_a": 0.25,
+          "mean_b": 0.225,
+          "abs_diff": 0.024999999999999994,
+          "abs_lo": 0.0,
+          "abs_hi": 0.07500000000000001,
+          "rel_diff": 0.11111111111111108,
+          "rel_lo": 0.0,
+          "rel_hi": 0.4999999999999999
+        },
+        "mrr@1": {
+          "n": 20,
+          "mean_a": 0.5,
+          "mean_b": 0.45,
+          "abs_diff": 0.04999999999999999,
+          "abs_lo": 0.0,
+          "abs_hi": 0.15000000000000002,
+          "rel_diff": 0.11111111111111108,
+          "rel_lo": 0.0,
+          "rel_hi": 0.4999999999999999
+        },
+        "ndcg@1": {
+          "n": 20,
+          "mean_a": 0.5,
+          "mean_b": 0.45,
+          "abs_diff": 0.04999999999999999,
+          "abs_lo": 0.0,
+          "abs_hi": 0.15000000000000002,
+          "rel_diff": 0.11111111111111108,
+          "rel_lo": 0.0,
+          "rel_hi": 0.4999999999999999
+        },
+        "hit@3": {
+          "n": 20,
+          "mean_a": 0.15,
+          "mean_b": 0.2,
+          "abs_diff": -0.05000000000000002,
+          "abs_lo": -0.15000000000000002,
+          "abs_hi": 0.0,
+          "rel_diff": -0.25000000000000006,
+          "rel_lo": -1.0,
+          "rel_hi": 0.0
+        },
+        "recall@3": {
+          "n": 20,
+          "mean_a": 0.4,
+          "mean_b": 0.375,
+          "abs_diff": 0.025000000000000022,
+          "abs_lo": -0.050000000000000044,
+          "abs_hi": 0.10000000000000003,
+          "rel_diff": 0.06666666666666672,
+          "rel_lo": -0.1304347826086956,
+          "rel_hi": 0.4169642857142814
+        },
+        "mrr@3": {
+          "n": 20,
+          "mean_a": 0.575,
+          "mean_b": 0.5,
+          "abs_diff": 0.07499999999999996,
+          "abs_lo": 0.0,
+          "abs_hi": 0.19999999999999996,
+          "rel_diff": 0.1499999999999999,
+          "rel_lo": 0.0,
+          "rel_hi": 0.5294117647058825
+        },
+        "ndcg@3": {
+          "n": 20,
+          "mean_a": 0.37116302113738214,
+          "mean_b": 0.3450442063125431,
+          "abs_diff": 0.02611881482483902,
+          "abs_lo": -0.04322382553688797,
+          "abs_hi": 0.106776174463112,
+          "rel_diff": 0.07569701025839118,
+          "rel_lo": -0.10814234587654663,
+          "rel_hi": 0.4442233712365269
+        },
+        "hit@5": {
+          "n": 20,
+          "mean_a": 0.25,
+          "mean_b": 0.2,
+          "abs_diff": 0.04999999999999999,
+          "abs_lo": -0.1,
+          "abs_hi": 0.2,
+          "rel_diff": 0.24999999999999994,
+          "rel_lo": -0.5,
+          "rel_hi": 2.4999999999999996
+        },
+        "recall@5": {
+          "n": 20,
+          "mean_a": 0.5,
+          "mean_b": 0.425,
+          "abs_diff": 0.07500000000000001,
+          "abs_lo": -0.04999999999999999,
+          "abs_hi": 0.2,
+          "rel_diff": 0.17647058823529416,
+          "rel_lo": -0.10526315789473682,
+          "rel_hi": 0.6252840909090868
+        },
+        "mrr@5": {
+          "n": 20,
+          "mean_a": 0.595,
+          "mean_b": 0.52,
+          "abs_diff": 0.07499999999999996,
+          "abs_lo": -0.010000000000000009,
+          "abs_hi": 0.1999999999999999,
+          "rel_diff": 0.14423076923076913,
+          "rel_lo": -0.018181818181818195,
+          "rel_hi": 0.4999999999999999
+        },
+        "ndcg@5": {
+          "n": 20,
+          "mean_a": 0.42624037779667656,
+          "mean_b": 0.36876397758947277,
+          "abs_diff": 0.05747640020720379,
+          "abs_lo": -0.02801609120586142,
+          "abs_hi": 0.1458706524334358,
+          "rel_diff": 0.1558622959403847,
+          "rel_lo": -0.06546034849961903,
+          "rel_hi": 0.5458106520760344
+        },
+        "hit@10": {
+          "n": 20,
+          "mean_a": 0.4,
+          "mean_b": 0.3,
+          "abs_diff": 0.10000000000000003,
+          "abs_lo": 0.0,
+          "abs_hi": 0.25,
+          "rel_diff": 0.3333333333333335,
+          "rel_lo": 0.0,
+          "rel_hi": 1.4999999999999998
+        },
+        "recall@10": {
+          "n": 20,
+          "mean_a": 0.6,
+          "mean_b": 0.525,
+          "abs_diff": 0.07499999999999996,
+          "abs_lo": 0.0,
+          "abs_hi": 0.15000000000000002,
+          "rel_diff": 0.14285714285714277,
+          "rel_lo": 0.0,
+          "rel_hi": 0.36363636363636354
+        },
+        "mrr@10": {
+          "n": 20,
+          "mean_a": 0.6012500000000001,
+          "mean_b": 0.5305555555555556,
+          "abs_diff": 0.0706944444444445,
+          "abs_lo": -0.003750000000000031,
+          "abs_hi": 0.1812499999999999,
+          "rel_diff": 0.13324607329842944,
+          "rel_lo": -0.006048387096774066,
+          "rel_hi": 0.4339626793781557
+        },
+        "ndcg@10": {
+          "n": 20,
+          "mean_a": 0.47827573929852,
+          "mean_b": 0.42023596494368115,
+          "abs_diff": 0.05803977435483887,
+          "abs_lo": 0.0007167959560814319,
+          "abs_hi": 0.12215702534883942,
+          "rel_diff": 0.13811234448393106,
+          "rel_lo": 0.001628514335527088,
+          "rel_hi": 0.36266760343971366
+        }
+      },
+      "S-C2|single": {
+        "hit@1": {
+          "n": 100,
+          "mean_a": 0.53,
+          "mean_b": 0.6,
+          "abs_diff": -0.06999999999999995,
+          "abs_lo": -0.17000000000000004,
+          "abs_hi": 0.030000000000000027,
+          "rel_diff": -0.11666666666666659,
+          "rel_lo": -0.2698412698412698,
+          "rel_hi": 0.05454545454545439
+        },
+        "recall@1": {
+          "n": 100,
+          "mean_a": 0.53,
+          "mean_b": 0.6,
+          "abs_diff": -0.06999999999999995,
+          "abs_lo": -0.17000000000000004,
+          "abs_hi": 0.030000000000000027,
+          "rel_diff": -0.11666666666666659,
+          "rel_lo": -0.2698412698412698,
+          "rel_hi": 0.05454545454545439
+        },
+        "mrr@1": {
+          "n": 100,
+          "mean_a": 0.53,
+          "mean_b": 0.6,
+          "abs_diff": -0.06999999999999995,
+          "abs_lo": -0.17000000000000004,
+          "abs_hi": 0.030000000000000027,
+          "rel_diff": -0.11666666666666659,
+          "rel_lo": -0.2698412698412698,
+          "rel_hi": 0.05454545454545439
+        },
+        "ndcg@1": {
+          "n": 100,
+          "mean_a": 0.53,
+          "mean_b": 0.6,
+          "abs_diff": -0.06999999999999995,
+          "abs_lo": -0.17000000000000004,
+          "abs_hi": 0.030000000000000027,
+          "rel_diff": -0.11666666666666659,
+          "rel_lo": -0.2698412698412698,
+          "rel_hi": 0.05454545454545439
+        },
+        "hit@3": {
+          "n": 100,
+          "mean_a": 0.6,
+          "mean_b": 0.68,
+          "abs_diff": -0.08000000000000007,
+          "abs_lo": -0.17999999999999994,
+          "abs_hi": 0.020000000000000018,
+          "rel_diff": -0.11764705882352951,
+          "rel_lo": -0.25000000000000006,
+          "rel_hi": 0.030769230769230795
+        },
+        "recall@3": {
+          "n": 100,
+          "mean_a": 0.6,
+          "mean_b": 0.68,
+          "abs_diff": -0.08000000000000007,
+          "abs_lo": -0.17999999999999994,
+          "abs_hi": 0.020000000000000018,
+          "rel_diff": -0.11764705882352951,
+          "rel_lo": -0.25000000000000006,
+          "rel_hi": 0.030769230769230795
+        },
+        "mrr@3": {
+          "n": 100,
+          "mean_a": 0.5616666666666668,
+          "mean_b": 0.635,
+          "abs_diff": -0.07333333333333325,
+          "abs_lo": -0.16833333333333322,
+          "abs_hi": 0.019999999999999907,
+          "rel_diff": -0.11548556430446182,
+          "rel_lo": -0.25129637582776887,
+          "rel_hi": 0.032967032967032815
+        },
+        "ndcg@3": {
+          "n": 100,
+          "mean_a": 0.5715464876785729,
+          "mean_b": 0.5802750050215044,
+          "abs_diff": -0.008728517342931563,
+          "abs_lo": -0.09873296298313297,
+          "abs_hi": 0.08023365880398656,
+          "rel_diff": -0.01504203570272356,
+          "rel_lo": -0.1625854556824953,
+          "rel_hi": 0.14965128858927396
+        },
+        "hit@5": {
+          "n": 100,
+          "mean_a": 0.7,
+          "mean_b": 0.74,
+          "abs_diff": -0.040000000000000036,
+          "abs_lo": -0.13,
+          "abs_hi": 0.050000000000000044,
+          "rel_diff": -0.054054054054054106,
+          "rel_lo": -0.17105263157894737,
+          "rel_hi": 0.07465513342378963
+        },
+        "recall@5": {
+          "n": 100,
+          "mean_a": 0.7,
+          "mean_b": 0.74,
+          "abs_diff": -0.040000000000000036,
+          "abs_lo": -0.13,
+          "abs_hi": 0.050000000000000044,
+          "rel_diff": -0.054054054054054106,
+          "rel_lo": -0.17105263157894737,
+          "rel_hi": 0.07465513342378963
+        },
+        "mrr@5": {
+          "n": 100,
+          "mean_a": 0.5836666666666667,
+          "mean_b": 0.6485,
+          "abs_diff": -0.0648333333333333,
+          "abs_lo": -0.15383333333333338,
+          "abs_hi": 0.024166666666666677,
+          "rel_diff": -0.0999742996658956,
+          "rel_lo": -0.22602221720797652,
+          "rel_hi": 0.03967978693235202
+        },
+        "ndcg@5": {
+          "n": 100,
+          "mean_a": 0.6119847184355811,
+          "mean_b": 0.6057754828514602,
+          "abs_diff": 0.006209235584120898,
+          "abs_lo": -0.07768276516890245,
+          "abs_hi": 0.09031801524869976,
+          "rel_diff": 0.01025006088871946,
+          "rel_lo": -0.12092902259977249,
+          "rel_hi": 0.15876651259895308
+        },
+        "hit@10": {
+          "n": 100,
+          "mean_a": 0.75,
+          "mean_b": 0.81,
+          "abs_diff": -0.06000000000000005,
+          "abs_lo": -0.1499999999999999,
+          "abs_hi": 0.030000000000000027,
+          "rel_diff": -0.07407407407407414,
+          "rel_lo": -0.17441860465116282,
+          "rel_hi": 0.03797468354430369
+        },
+        "recall@10": {
+          "n": 100,
+          "mean_a": 0.75,
+          "mean_b": 0.81,
+          "abs_diff": -0.06000000000000005,
+          "abs_lo": -0.1499999999999999,
+          "abs_hi": 0.030000000000000027,
+          "rel_diff": -0.07407407407407414,
+          "rel_lo": -0.17441860465116282,
+          "rel_hi": 0.03797468354430369
+        },
+        "mrr@10": {
+          "n": 100,
+          "mean_a": 0.5908571428571429,
+          "mean_b": 0.6560396825396826,
+          "abs_diff": -0.06518253968253973,
+          "abs_lo": -0.15196051587301576,
+          "abs_hi": 0.02150178571428576,
+          "rel_diff": -0.09935761725602164,
+          "rel_lo": -0.22079350396195774,
+          "rel_hi": 0.03446364477801422
+        },
+        "ndcg@10": {
+          "n": 100,
+          "mean_a": 0.6286661771075871,
+          "mean_b": 0.6370810477978948,
+          "abs_diff": -0.008414870690307663,
+          "abs_lo": -0.08661485561211578,
+          "abs_hi": 0.07110714300112397,
+          "rel_diff": -0.013208477507522976,
+          "rel_lo": -0.1309040579512423,
+          "rel_hi": 0.11778719665672134
+        }
+      },
+      "S-C2|multi": {
+        "hit@1": {
+          "n": 20,
+          "mean_a": 0.0,
+          "mean_b": 0.0,
+          "abs_diff": 0.0,
+          "abs_lo": 0.0,
+          "abs_hi": 0.0,
+          "rel_diff": null,
+          "rel_lo": null,
+          "rel_hi": null
+        },
+        "recall@1": {
+          "n": 20,
+          "mean_a": 0.15,
+          "mean_b": 0.225,
+          "abs_diff": -0.07500000000000001,
+          "abs_lo": -0.2,
+          "abs_hi": 0.05000000000000002,
+          "rel_diff": -0.33333333333333337,
+          "rel_lo": -0.7274242424242423,
+          "rel_hi": 0.3333333333333335
+        },
+        "mrr@1": {
+          "n": 20,
+          "mean_a": 0.3,
+          "mean_b": 0.45,
+          "abs_diff": -0.15000000000000002,
+          "abs_lo": -0.4,
+          "abs_hi": 0.10000000000000003,
+          "rel_diff": -0.33333333333333337,
+          "rel_lo": -0.7274242424242423,
+          "rel_hi": 0.3333333333333335
+        },
+        "ndcg@1": {
+          "n": 20,
+          "mean_a": 0.3,
+          "mean_b": 0.45,
+          "abs_diff": -0.15000000000000002,
+          "abs_lo": -0.4,
+          "abs_hi": 0.10000000000000003,
+          "rel_diff": -0.33333333333333337,
+          "rel_lo": -0.7274242424242423,
+          "rel_hi": 0.3333333333333335
+        },
+        "hit@3": {
+          "n": 20,
+          "mean_a": 0.05,
+          "mean_b": 0.2,
+          "abs_diff": -0.15000000000000002,
+          "abs_lo": -0.35000000000000003,
+          "abs_hi": 0.05,
+          "rel_diff": -0.7500000000000001,
+          "rel_lo": -1.0,
+          "rel_hi": 0.4999999999999999
+        },
+        "recall@3": {
+          "n": 20,
+          "mean_a": 0.275,
+          "mean_b": 0.375,
+          "abs_diff": -0.09999999999999998,
+          "abs_lo": -0.30000000000000004,
+          "abs_hi": 0.09999999999999998,
+          "rel_diff": -0.2666666666666666,
+          "rel_lo": -0.6363636363636364,
+          "rel_hi": 0.3999999999999999
+        },
+        "mrr@3": {
+          "n": 20,
+          "mean_a": 0.4,
+          "mean_b": 0.5,
+          "abs_diff": -0.09999999999999998,
+          "abs_lo": -0.35000000000000003,
+          "abs_hi": 0.15000000000000002,
+          "rel_diff": -0.19999999999999996,
+          "rel_lo": -0.5909090909090909,
+          "rel_hi": 0.45454545454545453
+        },
+        "ndcg@3": {
+          "n": 20,
+          "mean_a": 0.2766433990956823,
+          "mean_b": 0.3450442063125431,
+          "abs_diff": -0.06840080721686081,
+          "abs_lo": -0.26746940529384505,
+          "abs_hi": 0.11731968150568911,
+          "rel_diff": -0.19823780827347945,
+          "rel_lo": -0.6052146625183996,
+          "rel_hi": 0.5258555324163572
+        },
+        "hit@5": {
+          "n": 20,
+          "mean_a": 0.1,
+          "mean_b": 0.2,
+          "abs_diff": -0.1,
+          "abs_lo": -0.35,
+          "abs_hi": 0.15,
+          "rel_diff": -0.5,
+          "rel_lo": -1.0,
+          "rel_hi": 1.9999999999999998
+        },
+        "recall@5": {
+          "n": 20,
+          "mean_a": 0.325,
+          "mean_b": 0.425,
+          "abs_diff": -0.09999999999999998,
+          "abs_lo": -0.3,
+          "abs_hi": 0.09999999999999998,
+          "rel_diff": -0.23529411764705876,
+          "rel_lo": -0.5714285714285715,
+          "rel_hi": 0.2857142857142858
+        },
+        "mrr@5": {
+          "n": 20,
+          "mean_a": 0.4125,
+          "mean_b": 0.52,
+          "abs_diff": -0.10750000000000004,
+          "abs_lo": -0.35500000000000004,
+          "abs_hi": 0.13999999999999996,
+          "rel_diff": -0.2067307692307693,
+          "rel_lo": -0.5681818181818182,
+          "rel_hi": 0.37199309836504907
+        },
+        "ndcg@5": {
+          "n": 20,
+          "mean_a": 0.3030502113529414,
+          "mean_b": 0.36876397758947277,
+          "abs_diff": -0.06571376623653136,
+          "abs_lo": -0.25639510255773185,
+          "abs_hi": 0.11652109952060057,
+          "rel_diff": -0.17820006896033466,
+          "rel_lo": -0.5636255495626334,
+          "rel_hi": 0.44362599786450907
+        },
+        "hit@10": {
+          "n": 20,
+          "mean_a": 0.15,
+          "mean_b": 0.3,
+          "abs_diff": -0.15,
+          "abs_lo": -0.45,
+          "abs_hi": 0.15,
+          "rel_diff": -0.5,
+          "rel_lo": -1.0,
+          "rel_hi": 1.0
+        },
+        "recall@10": {
+          "n": 20,
+          "mean_a": 0.45,
+          "mean_b": 0.525,
+          "abs_diff": -0.07500000000000001,
+          "abs_lo": -0.275,
+          "abs_hi": 0.14999999999999997,
+          "rel_diff": -0.14285714285714288,
+          "rel_lo": -0.44827586206896547,
+          "rel_hi": 0.35730519480519246
+        },
+        "mrr@10": {
+          "n": 20,
+          "mean_a": 0.4376388888888889,
+          "mean_b": 0.5305555555555556,
+          "abs_diff": -0.09291666666666665,
+          "abs_lo": -0.333472222222222,
+          "abs_hi": 0.14570138888888876,
+          "rel_diff": -0.175130890052356,
+          "rel_lo": -0.5225590573000886,
+          "rel_hi": 0.3750283446712015
+        },
+        "ndcg@10": {
+          "n": 20,
+          "mean_a": 0.35059461689209637,
+          "mean_b": 0.42023596494368115,
+          "abs_diff": -0.06964134805158478,
+          "abs_lo": -0.2511683011842198,
+          "abs_hi": 0.10654118631021375,
+          "rel_diff": -0.16571962863987122,
+          "rel_lo": -0.49289905838549575,
+          "rel_hi": 0.33567232838609956
+        }
+      }
+    },
+    "S_identical_to_C2": false,
+    "chroma_parity": {
+      "mean_top10_overlap_with_exact": 0.895,
+      "min": 0.1,
+      "n_queries": 120
+    },
+    "n_test_single": 100,
+    "n_test_multi": 20,
+    "flashrank_cache": {
+      "fresh_scores": 17236,
+      "cache_hits": 30364
+    },
+    "chunk_offset_fallbacks": 0
+  },
+  "s3": {
+    "models": {
+      "answer": "gpt-oss-20b",
+      "judge": "nemotron-3-super-120b"
+    },
+    "subset": {
+      "single": 45,
+      "multi": 15,
+      "unanswerable": 20
+    },
+    "S_identical_to_C2": false,
+    "conditions": {
+      "C1": {
+        "n_answerable": 60,
+        "n_unanswerable": 20,
+        "failed_or_missing": 0,
+        "correct_yes": {
+          "mean": 0.75,
+          "lo": 0.6333333333333333,
+          "hi": 0.85,
+          "n": 60
+        },
+        "correct_yes_or_partial": {
+          "mean": 0.8166666666666667,
+          "lo": 0.7166666666666667,
+          "hi": 0.9166666666666666,
+          "n": 60
+        },
+        "correct_score_partial_half": {
+          "mean": 0.7833333333333333,
+          "lo": 0.6833333333333333,
+          "hi": 0.875,
+          "n": 60
+        },
+        "faithful_all_answers": {
+          "mean": 0.8333333333333334,
+          "lo": 0.7333333333333333,
+          "hi": 0.9166666666666666,
+          "n": 60
+        },
+        "faithful_among_non_abstained": {
+          "mean": 0.9555555555555556,
+          "lo": 0.8888888888888888,
+          "hi": 1.0,
+          "n": 45
+        },
+        "abstain_rate_answerable": {
+          "mean": 0.25,
+          "lo": 0.15,
+          "hi": 0.36666666666666664,
+          "n": 60
+        },
+        "abstain_rate_unanswerable": {
+          "mean": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "n": 20
+        },
+        "hallucinated_answer_rate_unanswerable": {
+          "mean": 0.0,
+          "lo": 0.0,
+          "hi": 0.0,
+          "n": 20
+        },
+        "length_truncated_answers": 0
+      },
+      "C2": {
+        "n_answerable": 60,
+        "n_unanswerable": 20,
+        "failed_or_missing": 0,
+        "correct_yes": {
+          "mean": 0.7666666666666667,
+          "lo": 0.65,
+          "hi": 0.8666666666666667,
+          "n": 60
+        },
+        "correct_yes_or_partial": {
+          "mean": 0.8166666666666667,
+          "lo": 0.7166666666666667,
+          "hi": 0.9,
+          "n": 60
+        },
+        "correct_score_partial_half": {
+          "mean": 0.7916666666666666,
+          "lo": 0.6916666666666667,
+          "hi": 0.8833333333333333,
+          "n": 60
+        },
+        "faithful_all_answers": {
+          "mean": 0.8333333333333334,
+          "lo": 0.7333333333333333,
+          "hi": 0.9166666666666666,
+          "n": 60
+        },
+        "faithful_among_non_abstained": {
+          "mean": 0.8823529411764706,
+          "lo": 0.7843137254901961,
+          "hi": 0.9607843137254902,
+          "n": 51
+        },
+        "abstain_rate_answerable": {
+          "mean": 0.15,
+          "lo": 0.06666666666666667,
+          "hi": 0.25,
+          "n": 60
+        },
+        "abstain_rate_unanswerable": {
+          "mean": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "n": 20
+        },
+        "hallucinated_answer_rate_unanswerable": {
+          "mean": 0.0,
+          "lo": 0.0,
+          "hi": 0.0,
+          "n": 20
+        },
+        "length_truncated_answers": 0
+      },
+      "S": {
+        "n_answerable": 60,
+        "n_unanswerable": 20,
+        "failed_or_missing": 0,
+        "correct_yes": {
+          "mean": 0.6833333333333333,
+          "lo": 0.5666666666666667,
+          "hi": 0.8,
+          "n": 60
+        },
+        "correct_yes_or_partial": {
+          "mean": 0.7666666666666667,
+          "lo": 0.65,
+          "hi": 0.8666666666666667,
+          "n": 60
+        },
+        "correct_score_partial_half": {
+          "mean": 0.725,
+          "lo": 0.6166666666666667,
+          "hi": 0.825,
+          "n": 60
+        },
+        "faithful_all_answers": {
+          "mean": 0.8,
+          "lo": 0.7,
+          "hi": 0.9,
+          "n": 60
+        },
+        "faithful_among_non_abstained": {
+          "mean": 0.9555555555555556,
+          "lo": 0.8888888888888888,
+          "hi": 1.0,
+          "n": 45
+        },
+        "abstain_rate_answerable": {
+          "mean": 0.25,
+          "lo": 0.15,
+          "hi": 0.36666666666666664,
+          "n": 60
+        },
+        "abstain_rate_unanswerable": {
+          "mean": 1.0,
+          "lo": 1.0,
+          "hi": 1.0,
+          "n": 20
+        },
+        "hallucinated_answer_rate_unanswerable": {
+          "mean": 0.0,
+          "lo": 0.0,
+          "hi": 0.0,
+          "n": 20
+        },
+        "length_truncated_answers": 0
+      }
+    },
+    "paired_diffs": {
+      "C2-C1": {
+        "correct_yes(answerable)": {
+          "n": 60,
+          "mean_a": 0.7666666666666667,
+          "mean_b": 0.75,
+          "abs_diff": 0.01666666666666672,
+          "abs_lo": -0.08333333333333337,
+          "abs_hi": 0.1333333333333333,
+          "rel_diff": 0.022222222222222292,
+          "rel_lo": -0.11363636363636355,
+          "rel_hi": 0.18604651162790695
+        },
+        "faithful(answerable)": {
+          "n": 60,
+          "mean_a": 0.8333333333333334,
+          "mean_b": 0.8333333333333334,
+          "abs_diff": 0.0,
+          "abs_lo": -0.1166666666666667,
+          "abs_hi": 0.1166666666666667,
+          "rel_diff": 0.0,
+          "rel_lo": -0.13207547169811312,
+          "rel_hi": 0.15555555555555559
+        },
+        "hallucinated_answer(unanswerable)": {
+          "n": 20,
+          "mean_a": 0.0,
+          "mean_b": 0.0,
+          "abs_diff": 0.0,
+          "abs_lo": 0.0,
+          "abs_hi": 0.0,
+          "rel_diff": null,
+          "rel_lo": null,
+          "rel_hi": null
+        }
+      },
+      "S-C2": {
+        "correct_yes(answerable)": {
+          "n": 60,
+          "mean_a": 0.6833333333333333,
+          "mean_b": 0.7666666666666667,
+          "abs_diff": -0.08333333333333337,
+          "abs_lo": -0.20000000000000007,
+          "abs_hi": 0.033333333333333326,
+          "rel_diff": -0.10869565217391308,
+          "rel_lo": -0.25000000000000006,
+          "rel_hi": 0.04651162790697674
+        },
+        "faithful(answerable)": {
+          "n": 60,
+          "mean_a": 0.8,
+          "mean_b": 0.8333333333333334,
+          "abs_diff": -0.033333333333333326,
+          "abs_lo": -0.13333333333333341,
+          "abs_hi": 0.06666666666666665,
+          "rel_diff": -0.03999999999999999,
+          "rel_lo": -0.1600000000000001,
+          "rel_hi": 0.08510638297872339
+        },
+        "hallucinated_answer(unanswerable)": {
+          "n": 20,
+          "mean_a": 0.0,
+          "mean_b": 0.0,
+          "abs_diff": 0.0,
+          "abs_lo": 0.0,
+          "abs_hi": 0.0,
+          "rel_diff": null,
+          "rel_lo": null,
+          "rel_hi": null
+        }
+      }
+    },
+    "definitions": {
+      "correct_yes": "judge says 'yes' vs gold answer (partial counts as not correct); answerable questions only",
+      "faithful": "judge says every claim is supported by the retrieved context",
+      "abstain_rate_unanswerable": "share of unanswerable questions where the system declined",
+      "hallucinated_answer_rate_unanswerable": "1 - abstain rate: the system gave a substantive answer to an unanswerable question"
+    }
+  },
+  "s4": {
+    "n_queries": 21,
+    "corpus": "legacy (20 stub PDFs + Attention Is All You Need), production default config 512/128/MiniLM",
+    "ragas_version": "0.4.3",
+    "ragas_judge": "nemotron-3-super-120b",
+    "answer_model": "gpt-oss-20b",
+    "metrics": {
+      "C1": {
+        "context_precision": {
+          "mean": 0.701984126931283,
+          "lo": 0.5539682539294477,
+          "hi": 0.8420634920015776,
+          "n": 21
+        },
+        "faithfulness": {
+          "mean": 0.8333333333333334,
+          "lo": 0.7142857142857143,
+          "hi": 0.9523809523809523,
+          "n": 21
+        },
+        "failed": {
+          "context_precision": 0,
+          "faithfulness": 0
+        }
+      },
+      "C2": {
+        "context_precision": {
+          "mean": 0.8337112622216403,
+          "lo": 0.7172335600533133,
+          "hi": 0.9338624337820978,
+          "n": 21
+        },
+        "faithfulness": {
+          "mean": 0.8492063492063493,
+          "lo": 0.7222222222222223,
+          "hi": 0.9523809523809523,
+          "n": 21
+        },
+        "failed": {
+          "context_precision": 0,
+          "faithfulness": 0
+        }
+      }
+    },
+    "paired": {
+      "C2-C1|context_precision": {
+        "n": 21,
+        "mean_a": 0.8337112622216403,
+        "mean_b": 0.701984126931283,
+        "abs_diff": 0.1317271352903573,
+        "abs_lo": -0.03643329553645897,
+        "abs_hi": 0.3077295918190564,
+        "rel_diff": 0.18764973485397915,
+        "rel_lo": -0.044118002492908905,
+        "rel_hi": 0.5339580649258676
+      },
+      "C2-C1|faithfulness": {
+        "n": 21,
+        "mean_a": 0.8492063492063493,
+        "mean_b": 0.8333333333333334,
+        "abs_diff": 0.015873015873015928,
+        "abs_lo": -0.1428571428571428,
+        "abs_hi": 0.16666666666666663,
+        "rel_diff": 0.019047619047619112,
+        "rel_lo": -0.1568763616557734,
+        "rel_hi": 0.22222222222222235
+      }
+    },
+    "readme_claim": {
+      "dense_only_context_precision": 0.869,
+      "hybrid_context_precision": 0.9167,
+      "abs_delta": 0.0477,
+      "rel_delta_pct": 5.5,
+      "source": "README.md 'Before/After Comparison' (added in commit 115e8b5, 2026-08-25)"
+    }
+  },
+  "s5": {
+    "judge": "nemotron-3-super-120b",
+    "n_answerable_test": 120,
+    "n_failures_c2_top5": 33,
+    "n_analysed": 33,
+    "cap": 40,
+    "counts": {
+      "vocabulary_mismatch": 20,
+      "reranker_demoted": 13
+    },
+    "programmatic_pool_facts": {
+      "not_in_pool(rule)": 20,
+      "reranker_demoted(rule)": 13
+    },
+    "items": [
+      {
+        "qid": "tm005",
+        "type": "multi",
+        "question": "How does the AVeriTeC shared task select qualified annotators based on specific performance thresholds, and what approach does the AMBIFC study use to model annotator disagreement caused by linguistic ambiguity?",
+        "gold_quote": "We develop models for predicting veracity handling this ambiguity via soft labels,\nand find that a pipeline that learns the label\ndistribution for sentence-level evidence selection and veracity prediction yields the best\nperformance. | We select qualified annotators based on their performance on 3\ntasks: (1) claim type and fact-checking strategies\nover 70%+ F-1 scores; (2) 2+ QA pairs per claim;\n(3) veracity prediction over 50%+ accuracy.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 3,
+          "chunks_touching_gold_span": 3,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 27,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.32
+        },
+        "top3": "[1] (13_AmbiFC_TACL2024.pdf) Implicature\nCoreference\nProbability\nPresupposition\nUnderspecification\nVagueness\nNone\n0\n20\n40\n60\n80\nDistCS\nTrained on AmbiFCC\nTrained on AmbiFC\nFigure 5: Performance of the Annotation Distillation\nmodel on different linguistic categories, separated by\nthe train\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) We only consider the first 10 questions generated\nby each system, so as to avoid rewarding sheer\nvolume. We then calculate total AVERITEC score\nas verdict accuracy given that srecall > t, where\nwe choose t = 0.5 so as to ensure high agreement on the 100 double\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) lists of frequent errors, and FAQs. Subsequently, the relevance of the calibration score diminishes\nthroughout the annotation process. Yet, annotators with a calibration score of above 0.9 maintain\nhigher agreement throughout the entire annotation process.\nFur",
+        "category": "vocabulary_mismatch",
+        "rationale": "Only 32% of question words appear in the gold chunk, indicating a wording mismatch that prevented dense retrieval from ranking it highly."
+      },
+      {
+        "qid": "ts043",
+        "type": "single",
+        "question": "On which dataset does our system achieve competitive performance?",
+        "gold_quote": "achieving competitive performance on a counterfactual dataset",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 2163,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.8
+        },
+        "top3": "[1] (05_FIRE_2411.00784.pdf) used in this study.\nthat evaluation metrics reflect performance on both\nclasses without being dominated by the majority\nclass. In FELM-WK, we retained un-split claims\nto maintain contextual integrity, which is crucial\nfor accurate verification. Full dataset st\n[2] (12b_Ev2R_2411.05375.pdf) and high score (0.435 or higher). This classification enabled systematic examination of system\nperformance across different scoring levels. Using stratified sampling, we selected 560 claims to\nensure an even distribution across the dataset.\nHuman ratings and a\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 2.1\nDataset\nSimilarly to the shared task of previous years, we\nask participants to train and validate their system\non the public AVERITEC dataset and evaluate\ntheir performance on our new test set (2025). The\n2025 test set consists of 1,000 instances, which\nte",
+        "category": "vocabulary_mismatch",
+        "rationale": "Gold chunk exists but was not retrieved into the candidate pool (C2 top20 false), indicating a wording/embedding mismatch between question and gold text."
+      },
+      {
+        "qid": "tm002",
+        "type": "multi",
+        "question": "How does the training data requirement of QA-NatVer when using Flan-T5 compare to the fine-tuning requirement of Zero-NatVer?",
+        "gold_quote": "Our findings indicate that Zero-NatVer\nhelps close this gap while maintaining the advantage of using a single model that does not require\nfine-tuning. | When training our QANatVer model with the Flan-T5 model instead, our\nsystem accuracy improves to 70.3 ± 2.1 with an\nF1 of 70.0 ± 1.4 while being trained only on 32\nclaim annotations.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 3,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 20,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 9,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.62
+        },
+        "top3": "[1] (07b_QA-NatVer_EMNLP2023.pdf) data. The variability decreases across all models with increasing sample size, with QA-NatVer\nhaving the lowest standard deviation, indicating\nits training robustness. QA-NatVer with Flan-T5\nachieves a sore of 71.6 ± 1.7 when trained with\n64 samples. The quest\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) the DeBERTav3-NLI model. When training our QA-NATVER model with the Flan-T5 model\ninstead, our system accuracy improves to 70.3 ± 2.1 with an F1 of 70.0 ± 1.4 despite being\ntrained only on 32 claim annotations. For comparison, ProoFVer-full achieves an accurac\n[3] (07c_Zero-NatVer_Findings-EMNLP2024.pdf) which was trained on 145K FEVER instances. For\nnon-English datasets, we use mBART (Liu et al.,\n2020) instead.\nQA-NatVer can use larger LLMs, such as FlanT5 (Chung et al., 2022), but its implementation currently supports training only for encoder-decoder\nmodel ",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was retrieved into the candidate pool (rank 20 dense, in top20 C2) but after reranking it fell to position 9, outside the top‑5."
+      },
+      {
+        "qid": "ts053",
+        "type": "single",
+        "question": "What does Ev2R jointly assess?",
+        "gold_quote": "Ev2R jointly assesses how well the evidence aligns with\nthe gold references and how reliably it\nsupports the verdict, addressing the shortcomings of prior methods.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 31,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.67
+        },
+        "top3": "[1] (12b_Ev2R_2411.05375.pdf) 6\nConclusion\nThis paper introduces Ev2R, a weighted evidence\nevaluation scorer for AFC. Ev2R consists of a\nreference-based and a verdict-level proxy evaluation component and addresses limitations in previous evaluation approaches by jointly assessing\nhow well \n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) between South Africa and other countries. However, the token-level overlap between both evidence\nis low and may result in a higher METEOR score\nfor one evidence alternative compared to the other.\nThus we decided to use Ev2R (Akhtar et al.,\n2024) for evaluation\n[3] (12b_Ev2R_2411.05375.pdf) 3\nEv2R: A Weighted Scorer for Evidence\nEvaluation\nThis section introduces Ev2R, a weighted scorer\nfor evaluating evidence in the context of AFC. The\nscorer combines two distinct but complementary\nparts: a reference-based component, which decomposes the compari",
+        "category": "vocabulary_mismatch",
+        "rationale": "Gold chunk exists in index but dense rank is 31 and not in candidate pool top20, indicating query wording mismatch."
+      },
+      {
+        "qid": "ts002",
+        "type": "single",
+        "question": "What does the Evidence Chain Evaluation (ECE) system return along with a structured verdict?",
+        "gold_quote": "then returns a structured verdict with a confidence score and a source-level tag.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 19,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 10,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.5
+        },
+        "top3": "[1] (15_Calibrated_Selective_Fact-Checking_2607.18240.pdf) Evidence Chain Evaluation (ECE), a selective\nfact-checking framework that permits abstention\nvia an uncertain verdict instead of requiring a\ntrue/false decision for every claim. The evaluated system is a tool-using verification agent\nthat gathers evidence thro\n[2] (12b_Ev2R_2411.05375.pdf) 3\nEv2R: A Weighted Scorer for Evidence\nEvaluation\nThis section introduces Ev2R, a weighted scorer\nfor evaluating evidence in the context of AFC. The\nscorer combines two distinct but complementary\nparts: a reference-based component, which decomposes the compari\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) participants were first asked to label the verdict\ngiven the retrieved evidence. Table 5 provides\nan overview of the matching between systempredicted labels (columns) and human-labeled verdicts (rows). While human annotators generally\nagreed with evidence labe",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was present in the candidate pool (top20) and ranked 10 in the final output, indicating it was retrieved but demoted by the reranker out of the top‑5."
+      },
+      {
+        "qid": "ts066",
+        "type": "single",
+        "question": "In the AVeriTeC shared task 2024, what scale did annotators use to rate retrieved evidence?",
+        "gold_quote": "Annotators rated the evidence on a scale\nfrom 1 to 5 across five dimensions:",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 3,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.56
+        },
+        "top3": "[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) AVeriTeC shared task (Schlichtkrull et al., 2024),\nwe conducted human evaluation of the evidence\nretrieved by the systems participating in the shared\ntask, motivated by two concerns. First, the incompleteness of the gold evidence annotation, since it is\noften \n[2] (12b_Ev2R_2411.05375.pdf) retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test\nsample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This result\n[3] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) answering, providing a structured representation of\nthe evidential reasoning process. The annotation\nprocess for AVERITEC was designed to ensure (1)\nthat claims are understandable independently of the\nfact-checking articles they were sourced from, (2)\nthat the",
+        "category": "reranker_demoted",
+        "rationale": "Gold chunk was in the candidate pool (top20) but absent from final top10, indicating the reranker demoted it."
+      },
+      {
+        "qid": "ts026",
+        "type": "single",
+        "question": "What does the SCoRe self-correct RL approach aim to teach LLMs to do on-the-fly?",
+        "gold_quote": "training LLMs to perform self-correction to fix their mistakes “on-the-fly”",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 10,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 10,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.33
+        },
+        "top3": "[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) Training Language Models to Self-Correct via Reinforcement Learning\non coding problems from HumanEval (Chen et al., 2021). We additionally motivate the design of SCoRe\nby extensively studying the failure modes of SFT and standard RL approaches, which broadly i\n[2] (04_Stop-RAG_2510.14337.pdf) modular and compatible with black-box LLMs. These results demonstrate the effectiveness of\nvalue-based stopping control for iterative RAG and highlight the potential for adaptive decision\nmaking in broader LLM-driven systems.\nReferences\nAkari Asai, Zeqiu Wu, Y\n[3] (16_SCoRe_self-correct_RL_2409.12917.pdf) final response.\nOur main contribution is SCoRe, a multi-turn RL approach for teaching LLMs how to correct their own\nmistakes. To the best of our knowledge, SCoRe is the first approach to attain significantly positive\nintrinsic self-correction: relative to base",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was retrieved (rank 10 in dense) and present in the candidate pool but was pushed out of the top‑5 after reranking/final ranking."
+      },
+      {
+        "qid": "ts075",
+        "type": "single",
+        "question": "What BLEU score did the big model achieve on the WMT 2014 English-to-French translation task?",
+        "gold_quote": "On the WMT 2014 English-to-French translation task, our big model achieves a BLEU score of 41.0",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 2,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.88
+        },
+        "top3": "[1] (Attention Is All You Need.pdf) be superior in quality while being more parallelizable and requiring significantly\nless time to train. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including\nensembles, by over 2 BLEU\n[2] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) from 21 teams, 18 of which outperformed our baseline. The leaderboard was dominated by systems\nrelying on large language models, especially GPT4o; nevertheless, especially for question generation\nand retrieval, smaller models – such as LLama-38b – also achieve\n[3] (12b_Ev2R_2411.05375.pdf) hello-gpt-4o/. Accessed: 2024-10-23.\nKishore Papineni, Salim Roukos, Todd Ward,\nand Wei-Jing Zhu. 2002.\nBleu:\na method\nfor automatic evaluation of machine translation. In Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics, ",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was retrieved at rank 2 and present in the candidate pool, but after reranking it did not appear in the final top‑10 results."
+      },
+      {
+        "qid": "ts063",
+        "type": "single",
+        "question": "How many MuSiQue questions were used for gold-claim statistics after excluding those with no atomic gold hop claims?",
+        "gold_quote": "One\nexception: 115 MuSiQue questions yield no atomic\ngold hop claims, so MuSiQue gold-claim statistics\nuse n=885 (§B).",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 8,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 7,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.7
+        },
+        "top3": "[1] (11_HALT_2608.02009.pdf) 115 of the 1,000 sampled\nMuSiQue questions yield no atomic hop claims\n(skip_reason: no_claims) and carry no verifier\ntrajectory at all. They are excluded from both\nnumerator and denominator, so every MuSiQue\ngold-claim point estimate and test in this paper is\n\n[2] (10_Ji_2026_survey_2601.00536.pdf) 14\n13.5%\nMuSiQue\n12\n11.5%\nComplexWebQuestions\n12\n11.5%\nStrategyQA\n6\n5.8%\nIIRC\n1\n1.0%\nFanOutQA\n1\n1.0%\nTotal methods\n104\n100%\nTable 8: Coverage of major multi-hop QA benchmarks in our coded corpus. Counts are based on the\nDatasets_Summary field in Table 5.\nC.5\nS\n[3] (09_Sufficient_Context_ICLR2025.pdf) Appendix A.3 for details on the retrieval). We use the ‘True Premise’ setting (452 instances), skipping\n‘False Premise’ questions that mislead by design. Musique-Ans (Trivedi et al., 2022) is a multi-hop\nQA benchmark, created by composing two to four single-ho",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was present in the candidate pool (top20) but after reranking it ended at rank 7, outside the top‑5, indicating demotion by the reranker."
+      },
+      {
+        "qid": "ts074",
+        "type": "single",
+        "question": "Which language model is used to initialise the node representations in the best configuration of KGAT?",
+        "gold_quote": "We use their best conﬁguration,\nwhere the node representations are initialised using RoBERTA (Large).",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 522,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 1,
+          "question_words_found_in_gold_chunk": 0.5
+        },
+        "top3": "[1] (Attention Is All You Need.pdf) language modeling tasks [34].\nTo the best of our knowledge, however, the Transformer is the first transduction model relying\nentirely on self-attention to compute representations of its input and output without using sequencealigned RNNs or convolution. In the\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Dragomir Radev, Mari Ostendorf, Luke Zettlemoyer, Noah A. Smith, and Tao Yu. 2023.\nBinding Language Models in Symbolic Languages. In The Eleventh International Conference\non Learning Representations (2023), Kigali, Rwanda.\nHyung Won Chung, Le Hou, Shayne Longp\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) Alex Vaughan, et al. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783.\nEdward J Hu, yelong shen, Phillip Wallis, Zeyuan AllenZhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu\nChen. 2022. LoRA: Low-rank adaptation of large\nlanguage models. In In",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk contains the answer but lacks key question terms like 'language model' and 'KGAT', causing dense retrieval to miss it due to vocabulary mismatch."
+      },
+      {
+        "qid": "ts078",
+        "type": "single",
+        "question": "What three baseline versions are reported in the AVeriTeC 2023 dataset paper?",
+        "gold_quote": "We report results for three versions\nof the baseline, as discussed in Section 7.2: a version that uses no evidence (no search), a version that\nuses gold evidence (gold evidence), and the full pipeline described in Section 7.1 (AVERITEC).",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 326,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.5
+        },
+        "top3": "[1] (12b_Ev2R_2411.05375.pdf) retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test\nsample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This result\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 2.1\nDataset\nSimilarly to the shared task of previous years, we\nask participants to train and validate their system\non the public AVERITEC dataset and evaluate\ntheir performance on our new test set (2025). The\n2025 test set consists of 1,000 instances, which\nte\n[3] (03_OpenFC_2609.33579.pdf) is excluded consistently from trajectory construction and difficulty filtering, so every reported AVeriTeC training statistic\nuses 3,067 as its denominator; the complete 500-claim development evaluation split is unaffected.\nQuanTemp++.\nQuanTemp++ targets natur",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk exists in the index but has low dense rank (326) and is not in the top‑20 candidate pool, indicating a wording mismatch between query and passage."
+      },
+      {
+        "qid": "ts077",
+        "type": "single",
+        "question": "What does the notation p(s′ | s, a) denote in the context of an MDP?",
+        "gold_quote": "We use the notation p(s′ | s, a) to denote\nthe probability of transitioning to state s′ when action a is taken in state s.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 27,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.67
+        },
+        "top3": "[1] (04_Stop-RAG_2510.14337.pdf) ˆQQ(0)(s, a) = ˆQλ(s, a)\n\f\f\f\nλ=0 = ˆQ(1)(s, a) = r(s, a) + γ max\na′∈A[[Qθ(s′(s, a), a′)]].\n(18)\nFor our MDP formulation, we have the following.\nˆQQ(0)(st, STOP) = r(st, STOP),\n(19)\nˆQQ(0)(st, CONT) = max\nn\nQθ(st+1, STOP), Qθ(st+1, CONT)\no\n.\n(20)\nAs with the MC\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) 3\n\"demo_sep\": \"\\n\\n\\n\",\n4\n\"context_format\": \"{INST}\\n\\nClaim: {}\\nSubclaims: {}\",\n5\n\"response_template\": \"\\nSubclaims:\",\nListing A.5: The prompt template for the claim decomposition model MD\nA.4.3\nQualitative examples\nA second example with the full output prod\n[3] (07a_TabVer_TACL2024.pdf) We first define a set-theoretic interpretation of the\nrelationship between numerals in claim spans and\nevidence (or answers calculated on the evidence\nwith ArithExps), within the context of natural\nlogic. Specifically, we consider five set-theoretic\nrelationsh",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk exists but its dense retrieval rank is 27 (outside top‑20 candidate pool), indicating the query wording did not match the chunk well enough for retrieval."
+      },
+      {
+        "qid": "ts011",
+        "type": "single",
+        "question": "What does the Q-network using Q(λ) provide in the Stop-RAG approach?",
+        "gold_quote": "We propose a novel formulation of iterative RAG as a finite-horizon MDP and train a Q-network\nusing Q(λ) to provide forward-looking estimates of stopping quality.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 16,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.5
+        },
+        "top3": "[1] (04_Stop-RAG_2510.14337.pdf) To address these problems, we reframe iterative RAG as a finite-horizon Markov decision process\n(MDP) and train a Q-network using Q(λ), a Q-learning variant with λ-returns. This approach yields\nforward-looking estimates of whether continuing retrieval will imp\n[2] (10_Ji_2026_survey_2601.00536.pdf) termination, while unsupported claims trigger additional retrieval, clarification questions or answer\nrevision (Gao et al., 2023a; Manakul et al., 2023;\nDhuliawala et al., 2024). In multi-round RAG, sufficiency critics and value-based controllers such\nas SIM-R\n[3] (11_HALT_2608.02009.pdf) The main EM endpoint uses a standardized\nQwen2.5-3B extractor so that stopping policies\nshare\na\nfixed\nanswer\nhead.\nRerunning the same Self-Ask 3B trajectories with a\nQwen2.5-7B-Instruct extractor (Table 5) raises\nabsolute\nEM\nby\n3–13 pp,\nbut\nthe\nHALT–\nFULL gap ",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was retrieved into the candidate pool (top20) but the reranker demoted it out of the final top10/top5 results."
+      },
+      {
+        "qid": "tm016",
+        "type": "multi",
+        "question": "How does the accuracy improvement of QA-NatVer over baselines on the Danish DanFEVER dataset compare to the inter‑annotator agreement scores (Hungarian METEOR) reported for question‑answer pairs in the AVeriTeC dataset?",
+        "gold_quote": "our system outperforms all baselines by 1.8 accuracy points, highlighting the potential of the question-answering\nformulation for low-resource languages. | At 0.28 for questions and 0.22 for questions and answers, these\nresults are quite low, highlighting the difficulty of automatic evaluation for this task.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 4,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 17,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 10,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.47
+        },
+        "top3": "[1] (07b_QA-NatVer_EMNLP2023.pdf) models, improving scores by about 4.9 accuracy\npoints to reach an accuracy of 85.8 ± 0.9.\nVarying sample sizes.\nTable 4 compares our approach against the baselines when trained with\nvarying amounts of data in a few-shot setting, ranging between 16, 32, and 64 \n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) models, improving scores by about 4.9 accuracy points to reach an accuracy of 85.8 ± 0.9.\nVarying sample sizes:\nTable 5.3 compares our approach against the baselines when trained\nwith varying amounts of data in a few-shot setting, ranging between 16, 32, and 6\n[3] (07c_Zero-NatVer_Findings-EMNLP2024.pdf) Figure 4: The averaged Macro-F1 scores for different\nensemble sizes, calculated from 20 independent runs for\neach size.\nacross all datasets but falls behind QA-NatVer\non DanFEVER, where QA-NatVer achieves 5.86\nmore accuracy points. Nonetheless, our results\nsho",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was present in the candidate pool (top20) but after reranking it fell to rank 10, outside the top‑5."
+      },
+      {
+        "qid": "ts009",
+        "type": "single",
+        "question": "What two components does the Papelo team combine to automate claim verification?",
+        "gold_quote": "We show that\nthe reasoning power of large language models (LLMs) and the retrieval power of modern\nsearch engines can be combined to automate\nthis process and explainably verify claims.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 737,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.43
+        },
+        "top3": "[1] (02_AVeriTeC_2023_dataset_paper.pdf) claims used in prior work.\nDecomposing claim verification into generations and answering questions allows us to break complex\nreal-world claims down to their components, simplifying the task. For example, in Figure 2, verifying\nthe claim requires knowing the s\n[2] (03_OpenFC_2609.33579.pdf) available record does not justify a definitive label (Thorne\net al. 2018).\nExisting automatic fact-checking (AFC) systems typically encode much of the verification policy in a predefined pipeline, assigning retrieval, evidence synthesis, and\nverdict prediction\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) for assessing the veracity and retrieving evidence for the claim you have created. You must\nselect one of the given challenge categories you expect to be the main challenge: Multi-hop\nReasoning, Numerical Reasoning, Combining Text and Tables, Entity Disambigua",
+        "category": "vocabulary_mismatch",
+        "rationale": "Only 43% of question words appear in the gold chunk, indicating a wording mismatch that hindered retrieval."
+      },
+      {
+        "qid": "tm001",
+        "type": "multi",
+        "question": "According to the Ji 2026 survey, what granularity hyperparameters are noted as typically hand‑tuned, and how does Stop‑RAG determine the optimal hyperparameter configuration?",
+        "gold_quote": "hand-tuned\nhyperparameters for granularity (e.g., cluster size,\nunit length, and graph pruning) | We provide the complete list\nof training hyperparameters in Section B.\nAfter training, we select the best checkpoint on the validation set.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 4,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 19,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.29
+        },
+        "top3": "[1] (04_Stop-RAG_2510.14337.pdf) • Search-o1: Uses QwQ-32B (Qwen Team, 2025a,b) as the generator and the Bing Web Search\nAPI as the retriever.\nB\nHyperparameters\nWe train the Stop-RAG Q-network with standard settings. The full list is provided in Table 5.\nTable 4: Reported performance of exist\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) to TABVER’s models, to ﬁne-tune the instruction-tuned CLM classiﬁer baselines with LoRA,\nwe use Huggingface’s SFTTrainer.\nWe do not consider a validation set for hyperparameter-tuning, following the real-world few-shot\nlearning setting of Alex et al. (2021) an\n[3] (10_Ji_2026_survey_2601.00536.pdf) 2025)\nRAPTOR\nR/I\nH\nR\nB\nLong-doc QA, Hotpot variants\n(Sarthi et al., 2024)\nLongRAG\nR/I\nL\nR\nB/H\nHotpotQA, ODQA (Jiang et al.,\n2024; Zhao et al., 2024)\nGraphRAG\nI\nG\nR/P\nB\nSensemaking, MHQA (Edge et al.,\n2024)\nKG-o1\nP/I\nG\nP/V\nB\n2Wiki,\nKGQA (Wang et al.,\n2025a)\nSIM",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was present in the candidate pool (top‑20) but did not appear in the final top‑10 after reranking, indicating it was demoted by the reranker."
+      },
+      {
+        "qid": "ts098",
+        "type": "single",
+        "question": "What accuracy lead does our method achieve when evaluated on TabFact without any further training?",
+        "gold_quote": "When evaluated on TabFact without any further training, our method\nremains competitive with an accuracy lead of\n0.5 points.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 167,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 1.0
+        },
+        "top3": "[1] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) further in Section 6.3.6.\nTabFact:\nResults in a domain-transfer scenario without TabFact training data are shown\nin Table 6.4. TABVER still remains competitive with our baselines with an accuracy lead\nof 0.5 accuracy points and an F1 of 0.3 points worse than t\n[2] (07a_TabVer_TACL2024.pdf) approaches when applied to diverse tables (cf.\nListing 4), which TabVer successfully addresses.\nTraining\nclassification\nbaselines,\nsuch\nas\nTAPAS, on Tabfact’s 92,283 training samples, using the same experimental setup, results in scores\nsubstantially outperfor\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) TABVER+T, particularly on textual claims, by 14.8 accuracy points. We hypothesise that this\ndiscrepancy is caused by TABVER+T’s training data, which consists exclusively of claims that\nrequire tabular reasoning. When evaluated over the entire FEVEROUS dataset,",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk exists in the index but dense retrieval ranked it low (167) and it did not enter the top‑20 candidate pool, indicating a wording/semantic mismatch between query and passage."
+      },
+      {
+        "qid": "tm020",
+        "type": "multi",
+        "question": "What evaluation metrics are used in each work to assess model performance on fact-checking tasks, and how do they differ?",
+        "gold_quote": "Second, we report the Brier score, a proper scoring\nrule over probabilistic predictions. To compute the\nBrier score, we map the model’s output to an implied\nprobability of the claim being true: P(true) = pi if\nˆvi = confirmed, P(true) = 1 −pi if ˆvi = refuted,\nand P(true) = 0.5 if ˆvi = uncertain. The score is\nthe mean squared error against the binary gold label. | We measure the proportion between veracity predictions\n7The ability of models to make pragmatic inferences has\nbeen explored in Jeretic et al.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 3,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 485,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.1
+        },
+        "top3": "[1] (05_FIRE_2411.00784.pdf) search tool. This configuration is designed to evaluate the model’s ability to perform fact-checking\nwithout retrieving any supporting evidence.\n4.4\nEvaluation Metrics\nIn this work, we investigate the trade-off between\ncomputational cost and fact-checking perf\n[2] (14_REAL_2609.08943.pdf) In contrast, our work focuses on the task of fact-checking itself, which adopts a stricter formulation than generation-centric\ngrounding by requiring granular labels and explicit causal dependency on evidence. Our work also differs from Akhtar et al. [2]\nwho r\n[3] (03_OpenFC_2609.33579.pdf) evaluations: every model is served with vLLM and queried\nthrough the same ReAct loop with search and visit\ntools, so that reported differences stem from the policy rather\nthan the decoding or tool setup.\nD\nFact-Check Blocklist\nWe apply the same fact-check bloc",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk contains terms like Brier score and AURC, while the question uses different wording (evaluation metrics, model performance, fact-checking tasks), resulting in low lexical overlap and failure to retrieve the chunk."
+      },
+      {
+        "qid": "tm004",
+        "type": "multi",
+        "question": "How does LOREN predict claim veracity, and what training objective does the REAL paper employ to produce veracity labels?",
+        "gold_quote": "Moreover, we evaluate in our few-shot setting\nLOREN (Chen et al., 2022a), which decomposes\nclaims into phrases, and predicts their veracity using a neural network regularized on the latently\nencoded phrases’ veracity by simple logical rules. | Models are fine-tuned using a supervised assistantonly objective [43], to generate structured outputs consisting of a\nveracity label and evidence sentence indices.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 3,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 53,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.27
+        },
+        "top3": "[1] (13_AmbiFC_TACL2024.pdf) both veracity labels (S or R).\nalternative interpretations in these classes, which\ncould also be the reason for these items being more\ndifficult for the model to learn.\nCorrect Probabilities by Veracity Labels\nWe\nanalyze how accurately the DISTILL pipelines\ntr\n[2] (14_REAL_2609.08943.pdf) claims and supporting evidence for veracity prediction. However,\nthese studies mainly employ the models in a zero-shot or few-shot\nmanner through prompting, without task-specific fine-tuning to\nensure evidence-grounded consistency. Hence, we evaluate REAL\nagai\n[3] (08_ProoFVer_TACL2022.pdf) an evidence sentence, then they become the rationale for veracity label of the claim given the evidence. Further, we require that the words extracted\nas rationale form a contiguous phrase. We identiﬁed 300 claims which satisfy all these criteria.\n5.2\nEvaluatio",
+        "category": "vocabulary_mismatch",
+        "rationale": "Only 27% of question words appear in the gold chunk, indicating poor lexical overlap that prevented dense retrieval from ranking it highly enough to enter the candidate pool."
+      },
+      {
+        "qid": "tm010",
+        "type": "multi",
+        "question": "How do the SCoRe self-correct RL approach and the REAL framework each recommend ensuring that model outputs depend on external evidence rather than internal memorization?",
+        "gold_quote": "leveraging on-policy\nsamples is especially critical in the self-correction setting, which presents a multi-turn problem that\nadmits potentially spurious solutions. | verification decisions\nare expected to be grounded in the evidence cited as their justification. This expectation demands that the decision should be sensitive\nto changes in the cited evidence, especially when that evidence is\nno longer available.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 2,
+          "chunks_touching_gold_span": 4,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 72,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.07
+        },
+        "top3": "[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) accuracy@t2, we saw that standard RL leads to a collapse to non-correcting behavior. Hence, our key\ninsight in SCoRe is that we must more explicitly encourage self-correction behavior, which we accomplish\nvia a two-stage approach. The first stage (Stage I) ser\n[2] (14_REAL_2609.08943.pdf) dependency rather than as a lightweight large-scale evaluation\nprotocol. In addition, evidence redundancy and incomplete annotations in existing fact-checking benchmarks may still allow models\nto preserve correct predictions after ‘gold’ evidence removal, maki\n[3] (16_SCoRe_self-correct_RL_2409.12917.pdf) makes in turn 1. In the lower example, the model is able to correct a reasoning error.\n3. Preliminaries and Problem Setup\nOur goal is to develop an approach for training LLMs to improve their own predictions entirely on selfgenerated data. As discussed so far,",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk is not retrieved (dense rank 72) despite sufficient chunk coverage, indicating a term mismatch between query and gold text."
+      },
+      {
+        "qid": "ts067",
+        "type": "single",
+        "question": "What additional supervision does the Rigorous Evidence Ablation Learning (REAL) framework provide beyond standard supervised fine-tuning?",
+        "gold_quote": "REAL additionally supervises the verifier’s\nbehaviour under evidence-ablated conditions where the supporting\nevidence has been intentionally removed.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 16,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 10,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.23
+        },
+        "top3": "[1] (14_REAL_2609.08943.pdf) and evidence grounding, we propose REAL (Rigorous Evidence\nAblation Learning), a training framework that promotes evidencedependent verification through counterfactual evidence supervision\nfor the LLM-as-verifier models. Experiments on four fact-checking\ndatas\n[2] (14_REAL_2609.08943.pdf) evidence, but are partially sustained through parametric knowledge\nacquired during pre-training. Such behaviour undermines evidencedependent verification, since the final prediction can remain stable\ndespite changes in the supporting context.\nTo address this l\n[3] (14_REAL_2609.08943.pdf) during verification. To address this issue, we propose Rigorous\nEvidence Ablation Learning (REAL), a training framework that explicitly supervises verifier behaviour under both complete evidence\nand ablated evidence conditions through counterfactual evidence\ns",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was present in the candidate pool (top20) and ranked 10 after reranking, indicating it was retrieved but demoted out of the top‑5 by the reranker."
+      },
+      {
+        "qid": "ts025",
+        "type": "single",
+        "question": "What task is used to further pretrain the LM in CorefRoBERTA?",
+        "gold_quote": "Here, they further pretrain the\nLM on a task that involves prediction of referents\nof a masked mention to capture co-referential relations in context.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 274,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 1.0
+        },
+        "top3": "[1] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) desired output, y, the log-likelihood loss, LNLL = ↙1\n|y|\n#|y|\nt=1 log pϖ(yt | x, y<t). MLMs are ﬁnetuned on the same objective with | y |= 1. Instead of ﬁne-tuning a pre-trained CLM exclusively\non the desired target task, ﬁne-tuning them ﬁrst on a variety of \n[2] (14_REAL_2609.08943.pdf) Strong performance may partly reflect prior exposure to relevant\nfacts included in pretraining data, making it difficult to determine\nwhether predictions are primarily supported by retrieved evidence\nor memorised knowledge [5, 16, 69]. Consequently, superior v\n[3] (09_Sufficient_Context_ICLR2025.pdf) inputs (see Section 5.2). Second, it offers a controllable mechanism for tuning abstention, which\nallows for different operating settings in differing applications, such as strict accuracy compliance in\nmedical domains or maximal coverage on creative generatio",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk is present in the index but its wording differs from the question, resulting in low dense‑retrieval similarity (rank 274) and exclusion from the candidate pool."
+      },
+      {
+        "qid": "ts081",
+        "type": "single",
+        "question": "How many health-related claims in the HealthFC dataset are labeled as Not Enough Information (NEI)?",
+        "gold_quote": "202 Supported, 125 Refuted, and 423 NEI\nclaims",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 190,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.25
+        },
+        "top3": "[1] (03_OpenFC_2609.33579.pdf) 2020). The aggregate claim labels are 655 Supports, 253\nRefutes, 153 Disputed, and 474 NEI. Unlike FEVER-style\nthree-way datasets, Disputed explicitly captures claims for\nwhich both supporting and refuting evidence was found. We\nuse Climate-FEVER only as an OO\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) highlighted. In some cases, a claim may be considered unveriﬁable (Not Enough Information;\nNEI) if enough information could not be found on Wikipedia to arrive at one of the two other\nverdicts. In contrast to the FEVER dataset, we also collected annotated evid\n[3] (07a_TabVer_TACL2024.pdf) tables (i.e., not ones selected via a retrieval system\nfrom a knowledge source) throughout our experiments. The resulting dataset consists of 2,011\nclaims, with 35%, 61.7%, and 3.2% being supported, refuted, and NEI claims, respectively (cf.\nAppendix Table 8).",
+        "category": "vocabulary_mismatch",
+        "rationale": "Only 25% of question words appear in the gold chunk, indicating a wording mismatch that prevented dense retrieval from ranking it highly."
+      },
+      {
+        "qid": "ts088",
+        "type": "single",
+        "question": "What does the Interleaved retrieval-augmented generation method involve?",
+        "gold_quote": "(b) Interleaved: the model alternates reasoning with\nadditional retrieval calls, updating a partial answer/state.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 37,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.2
+        },
+        "top3": "[1] (11_HALT_2608.02009.pdf) 1\nIntroduction\nRetrieval-augmented generation (RAG) systems\nground language models in external evidence. In\nagentic RAG, this retrieval step becomes an iterative search process: the model generates queries, retrieves evidence, and conditions subsequent queries\n[2] (10_Ji_2026_survey_2601.00536.pdf) such tasks. Retrieval-augmented generation (RAG)\ncouples a retriever with an LLM and has achieved\nstrong performance on knowledge-intensive QA\n(Lewis et al., 2020; Gao et al., 2023b), while more\nrecent agent-style systems model question answering as a sequence\n[3] (09_Sufficient_Context_ICLR2025.pdf) Stéphane Clinchant. Bergen: A benchmarking library for retrieval-augmented generation. arXiv preprint\narXiv:2407.01102, 2024.\nDongyu Ru, Lin Qiu, Xiangkun Hu, Tianhang Zhang, Peng Shi, Shuaichen Chang, Jiayang Cheng, Cunxiang\nWang, Shichao Sun, Huanyu Li, et a",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk is present in the index but shares only 20% of question words, indicating low lexical overlap that prevented retrieval into the candidate pool."
+      },
+      {
+        "qid": "ts094",
+        "type": "single",
+        "question": "What two-step process is used to ensure high-quality evidence annotation in the AVeriTeC 2023 dataset?",
+        "gold_quote": "Claims are first selected and normalized. Then,\ntwo rounds of question-answer pair generation and evidence sufficiency check ensure high-quality\nevidence annotation.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 252,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.56
+        },
+        "top3": "[1] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) answering, providing a structured representation of\nthe evidential reasoning process. The annotation\nprocess for AVERITEC was designed to ensure (1)\nthat claims are understandable independently of the\nfact-checking articles they were sourced from, (2)\nthat the\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) MultiFC (Augenstein et al., 2019) the evidence is\nannotated automatically and thus cannot be relied\nupon for evaluation (Glockner et al., 2022).\nThe\nrecently\nproposed\nAVERITEC\ndataset (Schlichtkrull et al., 2023a) addressed these\nlimitations. It consists of re\n[3] (02_AVeriTeC_2023_dataset_paper.pdf) each annotated with question-answer pairs decomposing the fact-checking process, as well as\njustifications. Our multi-step annotation process guarantees high-quality annotations, providing\nevidence sufficiency and avoiding temporal leakage; it also results in ",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk exists but only ~56% of question words overlap, indicating poor lexical match that prevented it from entering the retrieval candidate pool."
+      },
+      {
+        "qid": "ts042",
+        "type": "single",
+        "question": "What is the purpose of Stage I in the SCoRe method?",
+        "gold_quote": "The first stage (Stage I) serves the role of initialization where we train\nthe model to decouple its behavior across the two attempts by attempting to optimize second-attempt\naccuracy while explicitly constraining the distribution of first attempts to the base model.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 7,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 9,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.5
+        },
+        "top3": "[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) performance improvements without Stage I or without reward shaping in SCoRe are small when measured by the difference in\naccuracy over the two attempts. Utilizing STaR generally leads to worse performance even when it is run from an effective\nStage I checkpoin\n[2] (12b_Ev2R_2411.05375.pdf) The scorer computes a score s as follows:\ns = log p(y | P(I, c, ˆE), θ)\nwhere P(I, c, ˆE) is the prompt including an instruction I, the input claim c, and the retrieved\nevidence ˆE, and θ denotes the parameters of the\nLLM. We apply chain-of-thought prompting (\n[3] (04_Stop-RAG_2510.14337.pdf) on that state, and scoring the outputs against A0. Formally, for t = 1, . . . , T −1:\nr(st, STOP) = 1\nN\nN\nX\ni=1\nS\n\u0010\nˆA(i)\n0 (st), A0\n\u0011\n,\n(13)\nr(st, CONT) =\n(\n1\nN\nPN\ni=1 S\n\u0010\nˆA(i)\n0 (sT ), A0\n\u0011\n,\n(t = T −1),\n0,\n(otherwise),\n(14)\nwhere S is an arbitrary scoring ",
+        "category": "reranker_demoted",
+        "rationale": "Gold chunk was in the candidate pool (rank 7 dense, top20 C2) but the re‑ranker demoted it to final rank 9, outside the top‑5."
+      },
+      {
+        "qid": "ts069",
+        "type": "single",
+        "question": "Why do verdict prediction models that rely overly on surface-level patterns typically underperform on FEVEROUS?",
+        "gold_quote": "As a result, reasoning accurately over single pieces of information\nbecomes more important as a single incorrect fact leads to the entire refutation of the claim.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 2,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 10,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.9
+        },
+        "top3": "[1] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Thus, verdict prediction models relying overly on surface-level patterns typically underperform\non FEVEROUS (Bouziane et al., 2021), while planning-based approaches that decompose the\nveriﬁcation process, as described in Section 2.3, show promise (Pan et al., \n[2] (12b_Ev2R_2411.05375.pdf) judgments on criteria such as verdict agreement,\nevidence relevance, and coverage of reference\ndata, indicating Ev2R assesses retrieved evidence\nrather than verdict correctness alone.\nAssessment\nrelying\non\nclosed\nknowledge\nsources & surface-level matching of e\n[3] (13_AmbiFC_TACL2024.pdf) based on their accuracy of in predicting the veracity\nfor each (c, P). Similar to FEVER-score (Thorne\net al., 2018), we require models to correctly predict the evidence and veracity label (Ev.+Ver.). We\nscore models via the averaged instance-level product of t",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was retrieved in the candidate pool (rank 2 dense, top20 C2) but fell to rank 10 after reranking, indicating demotion by the reranker."
+      },
+      {
+        "qid": "ts044",
+        "type": "single",
+        "question": "What does a 'not enough evidence verdict' indicate in the AVeriTeC 2023 dataset paper?",
+        "gold_quote": "not enough evidence verdicts, which is a label for claims where evidence could not be found.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 40,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.25
+        },
+        "top3": "[1] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) the set supported, refuted, not enough evidence,\nor conflicting evidence/cherrypicking. Unlike the\noriginal AVERITEC dataset, we did not require\nparticipants to submit a justification for the verdict.\n2.1\nDataset\nParticipants are asked to use the public AVERIT\n[2] (02_AVeriTeC_2023_dataset_paper.pdf) structured representation of the evidence and reasoning supporting or refuting the claim. The free-text\njustifications detail how the evidence is used to reach the verdict, including cases of conflicting\nevidence, matching best practises for human fact-checker\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) (see Figure 1 for an example). This evidence had\nto be available before the claim was made, and\nwas additionally verified to adequately support\nthe verdict, thus avoiding the issues of temporal\nleakage and evidence insufficiency identified in\nearlier datasets ",
+        "category": "vocabulary_mismatch",
+        "rationale": "Only 25% of question words appear in the gold chunk, indicating a vocabulary mismatch that prevented dense retrieval from ranking it highly."
+      },
+      {
+        "qid": "ts061",
+        "type": "single",
+        "question": "What does including the question-only score enable in the AVERITEC evaluation?",
+        "gold_quote": "Including the question-only score allows comparison of systems along this axis as well.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 112,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.5
+        },
+        "top3": "[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 0.31760.001\nTable 2: Overall results for the AVERITEC shared task. Performance is evaluated on the total of 1000 hidden test\nset examples. Scores are given in Ev2R Recall for question-only, question-answer performance, and the total score.\nquantization (Gergan\n[2] (02_AVeriTeC_2023_dataset_paper.pdf) 8\nLimitations\nThe evaluation metric we have presented alongside AVERITEC contains a significant limitation:\nno efforts are made to ensure answers and source documents are consistent. As only 53% of gold\nanswers are fully extractive, it is expected that abstrac\n[3] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) taken with a grain of salt.\nHuman evaluation of evidence predictions offers valuable insights into the limitations of the\nAVERITEC score, and suggests directions for\nfuture research.\nA notable observation is the\ndiscrepancy between human evaluation and the\nAVE",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk has only 50% question word overlap and ranks 112 in dense retrieval, indicating it was not surfaced due to lexical mismatch."
+      },
+      {
+        "qid": "ts051",
+        "type": "single",
+        "question": "What type of evidence do veracity prediction systems typically have to consider to increase evidence coverage?",
+        "gold_quote": "The latter typically also\nhave to consider noisy evidence during veracity prediction to increase evidence coverage",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 23,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.89
+        },
+        "top3": "[1] (14_REAL_2609.08943.pdf) 3.2\nFact-Checking System Evaluation\nExisting evaluation protocols for fact-checking systems primarily\nassess two independent aspects: (1) whether a model predicts the\ncorrect veracity label supported by identified evidence, and (2)\nwhether the predicted eviden\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Chapter 2: Background and literature review\ndeﬁne a good explanation speciﬁcally for fact veriﬁcation systems. These criteria are constrained\nto the veracity prediction component of the fact-checking pipeline since evidence retrieval\ntypically exclusively reli\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) teams to omitting these labels from their predictions altogether. Moreover, systems that calibrate\ntheir veracity predictions to favor refuted claims\ngain an advantage (as long as they returned adequate evidence), as refuted claims dominate the\ndataset, compri",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk is present and mostly matches the question words, but dense retrieval ranked it 23rd and it did not enter the top‑20 candidate pool, indicating a vocabulary/semantic mismatch."
+      },
+      {
+        "qid": "ts095",
+        "type": "single",
+        "question": "What does the AMBIFC dataset aim to contribute to research?",
+        "gold_quote": "By publishing AMBIFC along with its\nannotations, we aim to contribute to research integrating annotations into trained models.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 101,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.75
+        },
+        "top3": "[1] (13_AmbiFC_TACL2024.pdf) AMBIFC, a large fact-checking dataset derived\nfrom real-world information needs, sourced from\nreal-world yes/no questions of BoolQ (Clark et al.,\n2019). AMBIFC contains evidence annotations at\nthe passage and sentence level from full Wikipedia\npages, from a mi\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) MultiFC (Augenstein et al., 2019) the evidence is\nannotated automatically and thus cannot be relied\nupon for evaluation (Glockner et al., 2022).\nThe\nrecently\nproposed\nAVERITEC\ndataset (Schlichtkrull et al., 2023a) addressed these\nlimitations. It consists of re\n[3] (03_OpenFC_2609.33579.pdf) controlled policy comparison. Provider-native search, direct generation, and AFC systems differ in their backends\nor interaction pipelines and are included as heterogeneous\nend-to-end references rather than policy-only controls. OOD\ndatasets remain more challe",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk is present in the index but ranks low (101) due to wording differences between question and chunk, preventing it from entering the candidate pool."
+      },
+      {
+        "qid": "ts019",
+        "type": "single",
+        "question": "At which stage does the Graph-of-Thoughts (GoT) framework typically expand to its maximum width, demanding substantial processing resources?",
+        "gold_quote": "The computational burden becomes especially acute near the evidence retrieval\nstage, where the GoT typically expands to its maximum width, demanding substantial processing resources.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 1,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 230,
+          "gold_chunk_in_C2_candidate_pool_top20": false,
+          "gold_chunk_rank_in_final_top10": null,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.73
+        },
+        "top3": "[1] (06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf) thoughts as vertices and their dependencies as\nedges. An edge (t1, t2) signifies that t1 serves\nas input for generating t2. Unlike other prompting\nmethods, GoT uniquely permits the construction of\nan arbitrary directed graph, enabling the aggregation of indivi\n[2] (10_Ji_2026_survey_2601.00536.pdf) in our framework are instantiated across the 104\nmulti-hop QA / RAG papers in our Topic 4 sample.\nAlong Axis A (overall execution plan), more than\nhalf of the systems (56/104, 53.8%) still follow\na frozen-pool “retrieve–then–read” pattern, while\n39/104 (37.5%)\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Proceedings of the 2023 IEEE/ACM International Conference on Advances in Social Networks\nAnalysis and Mining, ASONAM ’23, pages 164–170, New York, NY, USA. Association for\nComputing Machinery.\nFranz Nowak, Anej Svete, Alexandra Butoi, and Ryan Cotterell. 2024.",
+        "category": "vocabulary_mismatch",
+        "rationale": "The gold chunk is present in the index but its dense retrieval rank is 230, indicating the query wording did not match the chunk well enough to retrieve it into the candidate pool."
+      },
+      {
+        "qid": "ts059",
+        "type": "single",
+        "question": "How many teams achieved faster runtimes than the baseline’s average of 33.88s per claim?",
+        "gold_quote": "With these efficiency modifications, five out of seven teams (HUMANE, Yellow Flash, FZIGOT, EFC, and Checkmate) achieved faster runtimes than the baseline’s\naverage of 33.88s per claim.",
+        "facts": {
+          "gold_chunks_in_index_meeting_50pct_rule": 1,
+          "chunks_touching_gold_span": 2,
+          "best_dense_rank_of_gold_chunk_in_whole_corpus": 5,
+          "gold_chunk_in_C2_candidate_pool_top20": true,
+          "gold_chunk_rank_in_final_top10": 10,
+          "ligature_or_overlong_token_count_in_gold_quote": 0,
+          "question_words_found_in_gold_chunk": 0.88
+        },
+        "top3": "[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) average of 33.88s per claim.\nThe only non-baseline system that does not use\nmodel quantization is CTU AIC. Instead, Team\nCTU AIC uses the largest model with the maximum possible context size that fits on the VM’s\nGPU while satisfying the efficiency constraint,\n[2] (06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf) official published leaderboard3. Notably, scores for\nthe development split are significantly higher than\nthose on the test split. This discrepancy aligns\nwith observations from the baseline model provided by the shared task organizers, which achieved\nAVeriTeC \n[3] (12b_Ev2R_2411.05375.pdf) and high score (0.435 or higher). This classification enabled systematic examination of system\nperformance across different scoring levels. Using stratified sampling, we selected 560 claims to\nensure an even distribution across the dataset.\nHuman ratings and a",
+        "category": "reranker_demoted",
+        "rationale": "The gold chunk was present in the candidate pool (top20) but the reranker demoted it to rank 10, keeping it out of the top‑5 results."
+      }
+    ]
+  },
+  "models": {
+    "writer": "nemotron-3-super-120b",
+    "answer": "gpt-oss-20b",
+    "judge": "nemotron-3-super-120b",
+    "returned_strings": {
+      "nemotron-3-super-120b": [
+        "nvidia/nemotron-3-super-120b-a12b",
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "gpt-oss-20b": [
+        "openai/gpt-oss-20b"
+      ]
+    }
+  },
+  "ledger_totals": {
+    "cache_hits": 379.0,
+    "calls": 1055.0,
+    "prompt_tokens": 1474498.0,
+    "completion_tokens": 409234.0,
+    "latency": 4036.0900000000015,
+    "wall_s": 4036.0900000000015,
+    "http_5xx": 318.0,
+    "retries": 345.0,
+    "failed": 73.0,
+    "truncations": 44.0,
+    "http_429": 28.0
+  },
+  "runtime_s": 3159.6,
+  "git": {
+    "head": "610e42ef0fe0945828cdad34a8cb65044cea1a09",
+    "branch": "eval/rag-benchmark",
+    "dirty": true
+  }
+}

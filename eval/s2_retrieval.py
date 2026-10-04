@@ -274,3 +274,26 @@ def chroma_parity(docs, qs):
             ids = col.query(query_embeddings=[v.tolist()], n_results=10)["ids"][0]
             ov.append(len(set(ids) & {c["id"] for c in eng.dense(v, 10)}) / 10)
     return {"mean_top10_overlap_with_exact": float(np.mean(ov)), "min": float(np.min(ov)), "n_queries": len(qs)}
+
+
+def chroma_hit_check():
+    """Does Chroma's approximate (HNSW, default ef) top-10 change C1's retrieval metrics vs exact cosine? Local, no API calls."""
+    import tempfile, chromadb
+    docs = C.load_docs(); qs = [q for q in load_questions() if q["split"] == "test" and q["type"] == "single"]
+    eng = engine(docs, "main", 512, 128, "all-MiniLM-L6-v2"); qv = embed("all-MiniLM-L6-v2", [q["question"] for q in qs]); res = {"exact": [], "chroma": []}; dup = 0
+    texts = [c["text"] for c in eng.chunks]; dup = len(texts) - len(set(texts))
+    with tempfile.TemporaryDirectory() as d:
+        col = chromadb.PersistentClient(path=d).create_collection("parity_check", metadata={"hnsw:space": "cosine"})
+        for i in range(0, len(eng.chunks), 2000):
+            p = slice(i, i + 2000); col.add(ids=[c["id"] for c in eng.chunks[p]], embeddings=eng.E[p].tolist(), documents=texts[p])
+        for q, v in zip(qs, qv):
+            ex = eng.dense(v, 10); ids = col.query(query_embeddings=[v.tolist()], n_results=10)["ids"][0]; ch = [eng.chunks[eng.id2i[i]] for i in ids]
+            for name, ranked in (("exact", ex), ("chroma", ch)):
+                m, _ = score(ranked, q["gold_spans"], rel_total(eng, q["gold_spans"])); res[name].append(m)
+    out = {"n": len(qs), "duplicate_chunk_texts_in_index": dup, "chroma_default_hnsw": True}
+    for name, rows in res.items(): out[name] = {m: float(np.mean([r[m] for r in rows])) for m in ("hit@1", "hit@5", "hit@10", "mrr@10", "ndcg@5")}
+    write_json(RESULTS / "s2_chroma_hit_check.json", out); return out
+
+
+if __name__ == "__main__":
+    print(chroma_hit_check())

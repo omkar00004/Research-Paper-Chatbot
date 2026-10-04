@@ -53,6 +53,13 @@ History: before any result existed, `qwen3.8-27b` (Groq daily cap, ~3 h), `gemin
 - Langfuse tracing is only used in S3 (tags `cond:C1/C2/S`, `type:*`; `dry-run` for dry runs).
 - Raw outputs and caches are gitignored (`eval/cache`, `eval/state.json`, `results/raw`, `results/dry`); summaries and `eval/questions.jsonl` are committed.
 
+## What the full run taught us (also in the paste-back)
+- **Nemotron 502s were partly length cut-offs**: in JSON mode the gateway answers `502 format_ignored: truncated JSON` when reasoning tokens eat `max_tokens`, instead of `finish_reason=length`. The client now retries once with 2x `max_tokens` and counts it as a truncation. Before that fix, 12 S1 candidates (3 test-single, 8 test-multi, 1 dev) were skipped as `llm_error`; the question set was kept frozen (not regenerated) and the skips are listed in `results/s1_questions_report.json`. S3/S5 items lost to the same error were re-run to completion (all conditions have 60 answerable + 20 unanswerable items).
+- **Model alias**: some Nemotron calls were served as `nvidia/nemotron-3-super-120b-a12b:free` (a different host of the same model) instead of `nvidia/nemotron-3-super-120b-a12b`. Both strings are recorded in `eval/cache/frozen_models.json`; the host (and possibly numeric precision) is not controlled.
+- **Exact vs Chroma**: all S2 numbers use exact cosine search. With Chroma's default HNSW settings C1 loses ~5 points of Hit@5 and ~7 of Hit@10 (`results/s2_chroma_hit_check.json`), so the deployed dense baseline is somewhat weaker than reported and C2-vs-C1 gaps against the deployed system would be slightly larger.
+- RAGAS silently swallowed job errors (and once hung); S4 now re-raises quota/drift errors, retries failed jobs from the cache, and dumps a stack trace after 20 min.
+- Run history: the first full run lost ~950 S1 items to a duplicate-pacer bug (no HTTP calls were made; those rows were removed from the ledger) and was restarted; S1 was resumed twice with a faster retry policy.
+
 ## Known limitations
 - LLM-written questions share vocabulary with their gold passages (favours lexical/BM25 signals); only the verbatim-quote check and the human check guard validity.
 - Writer and judge are the same model (disclosed); the judge differs from the answer generator.

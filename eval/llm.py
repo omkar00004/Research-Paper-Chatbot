@@ -185,6 +185,9 @@ class LLM:
             text = r.text[:1500]; last = f"HTTP {r.status_code}"
             if r.status_code in (429, 500, 502, 503, 504, 408):
                 Ledger.log("429" if r.status_code == 429 else "5xx", model=model, status=r.status_code, why=text[:400])
+                if "truncated JSON" in text and body["max_tokens"] < 4096:   # gateway reports a length cut-off in JSON mode as a 502: retry once with a bigger budget
+                    Ledger.log("truncation", model=model, max_tokens=body["max_tokens"], via="gateway_truncated_json")
+                    body["max_tokens"] = min(body["max_tokens"] * 2, 4096); continue
                 hint = retry_hint(text, r.headers)
                 daily = re.search(r"daily[_ ]quota|per[- ]day|quota.*exhaust|exhausted.*daily", text, re.I) and "upstream_error" not in text
                 # the gateway labels short cooldowns 'daily_quota_exhausted' too: trust an advertised reset <= 15 min, exit otherwise
