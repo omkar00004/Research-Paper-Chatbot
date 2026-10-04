@@ -1,0 +1,5 @@
+Question filter vs human (n=20): human marked valid 19/20; percent agreement=95.0%; kappa=0.000; counts={'valid': 19, 'ambiguous': 1}
+Judge vs human faithfulness (n=20): percent agreement=80.0%; kappa=0.216; human={'faithful': 17, 'not': 3} judge={'faithful': 17, 'not': 3}
+Disagreements on faithfulness (id: human vs judge): tm002 human unfaithful / judge faithful; ts006 human unfaithful / judge faithful; ts068 human faithful / judge not; ts078 human faithful / judge not.
+Question filter: 19 valid, 1 ambiguous (tm003, a multi-passage question), 0 invalid. Kappa 0.000 is uninformative because the filter label is constant (it never rejects).
+n = 20 each, so agreement has a wide interval (about 58%-92% at 95%).

@@ -190,7 +190,7 @@ model, released on May 22, 2024 (Jiang et al., 2023).
 FLAMe. We use the published FLAMe-RM-24B model (Vu et al., 2024).
 TRUE-NLI model. Calculated the maximum probability over the chunks in the context. Use a
 threshold of 0.05, where if the maximum probability is higher then this, then we classify as ‘sufficient
-context’. The threshold of 0.05 achieved the highest F1 score on our human labeled dataset. We use",I cannot find sufficient information in the provided research papers to answer this question.,
+context’. The threshold of 0.05 achieved the highest F1 score on our human labeled dataset. We use",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 tm002,How does the training data requirement of QA-NatVer when using Flan-T5 compare to the fine-tuning requirement of Zero-NatVer?,"data. The variability decreases across all models with increasing sample size, with QA-NatVer
 having the lowest standard deviation, indicating
 its training robustness. QA-NatVer with Flan-T5
@@ -306,7 +306,7 @@ QA-NatVer
 Table 5.2: Results on FEVER with 32 claim annotations for training and Symmetric FEVER.
 QA-NATVER outperforms all baselines on FEVER, and shows further improvements when
 using Flan-T5 over BART as the backbone, indicating QA-NATVER’s scalability.
-For our ablation experiment with ChatGPT, we use OpenAI’s API (OpenAI, 2022) to query","QA‑NatVer with Flan‑T5 is trained on a small annotated set (e.g., 32–64 claim annotations) to achieve its reported accuracy, whereas Zero‑NatVer operates in a zero‑shot setting and does not require any fine‑tuning on the target data [2][5][6].",
+For our ablation experiment with ChatGPT, we use OpenAI’s API (OpenAI, 2022) to query","QA‑NatVer with Flan‑T5 is trained on a small annotated set (e.g., 32–64 claim annotations) to achieve its reported accuracy, whereas Zero‑NatVer operates in a zero‑shot setting and does not require any fine‑tuning on the target data [2][5][6].",unfaithful
 tm010,How do the SCoRe self-correct RL approach and the REAL framework each recommend ensuring that model outputs depend on external evidence rather than internal memorization?,"accuracy@t2, we saw that standard RL leads to a collapse to non-correcting behavior. Hence, our key
 insight in SCoRe is that we must more explicitly encourage self-correction behavior, which we accomplish
 via a two-stage approach. The first stage (Stage I) serves the role of initialization where we train
@@ -369,7 +369,25 @@ that SCoRe attains substantially better results. Other approaches train separate
 correction (e.g., GLoRE (Havrilla et al., 2024b), Self-Correction (Welleck et al., 2023), Akyürek et al.
 (2023); Paul et al. (2023). While such approaches can be convenient, they require system design for
 serving multiple models at deployment.
-Multi-turn RL for LLMs. Prior work at the intersection of LLMs and multi-turn RL builds machinery for",I cannot find sufficient information in the provided research papers to answer this question.,
+Multi-turn RL for LLMs. Prior work at the intersection of LLMs and multi-turn RL builds machinery for","Ensuring dependence on external evidence
+Approach
+Key recommendation
+How it is achieved (in the papers)
+Source
+SCoRe (Self‑Correction via Reinforcement Learning)
+Use optional external input and a two‑stage training regime to force the model to rely on evidence rather than internal memorization.
+1. Stage I: train the model to produce a first attempt that follows the base‑model distribution, while explicitly optimizing the second‑attempt accuracy. This decouples the two attempts and prevents the model from simply repeating its internal answer.
+2. Stage II: apply multi‑turn RL with reward shaping that rewards correct second‑attempt responses. The training pipeline optionally supplies an external input (p) (evidence, search results, etc.) that the model can use to revise its answer. By conditioning the second‑turn policy on (p), the model learns to incorporate external evidence when correcting.
+6
+REAL (Retrieval‑Enhanced LLMs for Fact‑Checking)
+Anchor the verifier’s hidden states to the availability of external evidence, thereby suppressing drift toward purely parametric (memorized) predictions.
+1. Representational probes show that without intervention the verifier’s hidden states drift toward a parametric baseline, leading to prediction persistence.
+2. REAL introduces mechanisms that anchor the hidden states to the presence of external evidence, ensuring that the verifier’s internal representation remains tied to the evidence set (E). This anchoring prevents the model from relying on internal memorization and forces it to use retrieved evidence when making a decision.
+3
+Summary
+SCoRe recommends explicitly providing external evidence during the second turn of the dialogue and structuring the RL training so that the second‑attempt policy is conditioned on that evidence. This two‑stage scheme decouples the first answer (which stays close to the base model) from the corrective answer, encouraging the model to use the supplied evidence.
+REAL recommends anchoring the verifier’s hidden states to the evidence set, thereby suppressing the model’s tendency to drift toward memorized, parametric predictions. By keeping the internal representation tied to external evidence, the model’s outputs remain evidence‑dependent.
+",Faithful
 ts057,How does the number of operations required to relate signals from two arbitrary input or output positions scale with distance in ConvS2S?,"the number of operations required to relate signals from two arbitrary input or output positions grows
 in the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. This makes
 it more difficult to learn dependencies between distant positions [12]. In the Transformer this is
@@ -433,7 +451,7 @@ dependencies is a key challenge in many sequence transduction tasks. One key fac
 ability to learn such dependencies is the length of the paths forward and backward signals have to
 traverse in the network. The shorter these paths between any combination of positions in the input
 and output sequences, the easier it is to learn long-range dependencies [12]. Hence we also compare
-the maximum path length between any two input and output positions in networks composed of the",The number of operations required to relate signals from two arbitrary input or output positions in ConvS2S grows linearly with the distance between those positions [1][8].,
+the maximum path length between any two input and output positions in networks composed of the",The number of operations required to relate signals from two arbitrary input or output positions in ConvS2S grows linearly with the distance between those positions [1][8].,Faithful
 ts085,What does Fact Ablated Evaluation (FAE) reveal about current LLM verifiers?,"fact-checking that strong verification accuracy does not necessarily
 imply evidence-grounded reasoning. Through Fact Ablated Evaluation (FAE), we show that current LLM verifiers often preserve
 their predictions even after the supporting evidence has been removed, revealing substantial reliance on parametric knowledge
@@ -524,7 +542,7 @@ Fact Ablated Evaluation metrics. We assess evidence dependence
 using the FAE metrics (IS, ER and IO) described in §4.3 over four ablation rounds following the initial prediction (𝑅= 4 in Equation 3).
 We set 𝑅= 4 based on our empirical observations that the verifier’s
 accuracy converges to a stable plateau by this stage. Beyond this
-point, continued ablation of the residual context adds minimal information regarding the model’s evidence dependence. Instead, the","Fact Ablated Evaluation (FAE) shows that current LLM‑based verifiers often preserve their original predictions even after the supporting evidence is removed, indicating a strong reliance on parametric knowledge rather than on the retrieved evidence [1][5][7][8][9].",
+point, continued ablation of the residual context adds minimal information regarding the model’s evidence dependence. Instead, the","Fact Ablated Evaluation (FAE) shows that current LLM‑based verifiers often preserve their original predictions even after the supporting evidence is removed, indicating a strong reliance on parametric knowledge rather than on the retrieved evidence [1][5][7][8][9].",Faithful
 ts078,What three baseline versions are reported in the AVeriTeC 2023 dataset paper?,"retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test
 sample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This resulted in 200 annotations while the overall rating
 for each annotated sample and dimension was calculated as the average of both annotations. If the annotators disagreed on the verdict assigned to the retrieved evidence, hence interpreted the relationship
@@ -617,7 +635,12 @@ We first collect
 ClaimReview, same source as AVERITEC. Then,
 we follow the same 5-phase annotation guideline
 of Schlichtkrull et al. (2023a).
-First, given a fact-checking article, an annotator",I cannot find sufficient information in the provided research papers to answer this question.,
+First, given a fact-checking article, an annotator","The 2023 AVeriTeC dataset paper reports results for three distinct baseline configurations:
+No‑evidence baseline – a system that performs no search for supporting evidence.
+Gold‑evidence baseline – a system that receives the correct evidence automatically.
+Full‑pipeline baseline (AVERITEC) – the complete end‑to‑end system described in the paper.
+These three baseline variants are detailed in Section 7.2 of the paper
+",Faithful
 tu013,Which optimizer and learning rate schedule were used to train the Mask R-CNN model in the Detectron2 framework for the LVIS v1.0 dataset?,"bottom line of table 3), step time was 1.0 seconds. The big models were trained for 300,000 steps
 (3.5 days).
 5.3
@@ -794,7 +817,7 @@ trained the base models for a total of 100,000 steps or 12 hours. For our big mo
 bottom line of table 3), step time was 1.0 seconds. The big models were trained for 300,000 steps
 (3.5 days).
 5.3
-Optimizer",I cannot find sufficient information in the provided research papers to answer this question.,
+Optimizer",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 tu017,"How does the proposed Masked Autoencoder (MAE) reconstruct missing patches, and what is the reported reconstruction loss on ImageNet‑1k?","timeout or network failure, or temporary webpage unavailability. We collect these spans in Ienv
 i
 , which is empty if no
@@ -881,7 +904,7 @@ the success of deep neural networks for fact veriﬁcation, they lack transparen
 and Scott, 2023, inter alia). Transparency covers (i) how a model as a whole functions, and
 what mechanisms it has learned (interpretability); and (ii) how and/or why the model made a
 certain prediction for a speciﬁc data point (explainability) (Augenstein, 2021, Section 1.1.3).3
-For instance, the interpretability of a model is concerned with questions such as “Is my model",I cannot find sufficient information in the provided research papers to answer this question.,
+For instance, the interpretability of a model is concerned with questions such as “Is my model",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 ts041,"In the encoder's self-attention layer, what can each position attend to?","position in the decoder to attend over all positions in the input sequence. This mimics the
 typical encoder-decoder attention mechanisms in sequence-to-sequence models such as
 [38, 2, 9].
@@ -986,7 +1009,7 @@ consider three desiderata.
 One is the total computational complexity per layer. Another is the amount of computation that can
 be parallelized, as measured by the minimum number of sequential operations required.
 The third is the path length between long-range dependencies in the network. Learning long-range
-dependencies is a key challenge in many sequence transduction tasks. One key factor affecting the","In the encoder’s self‑attention layer, each position can attend to all positions in the previous layer of the encoder. [1]",
+dependencies is a key challenge in many sequence transduction tasks. One key factor affecting the","In the encoder’s self‑attention layer, each position can attend to all positions in the previous layer of the encoder. [1]",Faithful
 ts073,What does combining a search engine and an LLM within a fact-checking system demonstrate?,"and multi-agent debate (Masterman et al., 2024),
 many of which can be seamlessly integrated into
 fact-checking pipelines to enhance the performance
@@ -1078,7 +1101,7 @@ the adoption of technologies (Warren et al., 2025).
 Expensive models may as such not be able to match
 their desired real-world function. Last but not least,
 systems relying on external LLMs can be less practical to use in real-world contexts, where latency
-due to network limitations and/or privacy concerns","Combining a search engine with an LLM demonstrates the power of a multi‑hop evidence pursuit strategy, where the system formulates additional questions only after initial retrieval and uses the search engine to gather further evidence before making a veracity judgment. [2]",
+due to network limitations and/or privacy concerns","Combining a search engine with an LLM demonstrates the power of a multi‑hop evidence pursuit strategy, where the system formulates additional questions only after initial retrieval and uses the search engine to gather further evidence before making a veracity judgment. [2]",Faithful
 ts068,"According to the Graph-of-Thoughts approach, why are additional training examples explicitly labeled as NEI included?","model is guided to generate the justification before
 the label, enabling it to condition the final veracity
 assessment on the generated explanatory text. One
@@ -1161,7 +1184,7 @@ Kamalloo, David Alfonso-Hermelo, Xiaoguang Li, Qun Liu, Boxing Chen, Mehdi
 Rezagholizadeh, and Jimmy Lin. 2024. “Knowing When You Don’t Know”: A
 Multilingual Relevance Assessment Dataset for Robust Retrieval-Augmented
 Generation. In Findings of the Association for Computational Linguistics: EMNLP
-2024.","Additional NEI-labeled examples are included to prevent the model from prematurely assigning a verdict of Supported, Refuted, or Conflicting Evidence/Cherry‑picking when the available information is insufficient, thereby reducing false positive judgments [1].",
+2024.","Additional NEI-labeled examples are included to prevent the model from prematurely assigning a verdict of Supported, Refuted, or Conflicting Evidence/Cherry‑picking when the available information is insufficient, thereby reducing false positive judgments [1].",Faithful
 tu019,What is the mean Intersection‑over‑Union (mIoU) of the Segment Anything Model (SAM) on the COCO‑Stuff validation set when prompted with point clicks?,"[USER] Claim: c
 ↑probe position
 Figure 7: Illustration of two paradigms. The probe extracts
@@ -1271,7 +1294,7 @@ o
 (20)
 As with the MC target, the training objective is unchanged; only the target values are replaced.
 Binary classification
-Finally, we test a binary formulation where the model directly predicts",I cannot find sufficient information in the provided research papers to answer this question.,
+Finally, we test a binary formulation where the model directly predicts",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 tu016,What is the top‑1 accuracy of the ConvNeXt‑XLarge model on ImageNet when trained with the same schedule as ResNet‑152?,"same experimental setup, results in scores substantially outperforming all considered models
 (82.1 accuracy points). In contrast, TAPAS achieves a score barely above random in our transfer
 setting (53.9 accuracy points) since the small training size is insufﬁcient for ﬁne-tuning the
@@ -1365,7 +1388,7 @@ TABVER
 • LoRA alpha: 32
 • LoRA dropout: 0.05
 • LoRA taret modules: [q_proj, v_proj]
-For ﬁne-tuning, we exclude tokens of the prompts from the loss computation that are not part of",I cannot find sufficient information in the provided research papers to answer this question.,
+For ﬁne-tuning, we exclude tokens of the prompts from the loss computation that are not part of",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 tu008,"How does the training stability of StyleGAN3 differ from that of StyleGAN2 when using the Path Length Regularizer, according to the authors?","Enough Information. The training split is imbalanced toward Refuted: it contains 847 supported, 1,743 refuted, 196
 conflicting, and 282 NEI claims. The preprocessing manifest
 used by all training stages contains 3,067 of the official 3,068
@@ -1507,7 +1530,7 @@ rate over the course of training, according to the formula:
 lrate = d−0.5
 model · min(step_num−0.5, step_num · warmup_steps−1.5)
 (3)
-This corresponds to increasing the learning rate linearly for the first warmup_steps training steps,",I cannot find sufficient information in the provided research papers to answer this question.,
+This corresponds to increasing the learning rate linearly for the first warmup_steps training steps,",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 ts006,Which datasets were used to evaluate models on artificial claims?,"have evaluated our models on both artificial and
 natural claims, including non-English datasets.
 For artificial claims, we evaluated models using claims from the multi-hop dataset Hover
@@ -1600,7 +1623,7 @@ instances.
 Human Evaluation of Evidence
 Following the approach taken in last year’s
 AVeriTeC shared task (Schlichtkrull et al., 2024),
-we conducted human evaluation of the evidence","The models were evaluated on artificial claims using claims from the multi‑hop dataset **Hover** (Jiang et al., 2020) and the Danish dataset **DanFEVER** (Nørregaard and Derczynski, 2021)【1】.",
+we conducted human evaluation of the evidence","The models were evaluated on artificial claims using claims from the multi‑hop dataset **Hover** (Jiang et al., 2020) and the Danish dataset **DanFEVER** (Nørregaard and Derczynski, 2021)【1】.",Unfaithful
 ts026,What does the SCoRe self-correct RL approach aim to teach LLMs to do on-the-fly?,"Training Language Models to Self-Correct via Reinforcement Learning
 on coding problems from HumanEval (Chen et al., 2021). We additionally motivate the design of SCoRe
 by extensively studying the failure modes of SFT and standard RL approaches, which broadly indicate
@@ -1662,7 +1685,7 @@ called intrinsic self-correction) (Huang et al., 2023; Kamoi et al., 2024).
 To make progress towards teaching LLMs to implement meta-strategies for challenging inputs, we study
 a special instance of training LLMs to perform self-correction to fix their mistakes “on-the-fly”. This
 should be possible: on many queries where current LLMs fail, they possess the underlying “knowledge”
-needed to arrive at the correct response but are unable to correctly elicit and draw inferences about","The SCoRe self‑correct RL approach aims to teach LLMs to **self‑correct their own responses “on‑the‑fly” by iteratively generating a first attempt, then refining it in a second attempt, guided by a reward that rewards progress toward correctness**【6】【5】.",
+needed to arrive at the correct response but are unable to correctly elicit and draw inferences about","The SCoRe self‑correct RL approach aims to teach LLMs to **self‑correct their own responses “on‑the‑fly” by iteratively generating a first attempt, then refining it in a second attempt, guided by a reward that rewards progress toward correctness**【6】【5】.",Faithful
 ts083,What action was taken when a majority verdict disagreed with the reference verdict from the article?,"majority verdict disagreed with the reference verdict from the article, the claim was re-annotated in
 a second round. However, we kept the claims afterwards as differences in the evidence may naturally
 lead to differing verdicts.
@@ -1743,7 +1766,7 @@ reference evidence. Discrepancies in verdicts can
 indicate issues with the retrieved evidence such
 that a follow-up review can be performed to ensure accuracy in the fact-checking process.
 While coverage can penalise potentially valid
-evidence, this only occurs when such evidence",The claim was re‑annotated in a second round after the majority verdict disagreed with the reference verdict from the article. [1],
+evidence, this only occurs when such evidence",The claim was re‑annotated in a second round after the majority verdict disagreed with the reference verdict from the article. [1],Faithful
 tu010,"In the paper on NeRF, what is the average PSNR achieved on the synthetic Blender dataset for novel view synthesis?","standardized-extractor EM in Table 15. EM increases monotonically with β on every dataset,
 confirming that FLARE trades search depth for
 accuracy. Even at the most retrieval-heavy setting
@@ -1981,7 +2004,7 @@ we ablated our method by omitting prompt ensembles and using a single randomly s
 instead. This resulted in a drop in performance by
 2.79 accuracy points, which aligns with our previous findings regarding ensemble sizes. Third,
 we ablated Zero-NatVer by using unconstrained
-generation during decoding, leading to an average",I cannot find sufficient information in the provided research papers to answer this question.,
+generation during decoding, leading to an average",I cannot find sufficient information in the provided research papers to answer this question.,faithful
 tm015,"What are two distinct future improvement directions suggested across the two papers, one concerning system architecture (such as memory banks or multimodal support) and one concerning evaluation performance (such as reducing the gap between claim types)?","We identify several promising directions for future work, which include: (1) Integrating memory
 banks to store verification results, allowing the system to reuse previous results instead of repeatedly
 executing the entire process; (2) Expanding the
@@ -2075,7 +2098,7 @@ baselines comparable. They observe comparable
 performance between BART0 and T0, which we
 confirmed in preliminary experiments. Finally, we
 also evaluate a finetuned DeBERTaLARGE model
-(He et al., 2021), and a DeBERTa model additionally fine-tuned on SNLI (Bowman et al., 2015)","Future work includes (1) architectural enhancements such as integrating memory banks to store verification results and expanding the system to support additional modalities like code and images [1]; and (2) evaluation improvements by revisiting public fact‑checking datasets, incorporating personal opinions for ambiguous cases, and adding claims that require rarer and more complex reasoning to reduce performance gaps across claim types [1].",
+(He et al., 2021), and a DeBERTa model additionally fine-tuned on SNLI (Bowman et al., 2015)","Future work includes (1) architectural enhancements such as integrating memory banks to store verification results and expanding the system to support additional modalities like code and images [1]; and (2) evaluation improvements by revisiting public fact‑checking datasets, incorporating personal opinions for ambiguous cases, and adding claims that require rarer and more complex reasoning to reduce performance gaps across claim types [1].",Unfaithful
 ts069,Why do verdict prediction models that rely overly on surface-level patterns typically underperform on FEVEROUS?,"Thus, verdict prediction models relying overly on surface-level patterns typically underperform
 on FEVEROUS (Bouziane et al., 2021), while planning-based approaches that decompose the
 veriﬁcation process, as described in Section 2.3, show promise (Pan et al., 2023, inter alia).
@@ -2172,4 +2195,4 @@ explore the numerical reasoning capabilities of neural and symbolic methods on F
 in detail in Chapter 6. Moreover, compared to previous datasets, the length and complexity of
 claims is substantially higher. As a result, reasoning accurately over single pieces of information
 becomes more important as a single incorrect fact leads to the entire refutation of the claim.
-Thus, verdict prediction models relying overly on surface-level patterns typically underperform","Verdict prediction models that rely overly on surface‑level patterns typically underperform on FEVEROUS because the dataset contains longer, more complex claims where accurate reasoning over single pieces of information is crucial; a single incorrect fact can cause a refutation, making surface cues insufficient for correct verdicts [1].",
+Thus, verdict prediction models relying overly on surface-level patterns typically underperform","Verdict prediction models that rely overly on surface‑level patterns typically underperform on FEVEROUS because the dataset contains longer, more complex claims where accurate reasoning over single pieces of information is crucial; a single incorrect fact can cause a refutation, making surface cues insufficient for correct verdicts [1].",Faithful
