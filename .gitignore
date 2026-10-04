@@ -23,3 +23,10 @@ eval/cache_test_results.json
 # Large Files
 Research Paper/*.pdf
 
+
+# Eval harness: caches + raw outputs are not committed (summaries and questions.jsonl are)
+eval/cache/
+eval/state.json
+results/raw/
+results/dry/
+eval/corpus_dev/

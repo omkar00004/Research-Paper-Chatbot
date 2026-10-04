@@ -23,21 +23,22 @@ LOGS_DIR.mkdir(exist_ok=True)
 UPLOAD_DIR.mkdir(exist_ok=True)
 
 # ── Embedding Model ───────────────────────────────────
-EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
+EMBEDDING_MODEL_NAME = os.getenv("RAG_EMBEDDING_MODEL", "all-MiniLM-L6-v2")
 
 # ── Chunking ──────────────────────────────────────────
-CHUNK_SIZE = 512
-CHUNK_OVERLAP = 128
+CHUNK_SIZE = int(os.getenv("RAG_CHUNK_SIZE", "512"))
+CHUNK_OVERLAP = int(os.getenv("RAG_CHUNK_OVERLAP", "128"))
 
 # ── ChromaDB ──────────────────────────────────────────
-COLLECTION_NAME = "research_papers"
+COLLECTION_NAME = os.getenv("RAG_COLLECTION", "research_papers")  # use a distinct name per embedder/chunking
 DISTANCE_METRIC = "cosine"
 
 # ── Retrieval ─────────────────────────────────────────
-TOP_K_RETRIEVAL = 20          # legacy (used as fallback)
-TOP_K_DENSE = 30              # dense vector retrieval window
-TOP_K_BM25 = 30               # BM25 sparse retrieval window
-TOP_K_RERANK = 10             # final reranked results for LLM
+TOP_K_RETRIEVAL = int(os.getenv("RAG_POOL", "20"))          # legacy (used as fallback)
+TOP_K_DENSE = int(os.getenv("RAG_POOL_DENSE", "30"))              # dense vector retrieval window
+TOP_K_BM25 = int(os.getenv("RAG_POOL_BM25", "30"))               # BM25 sparse retrieval window
+TOP_K_RERANK = int(os.getenv("RAG_TOP_K", "10"))             # final reranked results for LLM
+RERANK_ENABLED = os.getenv("RAG_RERANK", "1") != "0"   # set RAG_RERANK=0 to skip FlashRank
 RRF_K = 60                    # reciprocal rank fusion constant
 
 # ── Groq LLM ─────────────────────────────────────────

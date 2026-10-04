@@ -16,7 +16,7 @@ import backend.tracing  # noqa: F401 -  configures Langfuse env vars on import
 
 from langfuse import observe, get_client
 
-from backend.config import PAPERS_DIR, UPLOAD_DIR
+from backend.config import PAPERS_DIR, UPLOAD_DIR, RERANK_ENABLED, TOP_K_RERANK, GROQ_MODEL
 from backend.ingestion import ingest_pdf, ingest_directory
 from backend.chunking import chunk_documents
 from backend.indexing import index_chunks, get_collection_stats, get_indexed_sources, delete_paper
@@ -279,7 +279,7 @@ def _generate_step(question: str, reranked_chunks):
     try:
         client_lf = get_client()
         client_lf.update_current_span(
-            model="qwen/qwen3-27b",
+            model=GROQ_MODEL,
             output=result.get("answer", "")[:500],
             metadata={"source_count": len(result.get("sources", []))},
         )
@@ -391,7 +391,10 @@ def query(question: str) -> Dict[str, Any]:
 
     # Step 2: Re-ranking
     step_start = time.time()
-    reranked_chunks = _rerank_step(question, retrieved_chunks)
+    if RERANK_ENABLED:
+        reranked_chunks = _rerank_step(question, retrieved_chunks)
+    else:
+        reranked_chunks = retrieved_chunks[:TOP_K_RERANK]
     rerank_time = round(time.time() - step_start, 3)
     pipeline_log.append({"step": "reranking", "count": len(reranked_chunks), "time": rerank_time})
 
