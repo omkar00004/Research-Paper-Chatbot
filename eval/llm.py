@@ -134,6 +134,7 @@ class LLM:
         self.calls = 0; self.cost = 0.0; self.lock = threading.Lock()
         self.consec_fail = 0; self.reset_at = 0.0; self.next_slot = 0.0; self.pace_lock = threading.Lock()
         self.p_in = float(os.getenv("PRICE_IN_PER_M", "0")); self.p_out = float(os.getenv("PRICE_OUT_PER_M", "0"))
+        self.rpm = int(os.getenv("EVAL_RPM", "36"))
         self.frozen = {k: ([v] if isinstance(v, str) else v) for k, v in read_json(FROZEN, {}).items()}
 
     # ---- http with retries -------------------------------------------------
@@ -152,7 +153,19 @@ class LLM:
             self.next_slot = max(now, self.next_slot) + 60.0 / RPM
         if wait > 0: time.sleep(wait)
 
+    def _pace(self, model):
+        """Stay under the provider's per-minute request cap (NVIDIA: 40 RPM; default 36) with a sliding 60 s window per model."""
+        while True:
+            with self.lock:
+                now = time.time(); w = self.window.setdefault(model, [])
+                w[:] = [t for t in w if now - t < 60]
+                if len(w) < self.rpm: w.append(now); return
+                wait = 60 - (now - w[0])
+            time.sleep(wait + 0.05)
+    window = {}
+
     def _gate(self, model):
+        self._pace(model)
         self._pace()
         # shared cooldown (set after a 429/5xx) so concurrent threads wait instead of burning tries; never wait > 15 min
         w = self.cool.get(model, 0) - time.time()
