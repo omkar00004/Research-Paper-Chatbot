@@ -5258,21 +5258,21 @@
     }
   },
   "ledger_totals": {
-    "cache_hits": 379.0,
-    "calls": 1055.0,
-    "prompt_tokens": 1474498.0,
-    "completion_tokens": 409234.0,
-    "latency": 4036.0900000000015,
-    "wall_s": 4036.0900000000015,
-    "http_5xx": 318.0,
+    "cache_hits": 540.0,
+    "calls": 1617.0,
+    "prompt_tokens": 2107715.0,
+    "completion_tokens": 685680.0,
+    "latency": 6236.350000000004,
+    "wall_s": 6236.350000000004,
+    "http_5xx": 323.0,
     "retries": 345.0,
     "failed": 73.0,
-    "truncations": 44.0,
+    "truncations": 52.0,
     "http_429": 28.0
   },
-  "runtime_s": 3159.6,
+  "runtime_s": 4306.7,
   "git": {
-    "head": "610e42ef0fe0945828cdad34a8cb65044cea1a09",
+    "head": "c0e01757dec37d80aac85cba699d4015c04210c5",
     "branch": "eval/rag-benchmark",
     "dirty": true
   }

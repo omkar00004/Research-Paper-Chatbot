@@ -1,6 +1,6 @@
 
 ========================= PASTE-BACK SUMMARY =========================
-git: 610e42ef0fe0945828cdad34a8cb65044cea1a09 (branch eval/rag-benchmark; uncommitted changes in eval/backend/results at report time: True)
+git: c0e01757dec37d80aac85cba699d4015c04210c5 (branch eval/rag-benchmark; uncommitted changes in eval/backend/results at report time: True)
 Models (requested -> returned string(s) seen): question-writer=nemotron-3-super-120b -> ['nvidia/nemotron-3-super-120b-a12b', 'nvidia/nemotron-3-super-120b-a12b:free']; answer=gpt-oss-20b -> ['openai/gpt-oss-20b']; judge=nemotron-3-super-120b -> ['nvidia/nemotron-3-super-120b-a12b', 'nvidia/nemotron-3-super-120b-a12b:free']
 Families: writer=NVIDIA (Nemotron), answer=OpenAI (gpt-oss), judge=NVIDIA (Nemotron). Judge and generator share a family: False. Writer and judge are the same model: True.
 Corpus: 23 PDFs (uploads/), ~2.09M characters of cleaned text. Chunks per config on the test run: {512/0: 4701, 512/128: 5569}; dev grid chunk counts in dev_grid.md.
@@ -65,7 +65,13 @@ RAGAS (21 original queries, legacy corpus, judge nemotron-3-super-120b):
 
 ERROR ANALYSIS (C2 misses in top 5: 33/120; analysed 33): {'vocabulary_mismatch': 20, 'reranker_demoted': 13}; programmatic pool facts {'not_in_pool(rule)': 20, 'reranker_demoted(rule)': 13}
 
-LEDGER: HTTP calls=1055, cache hits=379, retries=345, 429s=28, 5xx=318, truncation retries=44, failed=73, invalid JSON=0, tokens in/out=1474498/409234, cost=$0.00 (free tier), measured stage runtime=3160s (excludes time waiting between resumed sessions)
+RAGAS ON TEST SUBSET S4b (n=30 single-passage questions; single LLM judge nemotron-3-super-120b; NaN excluded, never 0):
+  C1: context_precision=0.6210 [0.5018, 0.7358] (NaN excluded 0); faithfulness=0.7833 [0.6444, 0.9111] (NaN excluded 0)
+  C2: context_precision=0.5849 [0.4707, 0.6942] (NaN excluded 0); faithfulness=0.7733 [0.6355, 0.8944] (NaN excluded 0)
+  C2-C1 context_precision: abs -0.0361 [-0.1679,+0.1054] rel -5.8% [-24.9%,+19.8%] (pairs=30)
+  C2-C1 faithfulness: abs -0.0100 [-0.1722,+0.1556] rel -1.3% [-20.5%,+22.6%] (pairs=30)
+
+LEDGER: HTTP calls=1617, cache hits=540, retries=345, 429s=28, 5xx=323, truncation retries=52, failed=73, invalid JSON=0, tokens in/out=2107715/685680, cost=$0.00 (free tier), measured stage runtime=4307s (excludes time waiting between resumed sessions)
 CHROMA CHECK (C1, 512/128/MiniLM, n=100 single test questions): exact cosine vs Chroma default HNSW: Hit@1 0.36 vs 0.33; Hit@5 0.61 vs 0.56; Hit@10 0.71 vs 0.64; nDCG@5 0.450 vs 0.406. All S2 numbers use EXACT search, so they overstate the deployed dense retrieval by roughly this much; 25 chunk texts are duplicated in the index.
 LIMITATIONS: see eval/README.md (LLM-written questions share vocabulary with gold passages; writer==judge model; small dev set (n=40) makes config selection noisy; chunk-size comparisons are confounded by context length; 28%-of-corpus thesis; PDF ligatures untouched; S2 uses exact search vs Chroma HNSW; judge/writer served partly via an ':free' host alias; unanswerable test is saturated at 100% abstention; human check pending unless filled).
 ======================================================================

@@ -14,6 +14,7 @@ python -m eval.run all                        # full run; resumable: re-run the 
 python -m eval.run all --extras               # adds C0 (no retrieval) and C3 answers in S3 and C3 in S4
 python -m eval.agreement                      # after you fill the two human_check CSVs
 python -m eval.post_hoc                       # cached-results-only: exploratory diversity bootstrap + eval/human_check_errors.csv (no API calls)
+python -m eval.run s4b --ragas-test --max-calls N   # OPTIONAL S4b, off by default (see below); needs S0-S6 saved and ledger <= 80% of N
 ```
 
 Single stages: `s0 s1 s2 s3 s4 s5 s6 report`. Flags: `--max-calls N`, `--max-cost USD`, `--dry-run`, `--extras`.
@@ -120,6 +121,19 @@ C1 context precision 0.7020 [0.5540, 0.8421], C2 0.8337 [0.7172, 0.9339]. C2-C1:
 
 **The original "+25% Context Precision on 21 queries" claim is not reproducible, and its provenance was not found.** It appears nowhere in the repository, its git history or its logs. The only before/after table (README, Context Precision 0.8690 to 0.9167, +0.0477 absolute, +5.5% relative) compares dense+FlashRank against hybrid+FlashRank and has no saved run behind it. The only saved RAGAS run (2026-08-01) has all scores None, and the judge at that time was llama-3.3-70b-versatile. The re-run above gives +18.8% relative with a CI that includes 0.
 
+### RAGAS on the test split (optional S4b, n=30)
+
+S4b was run once, after S0-S6 were saved: 30 single-passage test questions (a fixed subset of the S3 test subset), C1 vs C2, RAGAS Context Precision and Faithfulness, using the S3 answers and contexts. **n = 30 and the judge is a single LLM (Nemotron-3-Super-120B, which also wrote the questions); no sample was NaN, so none were excluded.**
+
+| cond | context precision | faithfulness |
+|---|---|---|
+| C1 | 0.6210 [0.5018, 0.7358] | 0.7833 [0.6444, 0.9111] |
+| C2 | 0.5849 [0.4707, 0.6942] | 0.7733 [0.6355, 0.8944] |
+
+C2-C1: context precision absolute -0.0361 [-0.1679, +0.1054], relative -5.8% [-24.9%, +19.8%]; faithfulness absolute -0.0100 [-0.1722, +0.1556], relative -1.3% [-20.5%, +22.6%] (30 pairs). Both intervals include 0. On these 30 questions Context Precision does not show the C2 advantage seen on the legacy 21 queries (+0.1317 [-0.0364, +0.3077]).
+
+S4b rules (enforced in `eval/s4b_ragas_test.py`, self-check: `python -m eval.s4b_ragas_test --selftest`): it runs only with `--ragas-test` and `--max-calls`, never with `--dry-run`; it refuses to start unless the S0-S6 outputs and human-check sheets exist and S3 is complete for C1 and C2; it refuses if the cumulative full-run HTTP attempts (successful calls + 429s + 5xx) exceed 80% of `--max-calls`, and it cannot push the total past `--max-calls`. RAGAS parse failures come back as NaN: they are never scored as 0, they are excluded from the means and from the paired differences, they are counted per metric and condition, and a metric with more than 20% NaN in a condition is labelled unreliable. Every RAGAS judge call goes through the shared cached client and is counted under stage S4b in `results/call_ledger.md`.
+
 ### Error analysis (C2 misses in the top 5: 33 of 120 answerable test questions, all analysed)
 
 The LLM judge labelled 20 as vocabulary mismatch and 13 as re-ranker demoted (programmatic pool facts agree: 20 not in the candidate pool, 13 in the pool). No misses were labelled chunk boundary, PDF extraction, multi-hop or other. `eval/human_check_errors.csv` holds 10 random misses for your own categorisation.
@@ -130,7 +144,7 @@ The LLM judge labelled 20 as vocabulary mismatch and 13 as re-ranker demoted (pr
 - **Judge faithfulness vs human**: 80% agreement (16 of 20), Cohen's kappa 0.216. Both rated 17 answers faithful and 3 not faithful, but they disagreed on 4 items: on 2 the judge said faithful where the human said not, and on 2 the judge said not faithful where the human said faithful. The faithfulness scores above are therefore noisy and should not be used to rank conditions.
 
 ### Cost
-1055 HTTP calls, 379 cache hits, 345 retries, 28 HTTP 429s, 318 HTTP 5xx, 44 length-truncation retries, 73 failed attempts, 0 invalid JSON; 1474498 input and 409234 output tokens; $0.00 (free tier).
+1617 HTTP calls (including 562 for the optional S4b), 540 cache hits, 345 retries, 28 HTTP 429s, 323 HTTP 5xx, 52 length-truncation retries, 73 failed attempts, 0 invalid JSON; 2107715 input and 685680 output tokens; $0.00 (free tier).
 
 ### Limitations
 - All retrieval numbers use exact search. With Chroma's default HNSW, C1 scores Hit@5 0.56 vs 0.61 and Hit@10 0.64 vs 0.71, so the deployed dense baseline is about 5-7 points weaker than reported.

@@ -14,7 +14,7 @@ from eval.s4_ragas import SharedLLM
 
 N_SUBSET = 30
 NAN_LIMIT = 0.20
-REQUIRED = ["s1_questions_report.json", "s2_dev_grid.json", "s2_retrieval.json", "s3_answers.json", "s4_ragas.json", "s5_errors.json", "summary.json"]
+REQUIRED = ["s0_recon.md", "s1_questions_report.json", "s2_dev_grid.json", "s2_retrieval.json", "s3_answers.json", "s4_ragas.json", "s5_errors.json", "summary.json"]
 METRICS = {"context_precision": "llm_context_precision_with_reference", "faithfulness": "faithfulness"}
 
 

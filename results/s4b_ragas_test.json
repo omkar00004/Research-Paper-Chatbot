@@ -1,0 +1,325 @@
+{
+  "n_subset": 30,
+  "question_ids": [
+    "ts003",
+    "ts004",
+    "ts005",
+    "ts011",
+    "ts014",
+    "ts016",
+    "ts031",
+    "ts033",
+    "ts037",
+    "ts041",
+    "ts049",
+    "ts052",
+    "ts056",
+    "ts059",
+    "ts060",
+    "ts064",
+    "ts065",
+    "ts066",
+    "ts068",
+    "ts069",
+    "ts073",
+    "ts074",
+    "ts075",
+    "ts076",
+    "ts079",
+    "ts080",
+    "ts083",
+    "ts085",
+    "ts089",
+    "ts094"
+  ],
+  "judge": "nemotron-3-super-120b",
+  "ragas_version": "0.4.3",
+  "answers": "the S3 answers and retrieved contexts for C1 and C2 (no new answer calls)",
+  "caveats": "n=30 single-passage questions; the judge is a single LLM (nemotron-3-super-120b, also the question writer); RAGAS metrics can return NaN on parse failures, which are excluded, never scored 0.",
+  "metrics": {
+    "C1": {
+      "context_precision": {
+        "mean": 0.6209781745693845,
+        "lo": 0.5017543650533332,
+        "hi": 0.7358257936121877,
+        "n": 30,
+        "nan_excluded": 0,
+        "nan_fraction": 0.0,
+        "unreliable": false
+      },
+      "faithfulness": {
+        "mean": 0.7833333333333333,
+        "lo": 0.6444444444444444,
+        "hi": 0.9111111111111111,
+        "n": 30,
+        "nan_excluded": 0,
+        "nan_fraction": 0.0,
+        "unreliable": false
+      }
+    },
+    "C2": {
+      "context_precision": {
+        "mean": 0.5849188712179738,
+        "lo": 0.4706721560613958,
+        "hi": 0.6941951057783964,
+        "n": 30,
+        "nan_excluded": 0,
+        "nan_fraction": 0.0,
+        "unreliable": false
+      },
+      "faithfulness": {
+        "mean": 0.7733333333333333,
+        "lo": 0.6355277777777777,
+        "hi": 0.8944444444444444,
+        "n": 30,
+        "nan_excluded": 0,
+        "nan_fraction": 0.0,
+        "unreliable": false
+      }
+    }
+  },
+  "paired": {
+    "context_precision": {
+      "C2-C1": {
+        "n": 30,
+        "mean_a": 0.5849188712179738,
+        "mean_b": 0.6209781745693845,
+        "abs_diff": -0.03605930335141072,
+        "abs_lo": -0.16789923940838003,
+        "abs_hi": 0.10535076608337889,
+        "rel_diff": -0.0580685518881818,
+        "rel_lo": -0.24864371142751593,
+        "rel_hi": 0.1980700855930366
+      },
+      "n_pairs": 30,
+      "unreliable": false
+    },
+    "faithfulness": {
+      "C2-C1": {
+        "n": 30,
+        "mean_a": 0.7733333333333333,
+        "mean_b": 0.7833333333333333,
+        "abs_diff": -0.010000000000000009,
+        "abs_lo": -0.17222222222222228,
+        "abs_hi": 0.15555555555555567,
+        "rel_diff": -0.012765957446808522,
+        "rel_lo": -0.20482301878320747,
+        "rel_hi": 0.2262326852204856
+      },
+      "n_pairs": 30,
+      "unreliable": false
+    }
+  },
+  "per_question": [
+    {
+      "qid": "ts003",
+      "C1_context_precision": 0.9266666666481332,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.5911111110992889,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts004",
+      "C1_context_precision": 0.09999999999,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.9999999999,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts005",
+      "C1_context_precision": 0.9999999999,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.9999999999,
+      "C2_faithfulness": 0.0
+    },
+    {
+      "qid": "ts011",
+      "C1_context_precision": 0.5726190476075953,
+      "C1_faithfulness": 0.6666666666666666,
+      "C2_context_precision": 0.6428571428357143,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts014",
+      "C1_context_precision": 0.14285714284285714,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.6666666666333333,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts016",
+      "C1_context_precision": 0.3472222222106481,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.62499999996875,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts031",
+      "C1_context_precision": 0.99999999995,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.59999999997,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts033",
+      "C1_context_precision": 0.2888888888792593,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.22499999998875,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts037",
+      "C1_context_precision": 0.0,
+      "C1_faithfulness": 0.0,
+      "C2_context_precision": 0.9999999999,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts041",
+      "C1_context_precision": 0.699999999965,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.99999999995,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts049",
+      "C1_context_precision": 0.9999999999,
+      "C1_faithfulness": 0.6666666666666666,
+      "C2_context_precision": 0.6666666666333333,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts052",
+      "C1_context_precision": 0.49999999995,
+      "C1_faithfulness": 0.0,
+      "C2_context_precision": 0.8333333332916666,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts056",
+      "C1_context_precision": 0.6333333333122222,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.3407407407293827,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts059",
+      "C1_context_precision": 0.699999999965,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.09999999999,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts060",
+      "C1_context_precision": 0.6666666666333333,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.62499999996875,
+      "C2_faithfulness": 0.6666666666666666
+    },
+    {
+      "qid": "ts064",
+      "C1_context_precision": 0.99999999995,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.5873015872820105,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts065",
+      "C1_context_precision": 0.9999999999,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.9999999999,
+      "C2_faithfulness": 0.0
+    },
+    {
+      "qid": "ts066",
+      "C1_context_precision": 0.6388888888675925,
+      "C1_faithfulness": 0.6666666666666666,
+      "C2_context_precision": 0.0,
+      "C2_faithfulness": 0.0
+    },
+    {
+      "qid": "ts068",
+      "C1_context_precision": 0.9999999999666667,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.5277777777601852,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts069",
+      "C1_context_precision": 0.49999999995,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.26666666665333333,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts073",
+      "C1_context_precision": 0.3888888888759259,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.3928571428375,
+      "C2_faithfulness": 0.6666666666666666
+    },
+    {
+      "qid": "ts074",
+      "C1_context_precision": 0.0,
+      "C1_faithfulness": 0.0,
+      "C2_context_precision": 0.0,
+      "C2_faithfulness": 0.0
+    },
+    {
+      "qid": "ts075",
+      "C1_context_precision": 0.99999999995,
+      "C1_faithfulness": 0.0,
+      "C2_context_precision": 0.9999999999,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts076",
+      "C1_context_precision": 0.5791666666521874,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.4444444444333333,
+      "C2_faithfulness": 0.6666666666666666
+    },
+    {
+      "qid": "ts079",
+      "C1_context_precision": 0.9999999999,
+      "C1_faithfulness": 0.5,
+      "C2_context_precision": 0.6666666666333333,
+      "C2_faithfulness": 0.5
+    },
+    {
+      "qid": "ts080",
+      "C1_context_precision": 0.5333333333155555,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.6349206349047619,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts083",
+      "C1_context_precision": 0.8666666666377778,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.5666666666477778,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts085",
+      "C1_context_precision": 0.7885912698314125,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.543888888878011,
+      "C2_faithfulness": 0.5
+    },
+    {
+      "qid": "ts089",
+      "C1_context_precision": 0.7555555555303703,
+      "C1_faithfulness": 1.0,
+      "C2_context_precision": 0.99999999995,
+      "C2_faithfulness": 1.0
+    },
+    {
+      "qid": "ts094",
+      "C1_context_precision": 0.0,
+      "C1_faithfulness": 0.0,
+      "C2_context_precision": 0.0,
+      "C2_faithfulness": 0.2
+    }
+  ]
+}
