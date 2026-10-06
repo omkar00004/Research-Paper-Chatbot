@@ -1,12 +1,12 @@
 id,type,question,gold_answer,gold_evidence,human_label (valid / ambiguous / invalid)
 ts045,single,How are hop claims obtained in the HALT experiments when supporting-fact annotations are available versus when they are not?,"When supporting-fact annotations are available, hop claims are obtained from them for diagnostic experiments; when such metadata is unavailable, hop claims are generated from the question alone.","[11_HALT_2608.02009.pdf] from supporting-fact annotations for diagnostic experiments, or generated from the question alone
-when such metadata is unavailable.",Valid
+when such metadata is unavailable.",valid
 ts030,single,What source provides the yes/no questions used to construct the AMBIFC dataset?,The AMBIFC dataset is sourced from real-world yes/no questions of BoolQ.,"[13_AmbiFC_TACL2024.pdf] sourced from
 real-world yes/no questions of BoolQ (Clark et al.,
-2019).",Valid
+2019).",valid
 ts085,single,What does Fact Ablated Evaluation (FAE) reveal about current LLM verifiers?,"FAE shows that current LLM verifiers often preserve their predictions even after the supporting evidence has been removed, revealing substantial reliance on parametric knowledge during verification.","[14_REAL_2609.08943.pdf] Through Fact Ablated Evaluation (FAE), we show that current LLM verifiers often preserve
 their predictions even after the supporting evidence has been removed, revealing substantial reliance on parametric knowledge
-during verification.",Valid
+during verification.",valid
 tm003,multi,"What types of language models are employed in the fact‑checking framework that uses FactcheckBench as a development set and evaluates on three other datasets, and what type of LLMs are used in the system that reports competitive performance in the AVeriTeC shared task?","The framework that uses FactcheckBench investigates proprietary GPT and Claude models, while the AVeriTeC system utilizes fine‑tuned open‑source LLMs.","[05_FIRE_2411.00784.pdf] We investigate several state-of-the-art (SOTA) language models, including proprietary models from
 two prominent families: GPT models (OpenAI,
 2024a,b) and Claude models (Anthropic, 2024), as
@@ -14,48 +14,48 @@ detailed in Table 2. || [06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf] Our s
 question answering, and final verdict prediction.",ambiguous
 ts006,single,Which datasets were used to evaluate models on artificial claims?,Hover and DanFEVER.,"[07c_Zero-NatVer_Findings-EMNLP2024.pdf] For artificial claims, we evaluated models using claims from the multi-hop dataset Hover
 (Jiang et al., 2020) and the Danish dataset
-DanFEVER (Nørregaard and Derczynski, 2021).",Valid
+DanFEVER (Nørregaard and Derczynski, 2021).",ambiguous
 ts094,single,What two-step process is used to ensure high-quality evidence annotation in the AVeriTeC 2023 dataset?,"Claims are first selected and normalized, followed by two rounds of question-answer pair generation and evidence sufficiency check.","[02_AVeriTeC_2023_dataset_paper.pdf] Claims are first selected and normalized. Then,
 two rounds of question-answer pair generation and evidence sufficiency check ensure high-quality
-evidence annotation.",Valid
+evidence annotation.",valid
 tm007,multi,"Compared to TabVer's heightened sensitivity to numerical inaccuracies and pragmatic context on the Tabfact dataset, how does Aly's neuro‑symbolic framework address numerical and multi‑hop reasoning over heterogeneous tables?","TabVer’s reading of numerals is more sensitive to numerical inaccuracies and the pragmatic context of a claim (i.e., quantifiers and rounding) than a same‑sized LLM baseline, reflecting the annotator guidelines of FEVEROUS more accurately. Aly’s framework enables numerical and multi‑hop reasoning with natural logic over large knowledge bases with heterogeneous tables (Chapter 4 and Chapter 6). Thus, TabVer focuses on fine‑grained numeral sensitivity while Aly’s approach provides broader numerical and multi‑hop reasoning over heterogeneous tables using natural logic.","[07a_TabVer_TACL2024.pdf] Our
 analysis reveals that TabVer’s reading of numerals is more sensitive to numerical inaccuracies and
 the pragmatic context of a claim (i.e., quantifiers
 and rounding) than a same-sized LLM baseline,
 reflecting the annotator guidelines of FEVEROUS
 more accurately. || [01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf] Enabling numerical and multi-hop reasoning with natural logic over large knowledge bases
-with heterogeneous tables (Chapter 4 and Chapter 6).",Valid
+with heterogeneous tables (Chapter 4 and Chapter 6).",invalid
 ts033,single,What does natural logic inference construct proofs by modeling?,set-theoretic relations between a claim and its evidence in natural language.,"[07a_TabVer_TACL2024.pdf] natural logic inference, which constructs
 proofs by modeling set-theoretic relations between a claim and its evidence in natural
-language.",Valid
-ts043,single,On which dataset does our system achieve competitive performance?,a counterfactual dataset.,[07b_QA-NatVer_EMNLP2023.pdf] achieving competitive performance on a counterfactual dataset,Valid
-ts052,single,What accuracy does the sufficient context autorater achieve?,It achieves 93% accuracy.,[09_Sufficient_Context_ICLR2025.pdf] sufficient context autorater (achieving 93% accuracy),Valid
+language.",ambiguous
+ts043,single,On which dataset does our system achieve competitive performance?,a counterfactual dataset.,[07b_QA-NatVer_EMNLP2023.pdf] achieving competitive performance on a counterfactual dataset,invalid
+ts052,single,What accuracy does the sufficient context autorater achieve?,It achieves 93% accuracy.,[09_Sufficient_Context_ICLR2025.pdf] sufficient context autorater (achieving 93% accuracy),valid
 ts042,single,What is the purpose of Stage I in the SCoRe method?,Stage I serves as initialization where the model is trained to decouple its behavior across the two attempts by optimizing second-attempt accuracy while constraining the distribution of first attempts to the base model.,"[16_SCoRe_self-correct_RL_2409.12917.pdf] The first stage (Stage I) serves the role of initialization where we train
 the model to decouple its behavior across the two attempts by attempting to optimize second-attempt
-accuracy while explicitly constraining the distribution of first attempts to the base model.",Valid
+accuracy while explicitly constraining the distribution of first attempts to the base model.",valid
 ts046,single,What cost savings factor does GPT-4o-mini provide compared to o1-preview for fact-checking tasks?,It offers a cost savings of 766 times.,"[05_FIRE_2411.00784.pdf] Although the more economical model, GPT-4o-mini,
 performs slightly worse than the top-performing
-o1-preview, it offers a cost savings of 766 times.",Valid
+o1-preview, it offers a cost savings of 766 times.",valid
 ts081,single,How many health-related claims in the HealthFC dataset are labeled as Not Enough Information (NEI)?,423,"[03_OpenFC_2609.33579.pdf] 202 Supported, 125 Refuted, and 423 NEI
-claims",Valid
+claims",valid
 ts023,single,What does the framework treat as the unit of analysis?,The framework treats the execution procedure as the unit of analysis.,"[10_Ji_2026_survey_2601.00536.pdf] our
 framework treats the execution procedure as the
-unit of analysis.",Valid
+unit of analysis.",ambiguous
 ts022,single,Which backbone models are evaluated for the LLM-based scorers?,"GPT4o, Gemini 1.5 Pro, Gemini 1.5 Flash, and Llama 3.1 70B.","[12b_Ev2R_2411.05375.pdf] For the LLM-based scorers,
 we evaluate several backbone models: GPT4o,
 Gemini 1.5 Pro, Gemini 1.5 Flash, and Llama
-3.1 70B (see Table 2).",Valid
+3.1 70B (see Table 2).",valid
 ts051,single,What type of evidence do veracity prediction systems typically have to consider to increase evidence coverage?,They typically have to consider noisy evidence.,"[01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf] The latter typically also
-have to consider noisy evidence during veracity prediction to increase evidence coverage",Valid
+have to consider noisy evidence during veracity prediction to increase evidence coverage",ambiguous
 ts098,single,What accuracy lead does our method achieve when evaluated on TabFact without any further training?,0.5 points.,"[07a_TabVer_TACL2024.pdf] When evaluated on TabFact without any further training, our method
 remains competitive with an accuracy lead of
-0.5 points.",Valid
+0.5 points.",valid
 ts059,single,How many teams achieved faster runtimes than the baseline’s average of 33.88s per claim?,Five out of seven teams.,"[06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf] With these efficiency modifications, five out of seven teams (HUMANE, Yellow Flash, FZIGOT, EFC, and Checkmate) achieved faster runtimes than the baseline’s
-average of 33.88s per claim.",Valid
+average of 33.88s per claim.",valid
 ts001,single,How many claims were initially collected using the Google FactCheck Claim Search API?,Around six thousand claims.,"[12a_TSVer_EMNLP2025.pdf] collecting
-an initial pool of around six thousand claims using The Google FactCheck Claim Search API",Valid
+an initial pool of around six thousand claims using The Google FactCheck Claim Search API",ambiguous
 tm001,multi,"According to the Ji 2026 survey, what granularity hyperparameters are noted as typically hand‑tuned, and how does Stop‑RAG determine the optimal hyperparameter configuration?","The Ji 2026 survey states that most work assumes static corpora and relies on hand‑tuned hyperparameters for granularity, such as cluster size, unit length, and graph pruning. Stop‑RAG provides the complete list of training hyperparameters in Section B and, after training, selects the best checkpoint on the validation set.","[10_Ji_2026_survey_2601.00536.pdf] hand-tuned
 hyperparameters for granularity (e.g., cluster size,
 unit length, and graph pruning) || [04_Stop-RAG_2510.14337.pdf] We provide the complete list
 of training hyperparameters in Section B.
-After training, we select the best checkpoint on the validation set.",Valid
+After training, we select the best checkpoint on the validation set.",ambiguous

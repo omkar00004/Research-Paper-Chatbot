@@ -1,5 +1,8 @@
-Question filter vs human (n=20): human marked valid 19/20; percent agreement=95.0%; kappa=0.000; counts={'valid': 19, 'ambiguous': 1}
-Judge vs human faithfulness (n=20): percent agreement=80.0%; kappa=0.216; human={'faithful': 17, 'not': 3} judge={'faithful': 17, 'not': 3}
-Disagreements on faithfulness (id: human vs judge): tm002 human unfaithful / judge faithful; ts006 human unfaithful / judge faithful; ts068 human faithful / judge not; ts078 human faithful / judge not.
-Question filter: 19 valid, 1 ambiguous (tm003, a multi-passage question), 0 invalid. Kappa 0.000 is uninformative because the filter label is constant (it never rejects).
-n = 20 each, so agreement has a wide interval (about 58%-92% at 95%).
+QUESTIONS (n=20 of 20 labelled): valid 11, ambiguous 7, invalid 2.
+  valid 55% (95% CI 34%-74%); not invalid 90% (95% CI 70%-97%); invalid 10% (95% CI 3%-30%).
+  Question filter vs human: percent agreement 55.0%; kappa 0.000 (uninformative: the filter label is constant (it never rejects), so kappa is 0 by construction when labels vary).
+  By type: multi: 0/3 valid (2 ambiguous, 1 invalid); single: 11/17 valid (5 ambiguous, 1 invalid).
+  Not valid: tm003 (multi: ambiguous), ts006 (single: ambiguous), tm007 (multi: invalid), ts033 (single: ambiguous), ts043 (single: invalid), ts023 (single: ambiguous), ts051 (single: ambiguous), ts001 (single: ambiguous), tm001 (multi: ambiguous)
+JUDGE FAITHFULNESS vs HUMAN (n=20 of 20 labelled): percent agreement 85.0% (17/20, 95% CI 64%-95%); Cohen's kappa 0.483.
+  Human: 16 faithful / 4 not faithful. Judge: 17 faithful / 3 not faithful. Both faithful 15, both not faithful 2.
+  Judge more lenient than the human (judge faithful, human not) on 2: tm010, ts073; judge stricter (judge not faithful, human faithful) on 1: ts068.

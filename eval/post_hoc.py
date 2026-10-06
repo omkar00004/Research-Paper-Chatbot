@@ -6,7 +6,7 @@
 """
 import csv, json, random
 from eval.common import EVAL, RESULTS, RAW, SEED, read_jsonl, write_json
-from eval import corpus as C, s2_retrieval as R, stats as ST
+from eval import agreement as AG, corpus as C, s2_retrieval as R, stats as ST
 
 def load(name): return {r["qid"]: r for r in map(json.loads, (RAW / f"s2_{name}.jsonl").read_text().splitlines())}
 
@@ -27,6 +27,9 @@ def diversity():
 
 def errors_sheet():
     qs = {q["id"]: q for q in read_jsonl(EVAL / "questions.jsonl")}
+    dest = EVAL / "human_check_errors.csv"
+    if dest.exists() and any(r[-1].strip() for r in list(csv.reader(open(dest, newline="")))[1:]):
+        print("eval/human_check_errors.csv already has your labels: not overwriting."); return
     fails = [r for r in load("C2").values() if r["metrics"]["recall@5"] == 0]
     random.Random(SEED + 55).shuffle(fails); pick = sorted(fails[:10], key=lambda r: r["qid"])
     eng = R.engine(C.load_docs(), "main", 512, 128, "all-MiniLM-L6-v2"); chunk = {c["id"]: c for c in eng.chunks}
@@ -39,5 +42,33 @@ def errors_sheet():
                         "\n---\n".join(f"[{i}] ({chunk[c]['doc']}) {chunk[c]['text']}" for i, c in enumerate(r["ranked"][:5], 1)), ""])
     print(f"wrote eval/human_check_errors.csv: {len(pick)} of {len(fails)} C2 top-5 misses")
 
+def validity_split():
+    """EXPLORATORY (added after the human-check labels were revised): retrieval metrics on the 20 audited test questions, split by your validity label.
+    The frozen test set is NOT edited; this only shows how much the audited questions that were not clearly valid move the numbers. n is tiny."""
+    labels = AG.compute()["questions"]["labels"]; conds = ["C1", "C2", "C3", "S"]; data = {c: load(c) for c in conds}
+    groups = {"valid": [i for i, l in labels.items() if l == "valid"], "ambiguous or invalid": [i for i, l in labels.items() if l != "valid"]}
+    groups["not audited (reference)"] = sorted(set(data["C2"]) - set(labels))
+    out = {"status": "EXPLORATORY, post hoc, tiny n; the frozen test question set was not edited", "groups": {}}
+    md = ["# EXPLORATORY: retrieval metrics by human validity label\n",
+          "Added after the human-check labels were revised. The frozen test set is unchanged and every headline number still uses all 120 answerable test questions. "
+          "Groups are tiny and mix single- and multi-passage questions (multi-passage Hit@k needs ALL gold spans, so groups with more multi-passage questions score lower for that reason alone); treat this as a diagnostic, not evidence. 'not audited' = the other test questions whose validity nobody checked.\n",
+          "| group | n (multi-passage) | cond | Hit@5 | nDCG@5 |", "|---|---|---|---|---|"]
+    for g, ids in groups.items():
+        nm = sum(data["C2"][i]["type"] == "multi" for i in ids); out["groups"][g] = {"n": len(ids), "n_multi": nm, "ids": ids, "metrics": {}}
+        for c in conds:
+            ci = {m: ST.mean_ci([data[c][i]["metrics"][m] for i in ids]) for m in ("hit@5", "ndcg@5")}; out["groups"][g]["metrics"][c] = ci
+            md.append(f"| {g} | {len(ids)} ({nm}) | {c} | {ST.fmt(ci['hit@5'])} | {ST.fmt(ci['ndcg@5'])} |")
+        out["groups"][g]["paired_C2_minus_C1"] = {m: ST.paired_diff([data["C2"][i]["metrics"][m] for i in ids], [data["C1"][i]["metrics"][m] for i in ids]) for m in ("hit@5", "ndcg@5")}
+    md.append("\n## Paired C2 - C1 within each group (absolute metric points, 95% bootstrap CI)\n"); md += ["| group | n (multi-passage) | Hit@5 | nDCG@5 |", "|---|---|---|---|"]
+    for g, v in out["groups"].items():
+        p_ = v["paired_C2_minus_C1"]; f_ = lambda x: f"{x['abs_diff']:+.3f} [{x['abs_lo']:+.3f}, {x['abs_hi']:+.3f}]"
+        md.append(f"| {g} | {v['n']} ({v['n_multi']}) | {f_(p_['hit@5'])} | {f_(p_['ndcg@5'])} |")
+    write_json(RESULTS / "s2_exploratory_validity_split.json", out); (RESULTS / "s2_exploratory_validity_split.md").write_text("\n".join(md) + "\n"); print("\n".join(md))
+
+
 if __name__ == "__main__":
-    diversity(); errors_sheet()
+    import sys
+    what = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if what in ("diversity", "all"): diversity()
+    if what in ("errors", "all"): errors_sheet()
+    if what in ("validity", "all"): validity_split()

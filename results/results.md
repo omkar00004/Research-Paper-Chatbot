@@ -1,6 +1,6 @@
 # Results
 
-_git c0e01757de on eval/rag-benchmark, dirty=True_
+_git 1077a8d6eb on eval/rag-benchmark, dirty=True_
 
 ## S2 Retrieval (test split; mean [95% bootstrap CI over questions])
 
@@ -135,3 +135,17 @@ Original README claim: {'dense_only_context_precision': 0.869, 'hybrid_context_p
 
 - context_precision: C2 0.5849 vs C1 0.6210; absolute -0.0361 [-0.1679, +0.1054]; relative -5.8% [-24.9%, +19.8%]; n pairs = 30
 - faithfulness: C2 0.7733 vs C1 0.7833; absolute -0.0100 [-0.1722, +0.1556]; relative -1.3% [-20.5%, +22.6%]; n pairs = 30
+
+
+## Human check (labels in eval/human_check_*.csv; revision history in human_check_label_revision.md)
+
+```
+QUESTIONS (n=20 of 20 labelled): valid 11, ambiguous 7, invalid 2.
+  valid 55% (95% CI 34%-74%); not invalid 90% (95% CI 70%-97%); invalid 10% (95% CI 3%-30%).
+  Question filter vs human: percent agreement 55.0%; kappa 0.000 (uninformative: the filter label is constant (it never rejects), so kappa is 0 by construction when labels vary).
+  By type: multi: 0/3 valid (2 ambiguous, 1 invalid); single: 11/17 valid (5 ambiguous, 1 invalid).
+  Not valid: tm003 (multi: ambiguous), ts006 (single: ambiguous), tm007 (multi: invalid), ts033 (single: ambiguous), ts043 (single: invalid), ts023 (single: ambiguous), ts051 (single: ambiguous), ts001 (single: ambiguous), tm001 (multi: ambiguous)
+JUDGE FAITHFULNESS vs HUMAN (n=20 of 20 labelled): percent agreement 85.0% (17/20, 95% CI 64%-95%); Cohen's kappa 0.483.
+  Human: 16 faithful / 4 not faithful. Judge: 17 faithful / 3 not faithful. Both faithful 15, both not faithful 2.
+  Judge more lenient than the human (judge faithful, human not) on 2: tm010, ts073; judge stricter (judge not faithful, human faithful) on 1: ts068.
+```

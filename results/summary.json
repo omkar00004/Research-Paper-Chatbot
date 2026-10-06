@@ -1,4 +1,175 @@
 {
+  "human_check": {
+    "questions": {
+      "n_rows": 20,
+      "n_labelled": 20,
+      "counts": {
+        "valid": 11,
+        "ambiguous": 7,
+        "invalid": 2
+      },
+      "valid_rate": 0.55,
+      "valid_ci95": [
+        0.3420820083075997,
+        0.7418049791429071
+      ],
+      "not_invalid_rate": 0.9,
+      "not_invalid_ci95": [
+        0.6989617935882066,
+        0.9721341060158468
+      ],
+      "invalid_rate": 0.1,
+      "invalid_ci95": [
+        0.027865893984153206,
+        0.30103820641179335
+      ],
+      "filter_agreement": 0.55,
+      "filter_kappa": 0.0,
+      "filter_kappa_note": "uninformative: the filter label is constant (it never rejects), so kappa is 0 by construction when labels vary",
+      "non_valid": {
+        "tm003": {
+          "label": "ambiguous",
+          "type": "multi"
+        },
+        "ts006": {
+          "label": "ambiguous",
+          "type": "single"
+        },
+        "tm007": {
+          "label": "invalid",
+          "type": "multi"
+        },
+        "ts033": {
+          "label": "ambiguous",
+          "type": "single"
+        },
+        "ts043": {
+          "label": "invalid",
+          "type": "single"
+        },
+        "ts023": {
+          "label": "ambiguous",
+          "type": "single"
+        },
+        "ts051": {
+          "label": "ambiguous",
+          "type": "single"
+        },
+        "ts001": {
+          "label": "ambiguous",
+          "type": "single"
+        },
+        "tm001": {
+          "label": "ambiguous",
+          "type": "multi"
+        }
+      },
+      "labels": {
+        "ts045": "valid",
+        "ts030": "valid",
+        "ts085": "valid",
+        "tm003": "ambiguous",
+        "ts006": "ambiguous",
+        "ts094": "valid",
+        "tm007": "invalid",
+        "ts033": "ambiguous",
+        "ts043": "invalid",
+        "ts052": "valid",
+        "ts042": "valid",
+        "ts046": "valid",
+        "ts081": "valid",
+        "ts023": "ambiguous",
+        "ts022": "valid",
+        "ts051": "ambiguous",
+        "ts098": "valid",
+        "ts059": "valid",
+        "ts001": "ambiguous",
+        "tm001": "ambiguous"
+      },
+      "by_type": {
+        "multi": {
+          "n": 3,
+          "valid": 0,
+          "ambiguous": 2,
+          "invalid": 1
+        },
+        "single": {
+          "n": 17,
+          "valid": 11,
+          "ambiguous": 5,
+          "invalid": 1
+        }
+      }
+    },
+    "answers": {
+      "n_rows": 20,
+      "n_labelled": 20,
+      "human_faithful": 16,
+      "human_not_faithful": 4,
+      "judge_faithful": 17,
+      "judge_not_faithful": 3,
+      "agreement": 0.85,
+      "agreement_count": 17,
+      "agreement_ci95": [
+        0.6395767041130426,
+        0.9476322080405041
+      ],
+      "kappa": 0.48275862068965514,
+      "judge_more_lenient_ids": [
+        "tm010",
+        "ts073"
+      ],
+      "judge_stricter_ids": [
+        "ts068"
+      ],
+      "both_faithful": 15,
+      "both_not_faithful": 2,
+      "labels": {
+        "tu012": "faithful",
+        "tm002": "faithful",
+        "tm010": "not faithful",
+        "ts057": "faithful",
+        "ts085": "faithful",
+        "ts078": "not faithful",
+        "tu013": "faithful",
+        "tu017": "faithful",
+        "ts041": "faithful",
+        "ts073": "not faithful",
+        "ts068": "faithful",
+        "tu019": "faithful",
+        "tu016": "faithful",
+        "tu008": "faithful",
+        "ts006": "faithful",
+        "ts026": "faithful",
+        "ts083": "faithful",
+        "tu010": "faithful",
+        "tm015": "not faithful",
+        "ts069": "faithful"
+      },
+      "judge_labels": {
+        "tu012": "faithful",
+        "tm002": "faithful",
+        "tm010": "faithful",
+        "ts057": "faithful",
+        "ts085": "faithful",
+        "ts078": "not faithful",
+        "tu013": "faithful",
+        "tu017": "faithful",
+        "ts041": "faithful",
+        "ts073": "faithful",
+        "ts068": "not faithful",
+        "tu019": "faithful",
+        "tu016": "faithful",
+        "tu008": "faithful",
+        "ts006": "faithful",
+        "ts026": "faithful",
+        "ts083": "faithful",
+        "tu010": "faithful",
+        "tm015": "not faithful",
+        "ts069": "faithful"
+      }
+    }
+  },
   "s1": {
     "test-single": {
       "requested": 100,
@@ -5272,7 +5443,7 @@
   },
   "runtime_s": 4306.7,
   "git": {
-    "head": "c0e01757dec37d80aac85cba699d4015c04210c5",
+    "head": "1077a8d6ebcc4de9c276724c4b0593e155aaebfb",
     "branch": "eval/rag-benchmark",
     "dirty": true
   }

@@ -4,6 +4,7 @@ from collections import Counter
 
 from eval.common import EVAL, RESULTS, ANSWER_MODEL, JUDGE_MODEL, WRITER_MODEL, atomic_write, read_json, rawdir, write_json
 from eval import llm as L
+from eval import agreement as AG
 from eval.s2_retrieval import KS
 
 HEAD = [f"{m}@{k}" for m in ("hit", "recall", "mrr", "ndcg") for k in KS]
@@ -28,7 +29,9 @@ def run(limit=None):
     for a in led.values():
         for k, v in a.items(): tot[k] += v
     runtime = sum(t["seconds"] for t in times if t["run"] == ("dry" if limit else "full"))
-    S = {"s1": s1, "grid": grid, "s2": s2, "s3": s3, "s4": s4, "s5": s5, "models": {"writer": WRITER_MODEL, "answer": ANSWER_MODEL, "judge": JUDGE_MODEL, "returned_strings": frozen},
+    try: hc = AG.compute() if not limit else {}
+    except (FileNotFoundError, ValueError, KeyError) as e: hc = {}; print("human check not included:", e)
+    S = {"human_check": hc, "s1": s1, "grid": grid, "s2": s2, "s3": s3, "s4": s4, "s5": s5, "models": {"writer": WRITER_MODEL, "answer": ANSWER_MODEL, "judge": JUDGE_MODEL, "returned_strings": frozen},
          "ledger_totals": dict(tot), "runtime_s": runtime, "git": {"head": git("rev-parse", "HEAD"), "branch": git("rev-parse", "--abbrev-ref", "HEAD"), "dirty": bool(git("status", "--porcelain", "--", "eval", "backend", "results"))}}
     write_json(d / "summary.json", S)
     md = ["# Results\n", f"_git {S['git']['head'][:10]} on {S['git']['branch']}, dirty={S['git']['dirty']}_\n"]
@@ -82,6 +85,7 @@ def run(limit=None):
         atomic_write(d / "error_analysis.md", "\n".join(em)); md.append("\n## S5 Error analysis: see error_analysis.md\n")
     s4b = read_json(RESULTS / "s4b_ragas_test.json") if not limit else None
     if s4b: md.append("\n" + (RESULTS / "s4b_ragas_test.md").read_text())
+    if hc: md.append("\n## Human check (labels in eval/human_check_*.csv; revision history in human_check_label_revision.md)\n\n```\n" + AG.render(hc) + "\n```\n")
     atomic_write(d / "results.md", "\n".join(md))
     # per-question CSV (S2 + S3)
     rows = []
@@ -146,10 +150,15 @@ def paste(S, d):
         for m, p in s4b["paired"].items():
             x = p["C2-C1"]
             if x: o.append(f"  C2-C1 {m}: abs {x['abs_diff']:+.4f} [{x['abs_lo']:+.4f},{x['abs_hi']:+.4f}] rel {pct(x['rel_diff'])} [{pct(x['rel_lo'])},{pct(x['rel_hi'])}] (pairs={p['n_pairs']}){' UNRELIABLE' if p['unreliable'] else ''}")
+    hc = S.get("human_check") or {}
+    if hc: o.append("\nHUMAN CHECK (your labels; the frozen test set was NOT edited, ambiguous/invalid questions stay in every metric above):\n  " + AG.render(hc).replace("\n", "\n  "))
     t = S["ledger_totals"]
     o.append(f"\nLEDGER: HTTP calls={int(t.get('calls', 0))}, cache hits={int(t.get('cache_hits', 0))}, retries={int(t.get('retries', 0))}, 429s={int(t.get('http_429', 0))}, 5xx={int(t.get('http_5xx', 0))}, truncation retries={int(t.get('truncations', 0))}, failed={int(t.get('failed', 0))}, invalid JSON={int(t.get('invalid_json', 0))}, tokens in/out={int(t.get('prompt_tokens', 0))}/{int(t.get('completion_tokens', 0))}, cost=$0.00 (free tier), measured stage runtime={S['runtime_s']:.0f}s (excludes time waiting between resumed sessions)")
     ch = read_json(RESULTS / "s2_chroma_hit_check.json")
     if ch: o.append(f"CHROMA CHECK (C1, 512/128/MiniLM, n={ch['n']} single test questions): exact cosine vs Chroma default HNSW: Hit@1 {ch['exact']['hit@1']:.2f} vs {ch['chroma']['hit@1']:.2f}; Hit@5 {ch['exact']['hit@5']:.2f} vs {ch['chroma']['hit@5']:.2f}; Hit@10 {ch['exact']['hit@10']:.2f} vs {ch['chroma']['hit@10']:.2f}; nDCG@5 {ch['exact']['ndcg@5']:.3f} vs {ch['chroma']['ndcg@5']:.3f}. All S2 numbers use EXACT search, so they overstate the deployed dense retrieval by roughly this much; 25 chunk texts are duplicated in the index.")
-    o.append("LIMITATIONS: see eval/README.md (LLM-written questions share vocabulary with gold passages; writer==judge model; small dev set (n=40) makes config selection noisy; chunk-size comparisons are confounded by context length; 28%-of-corpus thesis; PDF ligatures untouched; S2 uses exact search vs Chroma HNSW; judge/writer served partly via an ':free' host alias; unanswerable test is saturated at 100% abstention; human check pending unless filled).")
+    q = hc.get("questions")
+    hc_clause = (f"in the human audit only {q['counts']['valid']} of {q['n_labelled']} questions were valid ({q['counts']['ambiguous']} ambiguous, {q['counts']['invalid']} invalid), so gold labels are noisy for a sizeable share of the test set; the frozen test set was not edited"
+                 if q else "no human audit included")
+    o.append("LIMITATIONS: see eval/README.md (LLM-written questions share vocabulary with gold passages; writer==judge model; small dev set (n=40) makes config selection noisy; chunk-size comparisons are confounded by context length; 28%-of-corpus thesis; PDF ligatures untouched; S2 uses exact search vs Chroma HNSW; judge/writer served partly via an ':free' host alias; unanswerable test is saturated at 100% abstention; " + hc_clause + ").")
     o.append("=" * 70)
     txt = "\n".join(o); atomic_write(d / "paste_back.txt", txt); print(txt)
