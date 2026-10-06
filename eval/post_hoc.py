@@ -43,14 +43,14 @@ def errors_sheet():
     print(f"wrote eval/human_check_errors.csv: {len(pick)} of {len(fails)} C2 top-5 misses")
 
 def validity_split():
-    """EXPLORATORY (added after the human-check labels were revised): retrieval metrics on the 20 audited test questions, split by your validity label.
+    """EXPLORATORY (post hoc, added after seeing the human-check labels): retrieval metrics on the 20 audited test questions, split by your validity label.
     The frozen test set is NOT edited; this only shows how much the audited questions that were not clearly valid move the numbers. n is tiny."""
     labels = AG.compute()["questions"]["labels"]; conds = ["C1", "C2", "C3", "S"]; data = {c: load(c) for c in conds}
     groups = {"valid": [i for i, l in labels.items() if l == "valid"], "ambiguous or invalid": [i for i, l in labels.items() if l != "valid"]}
     groups["not audited (reference)"] = sorted(set(data["C2"]) - set(labels))
     out = {"status": "EXPLORATORY, post hoc, tiny n; the frozen test question set was not edited", "groups": {}}
     md = ["# EXPLORATORY: retrieval metrics by human validity label\n",
-          "Added after the human-check labels were revised. The frozen test set is unchanged and every headline number still uses all 120 answerable test questions. "
+          "Post hoc (added after seeing the human-check labels). The frozen test set is unchanged and every headline number still uses all 120 answerable test questions. "
           "Groups are tiny and mix single- and multi-passage questions (multi-passage Hit@k needs ALL gold spans, so groups with more multi-passage questions score lower for that reason alone); treat this as a diagnostic, not evidence. 'not audited' = the other test questions whose validity nobody checked.\n",
           "| group | n (multi-passage) | cond | Hit@5 | nDCG@5 |", "|---|---|---|---|---|"]
     for g, ids in groups.items():

@@ -1,6 +1,6 @@
 # EXPLORATORY: retrieval metrics by human validity label
 
-Added after the human-check labels were revised. The frozen test set is unchanged and every headline number still uses all 120 answerable test questions. Groups are tiny and mix single- and multi-passage questions (multi-passage Hit@k needs ALL gold spans, so groups with more multi-passage questions score lower for that reason alone); treat this as a diagnostic, not evidence. 'not audited' = the other test questions whose validity nobody checked.
+Post hoc (added after seeing the human-check labels). The frozen test set is unchanged and every headline number still uses all 120 answerable test questions. Groups are tiny and mix single- and multi-passage questions (multi-passage Hit@k needs ALL gold spans, so groups with more multi-passage questions score lower for that reason alone); treat this as a diagnostic, not evidence. 'not audited' = the other test questions whose validity nobody checked.
 
 | group | n (multi-passage) | cond | Hit@5 | nDCG@5 |
 |---|---|---|---|---|

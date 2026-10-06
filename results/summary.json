@@ -5441,9 +5441,9 @@
     "truncations": 52.0,
     "http_429": 28.0
   },
-  "runtime_s": 4306.7,
+  "runtime_s": 4307.9,
   "git": {
-    "head": "1077a8d6ebcc4de9c276724c4b0593e155aaebfb",
+    "head": "7536aa6ccb4638d13cc6a67396629c4d7b22cb36",
     "branch": "eval/rag-benchmark",
     "dirty": true
   }

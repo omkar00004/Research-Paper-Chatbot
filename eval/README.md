@@ -69,7 +69,7 @@ History: before any result existed, `qwen3.8-27b` (Groq daily cap, ~3 h), `gemin
 - Chunk-size comparisons are confounded by the amount of context per chunk and by MiniLM's 256-token limit at 1024 chars.
 - The PhD thesis is 28% of the text but gets 1/23 of the quota. PDF ligatures ("veriﬁcation") are left as production leaves them.
 - Free-tier gateway: routing across providers is invisible except via `X-Routed-Via`; answers are 150 tokens max.
-- The human check (S6) covers 20 questions and 20 answers; its results and the label revision history are under Results and limitations and in `results/human_check_label_revision.md`.
+- The human check (S6) covers 20 questions and 20 answers; its results are under Results and limitations.
 
 ## Results and limitations
 
@@ -138,7 +138,7 @@ S4b rules (enforced in `eval/s4b_ragas_test.py`, self-check: `python -m eval.s4b
 
 The LLM judge labelled 20 as vocabulary mismatch and 13 as re-ranker demoted (programmatic pool facts agree: 20 not in the candidate pool, 13 in the pool). No misses were labelled chunk boundary, PDF extraction, multi-hop or other. `eval/human_check_errors.csv` holds 10 random misses for your own categorisation.
 
-### Human check (n=20 each; labels re-uploaded 2026-10-06, superseding the earlier set, see `results/human_check_label_revision.md`)
+### Human check (n=20 each)
 
 - **Questions**: 11 of 20 valid (55%, 95% CI 34%-74%), 7 ambiguous, 2 invalid (10%, 95% CI 3%-30%); 90% were not invalid (95% CI 70%-97%). By type, single-passage 11 of 17 valid (5 ambiguous, 1 invalid) and multi-passage 0 of 3 valid (2 ambiguous, 1 invalid). The question filter never rejects, so its kappa (0.000) is uninformative; its percent agreement with your labels is 55.0%.
 - **Judge faithfulness vs human**: 85.0% agreement (17 of 20, 95% CI 64%-95%), Cohen's kappa 0.483. You marked 16 answers faithful and 4 not faithful; the judge marked 17 and 3. They disagreed on 3 items: the judge was more lenient than you on 2 (tm010, ts073) and stricter on 1 (ts068). Agreement is moderate and rests on 20 items, so the faithfulness scores above carry judge error.

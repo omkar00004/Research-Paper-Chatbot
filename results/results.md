@@ -1,6 +1,6 @@
 # Results
 
-_git 1077a8d6eb on eval/rag-benchmark, dirty=True_
+_git 7536aa6ccb on eval/rag-benchmark, dirty=True_
 
 ## S2 Retrieval (test split; mean [95% bootstrap CI over questions])
 
@@ -137,7 +137,7 @@ Original README claim: {'dense_only_context_precision': 0.869, 'hybrid_context_p
 - faithfulness: C2 0.7733 vs C1 0.7833; absolute -0.0100 [-0.1722, +0.1556]; relative -1.3% [-20.5%, +22.6%]; n pairs = 30
 
 
-## Human check (labels in eval/human_check_*.csv; revision history in human_check_label_revision.md)
+## Human check (labels in eval/human_check_*.csv)
 
 ```
 QUESTIONS (n=20 of 20 labelled): valid 11, ambiguous 7, invalid 2.

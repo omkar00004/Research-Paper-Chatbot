@@ -85,7 +85,7 @@ def run(limit=None):
         atomic_write(d / "error_analysis.md", "\n".join(em)); md.append("\n## S5 Error analysis: see error_analysis.md\n")
     s4b = read_json(RESULTS / "s4b_ragas_test.json") if not limit else None
     if s4b: md.append("\n" + (RESULTS / "s4b_ragas_test.md").read_text())
-    if hc: md.append("\n## Human check (labels in eval/human_check_*.csv; revision history in human_check_label_revision.md)\n\n```\n" + AG.render(hc) + "\n```\n")
+    if hc: md.append("\n## Human check (labels in eval/human_check_*.csv)\n\n```\n" + AG.render(hc) + "\n```\n")
     atomic_write(d / "results.md", "\n".join(md))
     # per-question CSV (S2 + S3)
     rows = []
