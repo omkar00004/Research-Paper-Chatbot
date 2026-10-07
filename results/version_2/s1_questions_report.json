@@ -1,0 +1,93 @@
+{
+  "test-single": {
+    "requested": 100,
+    "accepted": 100,
+    "candidates_tried": 136,
+    "outcomes": {
+      "ok": 100,
+      "answer_in_question": 15,
+      "banned_phrase": 14,
+      "quote_length": 1,
+      "empty_or_short": 1,
+      "writer_skip": 2,
+      "llm_error": 3
+    }
+  },
+  "test-multi": {
+    "requested": 20,
+    "accepted": 20,
+    "candidates_tried": 30,
+    "outcomes": {
+      "ok": 20,
+      "llm_error": 8,
+      "quote_not_verbatim": 1,
+      "banned_phrase": 1
+    }
+  },
+  "dev-single": {
+    "requested": 40,
+    "accepted": 40,
+    "candidates_tried": 59,
+    "outcomes": {
+      "ok": 40,
+      "banned_phrase": 8,
+      "answer_in_question": 9,
+      "quote_not_verbatim": 1,
+      "llm_error": 1
+    }
+  },
+  "test-unanswerable": {
+    "requested": 20,
+    "accepted": 20,
+    "rejected": {
+      "key_term_in_corpus": 5
+    }
+  },
+  "counts": {
+    "test/single": 100,
+    "test/multi": 20,
+    "dev/single": 40,
+    "test/unanswerable": 20,
+    "dev_legacy/legacy": 21
+  },
+  "per_paper_test_single": {
+    "12a_TSVer_EMNLP2025.pdf": 5,
+    "15_Calibrated_Selective_Fact-Checking_2607.18240.pdf": 2,
+    "14_REAL_2609.08943.pdf": 6,
+    "06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf": 4,
+    "01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf": 4,
+    "07c_Zero-NatVer_Findings-EMNLP2024.pdf": 4,
+    "12b_Ev2R_2411.05375.pdf": 6,
+    "10_Ji_2026_survey_2601.00536.pdf": 5,
+    "06c_Papelo_FEVER2024_2411.05762.pdf": 6,
+    "16_SCoRe_self-correct_RL_2409.12917.pdf": 5,
+    "04_Stop-RAG_2510.14337.pdf": 2,
+    "02_AVeriTeC_2023_dataset_paper.pdf": 6,
+    "13_AmbiFC_TACL2024.pdf": 5,
+    "11_HALT_2608.02009.pdf": 5,
+    "07a_TabVer_TACL2024.pdf": 4,
+    "08_ProoFVer_TACL2022.pdf": 5,
+    "06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf": 3,
+    "07b_QA-NatVer_EMNLP2023.pdf": 4,
+    "05_FIRE_2411.00784.pdf": 3,
+    "03_OpenFC_2609.33579.pdf": 5,
+    "06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf": 4,
+    "09_Sufficient_Context_ICLR2025.pdf": 3,
+    "Attention Is All You Need.pdf": 4
+  },
+  "section_mix": {
+    "method": 22,
+    "intro": 38,
+    "results": 16,
+    "other": 37,
+    "front": 3,
+    "discussion": 15,
+    "related": 9
+  },
+  "eligible_passages": {
+    "test": 690,
+    "multi": 312,
+    "dev": 234
+  },
+  "multi_pairs_available": 33
+}

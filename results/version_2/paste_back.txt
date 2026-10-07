@@ -1,0 +1,87 @@
+
+========================= PASTE-BACK SUMMARY =========================
+git: 7536aa6ccb4638d13cc6a67396629c4d7b22cb36 (branch eval/rag-benchmark; uncommitted changes in eval/backend/results at report time: True)
+Models (requested -> returned string(s) seen): question-writer=nemotron-3-super-120b -> ['nvidia/nemotron-3-super-120b-a12b', 'nvidia/nemotron-3-super-120b-a12b:free']; answer=gpt-oss-20b -> ['openai/gpt-oss-20b']; judge=nemotron-3-super-120b -> ['nvidia/nemotron-3-super-120b-a12b', 'nvidia/nemotron-3-super-120b-a12b:free']
+Families: writer=NVIDIA (Nemotron), answer=OpenAI (gpt-oss), judge=NVIDIA (Nemotron). Judge and generator share a family: False. Writer and judge are the same model: True.
+Corpus: 23 PDFs (uploads/), ~2.09M characters of cleaned text. Chunks per config on the test run: {512/0: 4701, 512/128: 5569}; dev grid chunk counts in dev_grid.md.
+Questions: dev/single=40, dev_legacy/legacy=21, test/multi=20, test/single=100, test/unanswerable=20. Writer outcomes: test-single: {'ok': 100, 'answer_in_question': 15, 'banned_phrase': 14, 'quote_length': 1, 'empty_or_short': 1, 'writer_skip': 2, 'llm_error': 3}; test-multi: {'ok': 20, 'llm_error': 8, 'quote_not_verbatim': 1, 'banned_phrase': 1}; dev-single: {'ok': 40, 'banned_phrase': 8, 'answer_in_question': 9, 'quote_not_verbatim': 1, 'llm_error': 1}; test-unanswerable: {'key_term_in_corpus': 5}
+
+RETRIEVAL (test; mean [95% CI]; n single=100, n multi=20):
+  single C1       hit@1=0.360 [0.270, 0.460] hit@3=0.550 [0.450, 0.650] hit@5=0.610 [0.510, 0.700] hit@10=0.710 [0.620, 0.800] recall@1=0.360 [0.270, 0.460] recall@3=0.550 [0.450, 0.650] recall@5=0.610 [0.510, 0.700] recall@10=0.710 [0.620, 0.800] mrr@1=0.360 [0.270, 0.460] mrr@3=0.443 [0.355, 0.532] mrr@5=0.456 [0.370, 0.543] mrr@10=0.470 [0.386, 0.554] ndcg@1=0.360 [0.270, 0.460] ndcg@3=0.422 [0.340, 0.505] ndcg@5=0.450 [0.369, 0.531] ndcg@10=0.485 [0.408, 0.561]
+  single C2       hit@1=0.600 [0.500, 0.690] hit@3=0.680 [0.580, 0.770] hit@5=0.740 [0.650, 0.820] hit@10=0.810 [0.730, 0.880] recall@1=0.600 [0.500, 0.690] recall@3=0.680 [0.580, 0.770] recall@5=0.740 [0.650, 0.820] recall@10=0.810 [0.730, 0.880] mrr@1=0.600 [0.500, 0.690] mrr@3=0.635 [0.542, 0.722] mrr@5=0.648 [0.558, 0.733] mrr@10=0.656 [0.568, 0.739] ndcg@1=0.600 [0.500, 0.690] ndcg@3=0.580 [0.492, 0.663] ndcg@5=0.606 [0.521, 0.685] ndcg@10=0.637 [0.558, 0.712]
+  single C3       hit@1=0.630 [0.530, 0.720] hit@3=0.700 [0.610, 0.790] hit@5=0.750 [0.660, 0.830] hit@10=0.890 [0.820, 0.950] recall@1=0.630 [0.530, 0.720] recall@3=0.700 [0.610, 0.790] recall@5=0.750 [0.660, 0.830] recall@10=0.890 [0.820, 0.950] mrr@1=0.630 [0.530, 0.720] mrr@3=0.660 [0.568, 0.747] mrr@5=0.671 [0.581, 0.754] mrr@10=0.689 [0.605, 0.767] ndcg@1=0.630 [0.530, 0.720] ndcg@3=0.608 [0.521, 0.690] ndcg@5=0.633 [0.550, 0.712] ndcg@10=0.694 [0.622, 0.760]
+  single S        hit@1=0.530 [0.430, 0.630] hit@3=0.600 [0.500, 0.690] hit@5=0.700 [0.610, 0.790] hit@10=0.750 [0.660, 0.830] recall@1=0.530 [0.430, 0.630] recall@3=0.600 [0.500, 0.690] recall@5=0.700 [0.610, 0.790] recall@10=0.750 [0.660, 0.830] mrr@1=0.530 [0.430, 0.630] mrr@3=0.562 [0.468, 0.655] mrr@5=0.584 [0.494, 0.672] mrr@10=0.591 [0.503, 0.678] ndcg@1=0.530 [0.430, 0.630] ndcg@3=0.572 [0.478, 0.665] ndcg@5=0.612 [0.525, 0.698] ndcg@10=0.629 [0.544, 0.712]
+  single C2-nodiv hit@1=0.600 [0.500, 0.690] hit@3=0.770 [0.680, 0.850] hit@5=0.790 [0.710, 0.870] hit@10=0.830 [0.750, 0.900] recall@1=0.600 [0.500, 0.690] recall@3=0.770 [0.680, 0.850] recall@5=0.790 [0.710, 0.870] recall@10=0.830 [0.750, 0.900] mrr@1=0.600 [0.500, 0.690] mrr@3=0.677 [0.592, 0.758] mrr@5=0.682 [0.598, 0.761] mrr@10=0.687 [0.604, 0.765] ndcg@1=0.600 [0.500, 0.690] ndcg@3=0.653 [0.572, 0.729] ndcg@5=0.660 [0.580, 0.734] ndcg@10=0.680 [0.603, 0.750]
+  multi  C1       hit@1=0.000 [0.000, 0.000] hit@3=0.000 [0.000, 0.000] hit@5=0.050 [0.000, 0.150] hit@10=0.250 [0.100, 0.450] recall@1=0.150 [0.050, 0.250] recall@3=0.225 [0.125, 0.325] recall@5=0.275 [0.150, 0.400] recall@10=0.425 [0.250, 0.600] mrr@1=0.300 [0.100, 0.500] mrr@3=0.367 [0.175, 0.567] mrr@5=0.377 [0.192, 0.568] mrr@10=0.391 [0.210, 0.581] ndcg@1=0.300 [0.100, 0.500] ndcg@3=0.228 [0.115, 0.347] ndcg@5=0.249 [0.129, 0.374] ndcg@10=0.300 [0.175, 0.428]
+  multi  C2       hit@1=0.000 [0.000, 0.000] hit@3=0.200 [0.050, 0.400] hit@5=0.200 [0.050, 0.400] hit@10=0.300 [0.100, 0.500] recall@1=0.225 [0.125, 0.325] recall@3=0.375 [0.200, 0.550] recall@5=0.425 [0.275, 0.575] recall@10=0.525 [0.350, 0.675] mrr@1=0.450 [0.250, 0.650] mrr@3=0.500 [0.300, 0.700] mrr@5=0.520 [0.320, 0.720] mrr@10=0.531 [0.336, 0.725] ndcg@1=0.450 [0.250, 0.650] ndcg@3=0.345 [0.191, 0.504] ndcg@5=0.369 [0.223, 0.522] ndcg@10=0.420 [0.274, 0.568]
+  multi  C3       hit@1=0.000 [0.000, 0.000] hit@3=0.150 [0.000, 0.300] hit@5=0.250 [0.100, 0.450] hit@10=0.400 [0.200, 0.600] recall@1=0.250 [0.150, 0.350] recall@3=0.400 [0.250, 0.550] recall@5=0.500 [0.350, 0.650] recall@10=0.600 [0.425, 0.750] mrr@1=0.500 [0.300, 0.700] mrr@3=0.575 [0.375, 0.775] mrr@5=0.595 [0.405, 0.785] mrr@10=0.601 [0.411, 0.785] ndcg@1=0.500 [0.300, 0.700] ndcg@3=0.371 [0.230, 0.509] ndcg@5=0.426 [0.289, 0.561] ndcg@10=0.478 [0.337, 0.616]
+  multi  S        hit@1=0.000 [0.000, 0.000] hit@3=0.050 [0.000, 0.150] hit@5=0.100 [0.000, 0.250] hit@10=0.150 [0.000, 0.301] recall@1=0.150 [0.050, 0.250] recall@3=0.275 [0.150, 0.400] recall@5=0.325 [0.175, 0.475] recall@10=0.450 [0.325, 0.600] mrr@1=0.300 [0.100, 0.500] mrr@3=0.400 [0.200, 0.600] mrr@5=0.412 [0.225, 0.600] mrr@10=0.438 [0.262, 0.623] ndcg@1=0.300 [0.100, 0.500] ndcg@3=0.277 [0.150, 0.411] ndcg@5=0.303 [0.169, 0.445] ndcg@10=0.351 [0.224, 0.485]
+  multi  C2-nodiv hit@1=0.000 [0.000, 0.000] hit@3=0.100 [0.000, 0.250] hit@5=0.200 [0.050, 0.400] hit@10=0.350 [0.150, 0.550] recall@1=0.225 [0.125, 0.325] recall@3=0.325 [0.175, 0.475] recall@5=0.400 [0.250, 0.575] recall@10=0.525 [0.350, 0.700] mrr@1=0.450 [0.250, 0.650] mrr@3=0.500 [0.300, 0.700] mrr@5=0.512 [0.312, 0.713] mrr@10=0.529 [0.333, 0.725] ndcg@1=0.450 [0.250, 0.650] ndcg@3=0.324 [0.185, 0.470] ndcg@5=0.365 [0.218, 0.517] ndcg@10=0.411 [0.269, 0.552]
+PAIRED DIFFERENCES (A-B; abs = metric points, rel = % of B):
+  C2-C1|single     hit@5      0.740 vs 0.610  abs +0.130 [+0.040,+0.220]  rel +21.3% [+6.5%,+40.0%]
+  C2-C1|single     recall@10  0.810 vs 0.710  abs +0.100 [+0.030,+0.170]  rel +14.1% [+4.0%,+26.2%]
+  C2-C1|single     mrr@10     0.656 vs 0.470  abs +0.186 [+0.112,+0.262]  rel +39.6% [+21.8%,+62.7%]
+  C2-C1|single     ndcg@5     0.606 vs 0.450  abs +0.156 [+0.081,+0.233]  rel +34.6% [+16.7%,+58.9%]
+  C2-C1|multi      hit@5      0.200 vs 0.050  abs +0.150 [-0.050,+0.350]  rel +300.0% [-66.7%,+600.0%]
+  C2-C1|multi      recall@10  0.525 vs 0.425  abs +0.100 [+0.000,+0.200]  rel +23.5% [+0.0%,+66.7%]
+  C2-C1|multi      mrr@10     0.531 vs 0.391  abs +0.139 [-0.047,+0.322]  rel +35.6% [-9.7%,+122.0%]
+  C2-C1|multi      ndcg@5     0.369 vs 0.249  abs +0.120 [-0.019,+0.258]  rel +48.1% [-6.6%,+147.2%]
+  C3-C2|single     hit@5      0.750 vs 0.740  abs +0.010 [-0.050,+0.070]  rel +1.4% [-7.2%,+10.8%]
+  C3-C2|single     recall@10  0.890 vs 0.810  abs +0.080 [+0.010,+0.160]  rel +9.9% [+1.1%,+21.6%]
+  C3-C2|single     mrr@10     0.689 vs 0.656  abs +0.033 [-0.018,+0.087]  rel +5.0% [-2.6%,+14.2%]
+  C3-C2|single     ndcg@5     0.633 vs 0.606  abs +0.027 [-0.023,+0.082]  rel +4.5% [-3.7%,+14.4%]
+  C3-C2|multi      hit@5      0.250 vs 0.200  abs +0.050 [-0.100,+0.200]  rel +25.0% [-50.0%,+250.0%]
+  C3-C2|multi      recall@10  0.600 vs 0.525  abs +0.075 [+0.000,+0.150]  rel +14.3% [+0.0%,+36.4%]
+  C3-C2|multi      mrr@10     0.601 vs 0.531  abs +0.071 [-0.004,+0.181]  rel +13.3% [-0.6%,+43.4%]
+  C3-C2|multi      ndcg@5     0.426 vs 0.369  abs +0.057 [-0.028,+0.146]  rel +15.6% [-6.5%,+54.6%]
+  S-C2|single      hit@5      0.700 vs 0.740  abs -0.040 [-0.130,+0.050]  rel -5.4% [-17.1%,+7.5%]
+  S-C2|single      recall@10  0.750 vs 0.810  abs -0.060 [-0.150,+0.030]  rel -7.4% [-17.4%,+3.8%]
+  S-C2|single      mrr@10     0.591 vs 0.656  abs -0.065 [-0.152,+0.022]  rel -9.9% [-22.1%,+3.4%]
+  S-C2|single      ndcg@5     0.612 vs 0.606  abs +0.006 [-0.078,+0.090]  rel +1.0% [-12.1%,+15.9%]
+  S-C2|multi       hit@5      0.100 vs 0.200  abs -0.100 [-0.350,+0.150]  rel -50.0% [-100.0%,+200.0%]
+  S-C2|multi       recall@10  0.450 vs 0.525  abs -0.075 [-0.275,+0.150]  rel -14.3% [-44.8%,+35.7%]
+  S-C2|multi       mrr@10     0.438 vs 0.531  abs -0.093 [-0.333,+0.146]  rel -17.5% [-52.3%,+37.5%]
+  S-C2|multi       ndcg@5     0.303 vs 0.369  abs -0.066 [-0.256,+0.117]  rel -17.8% [-56.4%,+44.4%]
+Latency (ms/query mean; retrieval + rerank): C1: 43+0; C2: 23+93; C3: 70+129; S: 71+60; C2-nodiv: 34+155
+Dev-selected config S: {'name': 'S', 'size': 512, 'overlap': 0, 'embedder': 'BAAI/bge-small-en-v1.5', 'mode': 'dense', 'pool': 10, 'rerank': True, 'diversity': True, 'top_k': 10} dev nDCG@5=0.7715 (n_dev=40); production default on dev nDCG@5=0.6283. S identical to C2: False
+
+ANSWERS (subset {'single': 45, 'multi': 15, 'unanswerable': 20}):
+  C1: correct(yes)=0.750 [0.633, 0.850] correct(yes|partial)=0.817 [0.717, 0.917] faithful=0.833 [0.733, 0.917] abstain@unanswerable=1.000 [1.000, 1.000] hallucinated@unanswerable=0.000 [0.000, 0.000] failed=0
+  C2: correct(yes)=0.767 [0.650, 0.867] correct(yes|partial)=0.817 [0.717, 0.900] faithful=0.833 [0.733, 0.917] abstain@unanswerable=1.000 [1.000, 1.000] hallucinated@unanswerable=0.000 [0.000, 0.000] failed=0
+  S: correct(yes)=0.683 [0.567, 0.800] correct(yes|partial)=0.767 [0.650, 0.867] faithful=0.800 [0.700, 0.900] abstain@unanswerable=1.000 [1.000, 1.000] hallucinated@unanswerable=0.000 [0.000, 0.000] failed=0
+  C2-C1 correct_yes(answerable): abs +0.017 [-0.083,+0.133] rel +2.2% (n=60)
+  C2-C1 faithful(answerable): abs +0.000 [-0.117,+0.117] rel +0.0% (n=60)
+  C2-C1 hallucinated_answer(unanswerable): abs +0.000 [+0.000,+0.000] rel n/a (n=20)
+  S-C2 correct_yes(answerable): abs -0.083 [-0.200,+0.033] rel -10.9% (n=60)
+  S-C2 faithful(answerable): abs -0.033 [-0.133,+0.067] rel -4.0% (n=60)
+  S-C2 hallucinated_answer(unanswerable): abs +0.000 [+0.000,+0.000] rel n/a (n=20)
+
+RAGAS (21 original queries, legacy corpus, judge nemotron-3-super-120b):
+  C1: context_precision=0.7020 [0.5540, 0.8421] faithfulness=0.8333 [0.7143, 0.9524] failed={'context_precision': 0, 'faithfulness': 0}
+  C2: context_precision=0.8337 [0.7172, 0.9339] faithfulness=0.8492 [0.7222, 0.9524] failed={'context_precision': 0, 'faithfulness': 0}
+  C2-C1|context_precision: abs +0.1317 [-0.0364,+0.3077] rel +18.8% [-4.4%,+53.4%]
+  C2-C1|faithfulness: abs +0.0159 [-0.1429,+0.1667] rel +1.9% [-15.7%,+22.2%]
+  Provenance of the old '+25%': not found in repo/git/logs. README table: CP 0.8690 -> 0.9167 (+0.0477 absolute, +5.5% relative), 'Dense-Only'=dense+FlashRank vs 'Hybrid'=hybrid+FlashRank, no saved run; the only saved run (2026-08-01) has all scores None; judge then = llama-3.3-70b-versatile (README era: qwen/qwen3-27b, inferred).
+
+ERROR ANALYSIS (C2 misses in top 5: 33/120; analysed 33): {'vocabulary_mismatch': 20, 'reranker_demoted': 13}; programmatic pool facts {'not_in_pool(rule)': 20, 'reranker_demoted(rule)': 13}
+
+RAGAS ON TEST SUBSET S4b (n=30 single-passage questions; single LLM judge nemotron-3-super-120b; NaN excluded, never 0):
+  C1: context_precision=0.6210 [0.5018, 0.7358] (NaN excluded 0); faithfulness=0.7833 [0.6444, 0.9111] (NaN excluded 0)
+  C2: context_precision=0.5849 [0.4707, 0.6942] (NaN excluded 0); faithfulness=0.7733 [0.6355, 0.8944] (NaN excluded 0)
+  C2-C1 context_precision: abs -0.0361 [-0.1679,+0.1054] rel -5.8% [-24.9%,+19.8%] (pairs=30)
+  C2-C1 faithfulness: abs -0.0100 [-0.1722,+0.1556] rel -1.3% [-20.5%,+22.6%] (pairs=30)
+
+HUMAN CHECK (your labels; the frozen test set was NOT edited, ambiguous/invalid questions stay in every metric above):
+  QUESTIONS (n=20 of 20 labelled): valid 11, ambiguous 7, invalid 2.
+    valid 55% (95% CI 34%-74%); not invalid 90% (95% CI 70%-97%); invalid 10% (95% CI 3%-30%).
+    Question filter vs human: percent agreement 55.0%; kappa 0.000 (uninformative: the filter label is constant (it never rejects), so kappa is 0 by construction when labels vary).
+    By type: multi: 0/3 valid (2 ambiguous, 1 invalid); single: 11/17 valid (5 ambiguous, 1 invalid).
+    Not valid: tm003 (multi: ambiguous), ts006 (single: ambiguous), tm007 (multi: invalid), ts033 (single: ambiguous), ts043 (single: invalid), ts023 (single: ambiguous), ts051 (single: ambiguous), ts001 (single: ambiguous), tm001 (multi: ambiguous)
+  JUDGE FAITHFULNESS vs HUMAN (n=20 of 20 labelled): percent agreement 85.0% (17/20, 95% CI 64%-95%); Cohen's kappa 0.483.
+    Human: 16 faithful / 4 not faithful. Judge: 17 faithful / 3 not faithful. Both faithful 15, both not faithful 2.
+    Judge more lenient than the human (judge faithful, human not) on 2: tm010, ts073; judge stricter (judge not faithful, human faithful) on 1: ts068.
+
+LEDGER: HTTP calls=1617, cache hits=540, retries=345, 429s=28, 5xx=323, truncation retries=52, failed=73, invalid JSON=0, tokens in/out=2107715/685680, cost=$0.00 (free tier), measured stage runtime=4308s (excludes time waiting between resumed sessions)
+CHROMA CHECK (C1, 512/128/MiniLM, n=100 single test questions): exact cosine vs Chroma default HNSW: Hit@1 0.36 vs 0.33; Hit@5 0.61 vs 0.56; Hit@10 0.71 vs 0.64; nDCG@5 0.450 vs 0.406. All S2 numbers use EXACT search, so they overstate the deployed dense retrieval by roughly this much; 25 chunk texts are duplicated in the index.
+LIMITATIONS: see eval/README.md (LLM-written questions share vocabulary with gold passages; writer==judge model; small dev set (n=40) makes config selection noisy; chunk-size comparisons are confounded by context length; 28%-of-corpus thesis; PDF ligatures untouched; S2 uses exact search vs Chroma HNSW; judge/writer served partly via an ':free' host alias; unanswerable test is saturated at 100% abstention; in the human audit only 11 of 20 questions were valid (7 ambiguous, 2 invalid), so gold labels are noisy for a sizeable share of the test set; the frozen test set was not edited).
+======================================================================

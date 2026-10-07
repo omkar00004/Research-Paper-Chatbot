@@ -1,0 +1,611 @@
+{
+  "judge": "nemotron-3-super-120b",
+  "n_answerable_test": 120,
+  "n_failures_c2_top5": 33,
+  "n_analysed": 33,
+  "cap": 40,
+  "counts": {
+    "vocabulary_mismatch": 20,
+    "reranker_demoted": 13
+  },
+  "programmatic_pool_facts": {
+    "not_in_pool(rule)": 20,
+    "reranker_demoted(rule)": 13
+  },
+  "items": [
+    {
+      "qid": "tm005",
+      "type": "multi",
+      "question": "How does the AVeriTeC shared task select qualified annotators based on specific performance thresholds, and what approach does the AMBIFC study use to model annotator disagreement caused by linguistic ambiguity?",
+      "gold_quote": "We develop models for predicting veracity handling this ambiguity via soft labels,\nand find that a pipeline that learns the label\ndistribution for sentence-level evidence selection and veracity prediction yields the best\nperformance. | We select qualified annotators based on their performance on 3\ntasks: (1) claim type and fact-checking strategies\nover 70%+ F-1 scores; (2) 2+ QA pairs per claim;\n(3) veracity prediction over 50%+ accuracy.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 3,
+        "chunks_touching_gold_span": 3,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 27,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.32
+      },
+      "top3": "[1] (13_AmbiFC_TACL2024.pdf) Implicature\nCoreference\nProbability\nPresupposition\nUnderspecification\nVagueness\nNone\n0\n20\n40\n60\n80\nDistCS\nTrained on AmbiFCC\nTrained on AmbiFC\nFigure 5: Performance of the Annotation Distillation\nmodel on different linguistic categories, separated by\nthe train\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) We only consider the first 10 questions generated\nby each system, so as to avoid rewarding sheer\nvolume. We then calculate total AVERITEC score\nas verdict accuracy given that srecall > t, where\nwe choose t = 0.5 so as to ensure high agreement on the 100 double\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) lists of frequent errors, and FAQs. Subsequently, the relevance of the calibration score diminishes\nthroughout the annotation process. Yet, annotators with a calibration score of above 0.9 maintain\nhigher agreement throughout the entire annotation process.\nFur",
+      "category": "vocabulary_mismatch",
+      "rationale": "Only 32% of question words appear in the gold chunk, indicating a wording mismatch that prevented dense retrieval from ranking it highly."
+    },
+    {
+      "qid": "ts043",
+      "type": "single",
+      "question": "On which dataset does our system achieve competitive performance?",
+      "gold_quote": "achieving competitive performance on a counterfactual dataset",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 2163,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.8
+      },
+      "top3": "[1] (05_FIRE_2411.00784.pdf) used in this study.\nthat evaluation metrics reflect performance on both\nclasses without being dominated by the majority\nclass. In FELM-WK, we retained un-split claims\nto maintain contextual integrity, which is crucial\nfor accurate verification. Full dataset st\n[2] (12b_Ev2R_2411.05375.pdf) and high score (0.435 or higher). This classification enabled systematic examination of system\nperformance across different scoring levels. Using stratified sampling, we selected 560 claims to\nensure an even distribution across the dataset.\nHuman ratings and a\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 2.1\nDataset\nSimilarly to the shared task of previous years, we\nask participants to train and validate their system\non the public AVERITEC dataset and evaluate\ntheir performance on our new test set (2025). The\n2025 test set consists of 1,000 instances, which\nte",
+      "category": "vocabulary_mismatch",
+      "rationale": "Gold chunk exists but was not retrieved into the candidate pool (C2 top20 false), indicating a wording/embedding mismatch between question and gold text."
+    },
+    {
+      "qid": "tm002",
+      "type": "multi",
+      "question": "How does the training data requirement of QA-NatVer when using Flan-T5 compare to the fine-tuning requirement of Zero-NatVer?",
+      "gold_quote": "Our findings indicate that Zero-NatVer\nhelps close this gap while maintaining the advantage of using a single model that does not require\nfine-tuning. | When training our QANatVer model with the Flan-T5 model instead, our\nsystem accuracy improves to 70.3 ± 2.1 with an\nF1 of 70.0 ± 1.4 while being trained only on 32\nclaim annotations.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 3,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 20,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 9,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.62
+      },
+      "top3": "[1] (07b_QA-NatVer_EMNLP2023.pdf) data. The variability decreases across all models with increasing sample size, with QA-NatVer\nhaving the lowest standard deviation, indicating\nits training robustness. QA-NatVer with Flan-T5\nachieves a sore of 71.6 ± 1.7 when trained with\n64 samples. The quest\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) the DeBERTav3-NLI model. When training our QA-NATVER model with the Flan-T5 model\ninstead, our system accuracy improves to 70.3 ± 2.1 with an F1 of 70.0 ± 1.4 despite being\ntrained only on 32 claim annotations. For comparison, ProoFVer-full achieves an accurac\n[3] (07c_Zero-NatVer_Findings-EMNLP2024.pdf) which was trained on 145K FEVER instances. For\nnon-English datasets, we use mBART (Liu et al.,\n2020) instead.\nQA-NatVer can use larger LLMs, such as FlanT5 (Chung et al., 2022), but its implementation currently supports training only for encoder-decoder\nmodel ",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was retrieved into the candidate pool (rank 20 dense, in top20 C2) but after reranking it fell to position 9, outside the top‑5."
+    },
+    {
+      "qid": "ts053",
+      "type": "single",
+      "question": "What does Ev2R jointly assess?",
+      "gold_quote": "Ev2R jointly assesses how well the evidence aligns with\nthe gold references and how reliably it\nsupports the verdict, addressing the shortcomings of prior methods.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 31,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.67
+      },
+      "top3": "[1] (12b_Ev2R_2411.05375.pdf) 6\nConclusion\nThis paper introduces Ev2R, a weighted evidence\nevaluation scorer for AFC. Ev2R consists of a\nreference-based and a verdict-level proxy evaluation component and addresses limitations in previous evaluation approaches by jointly assessing\nhow well \n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) between South Africa and other countries. However, the token-level overlap between both evidence\nis low and may result in a higher METEOR score\nfor one evidence alternative compared to the other.\nThus we decided to use Ev2R (Akhtar et al.,\n2024) for evaluation\n[3] (12b_Ev2R_2411.05375.pdf) 3\nEv2R: A Weighted Scorer for Evidence\nEvaluation\nThis section introduces Ev2R, a weighted scorer\nfor evaluating evidence in the context of AFC. The\nscorer combines two distinct but complementary\nparts: a reference-based component, which decomposes the compari",
+      "category": "vocabulary_mismatch",
+      "rationale": "Gold chunk exists in index but dense rank is 31 and not in candidate pool top20, indicating query wording mismatch."
+    },
+    {
+      "qid": "ts002",
+      "type": "single",
+      "question": "What does the Evidence Chain Evaluation (ECE) system return along with a structured verdict?",
+      "gold_quote": "then returns a structured verdict with a confidence score and a source-level tag.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 19,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 10,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.5
+      },
+      "top3": "[1] (15_Calibrated_Selective_Fact-Checking_2607.18240.pdf) Evidence Chain Evaluation (ECE), a selective\nfact-checking framework that permits abstention\nvia an uncertain verdict instead of requiring a\ntrue/false decision for every claim. The evaluated system is a tool-using verification agent\nthat gathers evidence thro\n[2] (12b_Ev2R_2411.05375.pdf) 3\nEv2R: A Weighted Scorer for Evidence\nEvaluation\nThis section introduces Ev2R, a weighted scorer\nfor evaluating evidence in the context of AFC. The\nscorer combines two distinct but complementary\nparts: a reference-based component, which decomposes the compari\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) participants were first asked to label the verdict\ngiven the retrieved evidence. Table 5 provides\nan overview of the matching between systempredicted labels (columns) and human-labeled verdicts (rows). While human annotators generally\nagreed with evidence labe",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was present in the candidate pool (top20) and ranked 10 in the final output, indicating it was retrieved but demoted by the reranker out of the top‑5."
+    },
+    {
+      "qid": "ts066",
+      "type": "single",
+      "question": "In the AVeriTeC shared task 2024, what scale did annotators use to rate retrieved evidence?",
+      "gold_quote": "Annotators rated the evidence on a scale\nfrom 1 to 5 across five dimensions:",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 3,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.56
+      },
+      "top3": "[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) AVeriTeC shared task (Schlichtkrull et al., 2024),\nwe conducted human evaluation of the evidence\nretrieved by the systems participating in the shared\ntask, motivated by two concerns. First, the incompleteness of the gold evidence annotation, since it is\noften \n[2] (12b_Ev2R_2411.05375.pdf) retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test\nsample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This result\n[3] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) answering, providing a structured representation of\nthe evidential reasoning process. The annotation\nprocess for AVERITEC was designed to ensure (1)\nthat claims are understandable independently of the\nfact-checking articles they were sourced from, (2)\nthat the",
+      "category": "reranker_demoted",
+      "rationale": "Gold chunk was in the candidate pool (top20) but absent from final top10, indicating the reranker demoted it."
+    },
+    {
+      "qid": "ts026",
+      "type": "single",
+      "question": "What does the SCoRe self-correct RL approach aim to teach LLMs to do on-the-fly?",
+      "gold_quote": "training LLMs to perform self-correction to fix their mistakes “on-the-fly”",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 10,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 10,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.33
+      },
+      "top3": "[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) Training Language Models to Self-Correct via Reinforcement Learning\non coding problems from HumanEval (Chen et al., 2021). We additionally motivate the design of SCoRe\nby extensively studying the failure modes of SFT and standard RL approaches, which broadly i\n[2] (04_Stop-RAG_2510.14337.pdf) modular and compatible with black-box LLMs. These results demonstrate the effectiveness of\nvalue-based stopping control for iterative RAG and highlight the potential for adaptive decision\nmaking in broader LLM-driven systems.\nReferences\nAkari Asai, Zeqiu Wu, Y\n[3] (16_SCoRe_self-correct_RL_2409.12917.pdf) final response.\nOur main contribution is SCoRe, a multi-turn RL approach for teaching LLMs how to correct their own\nmistakes. To the best of our knowledge, SCoRe is the first approach to attain significantly positive\nintrinsic self-correction: relative to base",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was retrieved (rank 10 in dense) and present in the candidate pool but was pushed out of the top‑5 after reranking/final ranking."
+    },
+    {
+      "qid": "ts075",
+      "type": "single",
+      "question": "What BLEU score did the big model achieve on the WMT 2014 English-to-French translation task?",
+      "gold_quote": "On the WMT 2014 English-to-French translation task, our big model achieves a BLEU score of 41.0",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 2,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.88
+      },
+      "top3": "[1] (Attention Is All You Need.pdf) be superior in quality while being more parallelizable and requiring significantly\nless time to train. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including\nensembles, by over 2 BLEU\n[2] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) from 21 teams, 18 of which outperformed our baseline. The leaderboard was dominated by systems\nrelying on large language models, especially GPT4o; nevertheless, especially for question generation\nand retrieval, smaller models – such as LLama-38b – also achieve\n[3] (12b_Ev2R_2411.05375.pdf) hello-gpt-4o/. Accessed: 2024-10-23.\nKishore Papineni, Salim Roukos, Todd Ward,\nand Wei-Jing Zhu. 2002.\nBleu:\na method\nfor automatic evaluation of machine translation. In Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics, ",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was retrieved at rank 2 and present in the candidate pool, but after reranking it did not appear in the final top‑10 results."
+    },
+    {
+      "qid": "ts063",
+      "type": "single",
+      "question": "How many MuSiQue questions were used for gold-claim statistics after excluding those with no atomic gold hop claims?",
+      "gold_quote": "One\nexception: 115 MuSiQue questions yield no atomic\ngold hop claims, so MuSiQue gold-claim statistics\nuse n=885 (§B).",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 8,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 7,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.7
+      },
+      "top3": "[1] (11_HALT_2608.02009.pdf) 115 of the 1,000 sampled\nMuSiQue questions yield no atomic hop claims\n(skip_reason: no_claims) and carry no verifier\ntrajectory at all. They are excluded from both\nnumerator and denominator, so every MuSiQue\ngold-claim point estimate and test in this paper is\n\n[2] (10_Ji_2026_survey_2601.00536.pdf) 14\n13.5%\nMuSiQue\n12\n11.5%\nComplexWebQuestions\n12\n11.5%\nStrategyQA\n6\n5.8%\nIIRC\n1\n1.0%\nFanOutQA\n1\n1.0%\nTotal methods\n104\n100%\nTable 8: Coverage of major multi-hop QA benchmarks in our coded corpus. Counts are based on the\nDatasets_Summary field in Table 5.\nC.5\nS\n[3] (09_Sufficient_Context_ICLR2025.pdf) Appendix A.3 for details on the retrieval). We use the ‘True Premise’ setting (452 instances), skipping\n‘False Premise’ questions that mislead by design. Musique-Ans (Trivedi et al., 2022) is a multi-hop\nQA benchmark, created by composing two to four single-ho",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was present in the candidate pool (top20) but after reranking it ended at rank 7, outside the top‑5, indicating demotion by the reranker."
+    },
+    {
+      "qid": "ts074",
+      "type": "single",
+      "question": "Which language model is used to initialise the node representations in the best configuration of KGAT?",
+      "gold_quote": "We use their best conﬁguration,\nwhere the node representations are initialised using RoBERTA (Large).",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 522,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 1,
+        "question_words_found_in_gold_chunk": 0.5
+      },
+      "top3": "[1] (Attention Is All You Need.pdf) language modeling tasks [34].\nTo the best of our knowledge, however, the Transformer is the first transduction model relying\nentirely on self-attention to compute representations of its input and output without using sequencealigned RNNs or convolution. In the\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Dragomir Radev, Mari Ostendorf, Luke Zettlemoyer, Noah A. Smith, and Tao Yu. 2023.\nBinding Language Models in Symbolic Languages. In The Eleventh International Conference\non Learning Representations (2023), Kigali, Rwanda.\nHyung Won Chung, Le Hou, Shayne Longp\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) Alex Vaughan, et al. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783.\nEdward J Hu, yelong shen, Phillip Wallis, Zeyuan AllenZhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu\nChen. 2022. LoRA: Low-rank adaptation of large\nlanguage models. In In",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk contains the answer but lacks key question terms like 'language model' and 'KGAT', causing dense retrieval to miss it due to vocabulary mismatch."
+    },
+    {
+      "qid": "ts078",
+      "type": "single",
+      "question": "What three baseline versions are reported in the AVeriTeC 2023 dataset paper?",
+      "gold_quote": "We report results for three versions\nof the baseline, as discussed in Section 7.2: a version that uses no evidence (no search), a version that\nuses gold evidence (gold evidence), and the full pipeline described in Section 7.1 (AVERITEC).",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 326,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.5
+      },
+      "top3": "[1] (12b_Ev2R_2411.05375.pdf) retrieved through the AVeriTeC baseline system as described in Schlichtkrull et al. (2023). Each test\nsample was evaluated by two annotators, who were either computer science graduate students or postdoctoral researchers familiar with AFC research. This result\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 2.1\nDataset\nSimilarly to the shared task of previous years, we\nask participants to train and validate their system\non the public AVERITEC dataset and evaluate\ntheir performance on our new test set (2025). The\n2025 test set consists of 1,000 instances, which\nte\n[3] (03_OpenFC_2609.33579.pdf) is excluded consistently from trajectory construction and difficulty filtering, so every reported AVeriTeC training statistic\nuses 3,067 as its denominator; the complete 500-claim development evaluation split is unaffected.\nQuanTemp++.\nQuanTemp++ targets natur",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk exists in the index but has low dense rank (326) and is not in the top‑20 candidate pool, indicating a wording mismatch between query and passage."
+    },
+    {
+      "qid": "ts077",
+      "type": "single",
+      "question": "What does the notation p(s′ | s, a) denote in the context of an MDP?",
+      "gold_quote": "We use the notation p(s′ | s, a) to denote\nthe probability of transitioning to state s′ when action a is taken in state s.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 27,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.67
+      },
+      "top3": "[1] (04_Stop-RAG_2510.14337.pdf) ˆQQ(0)(s, a) = ˆQλ(s, a)\n\f\f\f\nλ=0 = ˆQ(1)(s, a) = r(s, a) + γ max\na′∈A[[Qθ(s′(s, a), a′)]].\n(18)\nFor our MDP formulation, we have the following.\nˆQQ(0)(st, STOP) = r(st, STOP),\n(19)\nˆQQ(0)(st, CONT) = max\nn\nQθ(st+1, STOP), Qθ(st+1, CONT)\no\n.\n(20)\nAs with the MC\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) 3\n\"demo_sep\": \"\\n\\n\\n\",\n4\n\"context_format\": \"{INST}\\n\\nClaim: {}\\nSubclaims: {}\",\n5\n\"response_template\": \"\\nSubclaims:\",\nListing A.5: The prompt template for the claim decomposition model MD\nA.4.3\nQualitative examples\nA second example with the full output prod\n[3] (07a_TabVer_TACL2024.pdf) We first define a set-theoretic interpretation of the\nrelationship between numerals in claim spans and\nevidence (or answers calculated on the evidence\nwith ArithExps), within the context of natural\nlogic. Specifically, we consider five set-theoretic\nrelationsh",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk exists but its dense retrieval rank is 27 (outside top‑20 candidate pool), indicating the query wording did not match the chunk well enough for retrieval."
+    },
+    {
+      "qid": "ts011",
+      "type": "single",
+      "question": "What does the Q-network using Q(λ) provide in the Stop-RAG approach?",
+      "gold_quote": "We propose a novel formulation of iterative RAG as a finite-horizon MDP and train a Q-network\nusing Q(λ) to provide forward-looking estimates of stopping quality.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 16,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.5
+      },
+      "top3": "[1] (04_Stop-RAG_2510.14337.pdf) To address these problems, we reframe iterative RAG as a finite-horizon Markov decision process\n(MDP) and train a Q-network using Q(λ), a Q-learning variant with λ-returns. This approach yields\nforward-looking estimates of whether continuing retrieval will imp\n[2] (10_Ji_2026_survey_2601.00536.pdf) termination, while unsupported claims trigger additional retrieval, clarification questions or answer\nrevision (Gao et al., 2023a; Manakul et al., 2023;\nDhuliawala et al., 2024). In multi-round RAG, sufficiency critics and value-based controllers such\nas SIM-R\n[3] (11_HALT_2608.02009.pdf) The main EM endpoint uses a standardized\nQwen2.5-3B extractor so that stopping policies\nshare\na\nfixed\nanswer\nhead.\nRerunning the same Self-Ask 3B trajectories with a\nQwen2.5-7B-Instruct extractor (Table 5) raises\nabsolute\nEM\nby\n3–13 pp,\nbut\nthe\nHALT–\nFULL gap ",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was retrieved into the candidate pool (top20) but the reranker demoted it out of the final top10/top5 results."
+    },
+    {
+      "qid": "tm016",
+      "type": "multi",
+      "question": "How does the accuracy improvement of QA-NatVer over baselines on the Danish DanFEVER dataset compare to the inter‑annotator agreement scores (Hungarian METEOR) reported for question‑answer pairs in the AVeriTeC dataset?",
+      "gold_quote": "our system outperforms all baselines by 1.8 accuracy points, highlighting the potential of the question-answering\nformulation for low-resource languages. | At 0.28 for questions and 0.22 for questions and answers, these\nresults are quite low, highlighting the difficulty of automatic evaluation for this task.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 4,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 17,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 10,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.47
+      },
+      "top3": "[1] (07b_QA-NatVer_EMNLP2023.pdf) models, improving scores by about 4.9 accuracy\npoints to reach an accuracy of 85.8 ± 0.9.\nVarying sample sizes.\nTable 4 compares our approach against the baselines when trained with\nvarying amounts of data in a few-shot setting, ranging between 16, 32, and 64 \n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) models, improving scores by about 4.9 accuracy points to reach an accuracy of 85.8 ± 0.9.\nVarying sample sizes:\nTable 5.3 compares our approach against the baselines when trained\nwith varying amounts of data in a few-shot setting, ranging between 16, 32, and 6\n[3] (07c_Zero-NatVer_Findings-EMNLP2024.pdf) Figure 4: The averaged Macro-F1 scores for different\nensemble sizes, calculated from 20 independent runs for\neach size.\nacross all datasets but falls behind QA-NatVer\non DanFEVER, where QA-NatVer achieves 5.86\nmore accuracy points. Nonetheless, our results\nsho",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was present in the candidate pool (top20) but after reranking it fell to rank 10, outside the top‑5."
+    },
+    {
+      "qid": "ts009",
+      "type": "single",
+      "question": "What two components does the Papelo team combine to automate claim verification?",
+      "gold_quote": "We show that\nthe reasoning power of large language models (LLMs) and the retrieval power of modern\nsearch engines can be combined to automate\nthis process and explainably verify claims.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 737,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.43
+      },
+      "top3": "[1] (02_AVeriTeC_2023_dataset_paper.pdf) claims used in prior work.\nDecomposing claim verification into generations and answering questions allows us to break complex\nreal-world claims down to their components, simplifying the task. For example, in Figure 2, verifying\nthe claim requires knowing the s\n[2] (03_OpenFC_2609.33579.pdf) available record does not justify a definitive label (Thorne\net al. 2018).\nExisting automatic fact-checking (AFC) systems typically encode much of the verification policy in a predefined pipeline, assigning retrieval, evidence synthesis, and\nverdict prediction\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) for assessing the veracity and retrieving evidence for the claim you have created. You must\nselect one of the given challenge categories you expect to be the main challenge: Multi-hop\nReasoning, Numerical Reasoning, Combining Text and Tables, Entity Disambigua",
+      "category": "vocabulary_mismatch",
+      "rationale": "Only 43% of question words appear in the gold chunk, indicating a wording mismatch that hindered retrieval."
+    },
+    {
+      "qid": "tm001",
+      "type": "multi",
+      "question": "According to the Ji 2026 survey, what granularity hyperparameters are noted as typically hand‑tuned, and how does Stop‑RAG determine the optimal hyperparameter configuration?",
+      "gold_quote": "hand-tuned\nhyperparameters for granularity (e.g., cluster size,\nunit length, and graph pruning) | We provide the complete list\nof training hyperparameters in Section B.\nAfter training, we select the best checkpoint on the validation set.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 4,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 19,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.29
+      },
+      "top3": "[1] (04_Stop-RAG_2510.14337.pdf) • Search-o1: Uses QwQ-32B (Qwen Team, 2025a,b) as the generator and the Bing Web Search\nAPI as the retriever.\nB\nHyperparameters\nWe train the Stop-RAG Q-network with standard settings. The full list is provided in Table 5.\nTable 4: Reported performance of exist\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) to TABVER’s models, to ﬁne-tune the instruction-tuned CLM classiﬁer baselines with LoRA,\nwe use Huggingface’s SFTTrainer.\nWe do not consider a validation set for hyperparameter-tuning, following the real-world few-shot\nlearning setting of Alex et al. (2021) an\n[3] (10_Ji_2026_survey_2601.00536.pdf) 2025)\nRAPTOR\nR/I\nH\nR\nB\nLong-doc QA, Hotpot variants\n(Sarthi et al., 2024)\nLongRAG\nR/I\nL\nR\nB/H\nHotpotQA, ODQA (Jiang et al.,\n2024; Zhao et al., 2024)\nGraphRAG\nI\nG\nR/P\nB\nSensemaking, MHQA (Edge et al.,\n2024)\nKG-o1\nP/I\nG\nP/V\nB\n2Wiki,\nKGQA (Wang et al.,\n2025a)\nSIM",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was present in the candidate pool (top‑20) but did not appear in the final top‑10 after reranking, indicating it was demoted by the reranker."
+    },
+    {
+      "qid": "ts098",
+      "type": "single",
+      "question": "What accuracy lead does our method achieve when evaluated on TabFact without any further training?",
+      "gold_quote": "When evaluated on TabFact without any further training, our method\nremains competitive with an accuracy lead of\n0.5 points.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 167,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 1.0
+      },
+      "top3": "[1] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) further in Section 6.3.6.\nTabFact:\nResults in a domain-transfer scenario without TabFact training data are shown\nin Table 6.4. TABVER still remains competitive with our baselines with an accuracy lead\nof 0.5 accuracy points and an F1 of 0.3 points worse than t\n[2] (07a_TabVer_TACL2024.pdf) approaches when applied to diverse tables (cf.\nListing 4), which TabVer successfully addresses.\nTraining\nclassification\nbaselines,\nsuch\nas\nTAPAS, on Tabfact’s 92,283 training samples, using the same experimental setup, results in scores\nsubstantially outperfor\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) TABVER+T, particularly on textual claims, by 14.8 accuracy points. We hypothesise that this\ndiscrepancy is caused by TABVER+T’s training data, which consists exclusively of claims that\nrequire tabular reasoning. When evaluated over the entire FEVEROUS dataset,",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk exists in the index but dense retrieval ranked it low (167) and it did not enter the top‑20 candidate pool, indicating a wording/semantic mismatch between query and passage."
+    },
+    {
+      "qid": "tm020",
+      "type": "multi",
+      "question": "What evaluation metrics are used in each work to assess model performance on fact-checking tasks, and how do they differ?",
+      "gold_quote": "Second, we report the Brier score, a proper scoring\nrule over probabilistic predictions. To compute the\nBrier score, we map the model’s output to an implied\nprobability of the claim being true: P(true) = pi if\nˆvi = confirmed, P(true) = 1 −pi if ˆvi = refuted,\nand P(true) = 0.5 if ˆvi = uncertain. The score is\nthe mean squared error against the binary gold label. | We measure the proportion between veracity predictions\n7The ability of models to make pragmatic inferences has\nbeen explored in Jeretic et al.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 3,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 485,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.1
+      },
+      "top3": "[1] (05_FIRE_2411.00784.pdf) search tool. This configuration is designed to evaluate the model’s ability to perform fact-checking\nwithout retrieving any supporting evidence.\n4.4\nEvaluation Metrics\nIn this work, we investigate the trade-off between\ncomputational cost and fact-checking perf\n[2] (14_REAL_2609.08943.pdf) In contrast, our work focuses on the task of fact-checking itself, which adopts a stricter formulation than generation-centric\ngrounding by requiring granular labels and explicit causal dependency on evidence. Our work also differs from Akhtar et al. [2]\nwho r\n[3] (03_OpenFC_2609.33579.pdf) evaluations: every model is served with vLLM and queried\nthrough the same ReAct loop with search and visit\ntools, so that reported differences stem from the policy rather\nthan the decoding or tool setup.\nD\nFact-Check Blocklist\nWe apply the same fact-check bloc",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk contains terms like Brier score and AURC, while the question uses different wording (evaluation metrics, model performance, fact-checking tasks), resulting in low lexical overlap and failure to retrieve the chunk."
+    },
+    {
+      "qid": "tm004",
+      "type": "multi",
+      "question": "How does LOREN predict claim veracity, and what training objective does the REAL paper employ to produce veracity labels?",
+      "gold_quote": "Moreover, we evaluate in our few-shot setting\nLOREN (Chen et al., 2022a), which decomposes\nclaims into phrases, and predicts their veracity using a neural network regularized on the latently\nencoded phrases’ veracity by simple logical rules. | Models are fine-tuned using a supervised assistantonly objective [43], to generate structured outputs consisting of a\nveracity label and evidence sentence indices.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 3,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 53,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.27
+      },
+      "top3": "[1] (13_AmbiFC_TACL2024.pdf) both veracity labels (S or R).\nalternative interpretations in these classes, which\ncould also be the reason for these items being more\ndifficult for the model to learn.\nCorrect Probabilities by Veracity Labels\nWe\nanalyze how accurately the DISTILL pipelines\ntr\n[2] (14_REAL_2609.08943.pdf) claims and supporting evidence for veracity prediction. However,\nthese studies mainly employ the models in a zero-shot or few-shot\nmanner through prompting, without task-specific fine-tuning to\nensure evidence-grounded consistency. Hence, we evaluate REAL\nagai\n[3] (08_ProoFVer_TACL2022.pdf) an evidence sentence, then they become the rationale for veracity label of the claim given the evidence. Further, we require that the words extracted\nas rationale form a contiguous phrase. We identiﬁed 300 claims which satisfy all these criteria.\n5.2\nEvaluatio",
+      "category": "vocabulary_mismatch",
+      "rationale": "Only 27% of question words appear in the gold chunk, indicating poor lexical overlap that prevented dense retrieval from ranking it highly enough to enter the candidate pool."
+    },
+    {
+      "qid": "tm010",
+      "type": "multi",
+      "question": "How do the SCoRe self-correct RL approach and the REAL framework each recommend ensuring that model outputs depend on external evidence rather than internal memorization?",
+      "gold_quote": "leveraging on-policy\nsamples is especially critical in the self-correction setting, which presents a multi-turn problem that\nadmits potentially spurious solutions. | verification decisions\nare expected to be grounded in the evidence cited as their justification. This expectation demands that the decision should be sensitive\nto changes in the cited evidence, especially when that evidence is\nno longer available.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 2,
+        "chunks_touching_gold_span": 4,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 72,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.07
+      },
+      "top3": "[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) accuracy@t2, we saw that standard RL leads to a collapse to non-correcting behavior. Hence, our key\ninsight in SCoRe is that we must more explicitly encourage self-correction behavior, which we accomplish\nvia a two-stage approach. The first stage (Stage I) ser\n[2] (14_REAL_2609.08943.pdf) dependency rather than as a lightweight large-scale evaluation\nprotocol. In addition, evidence redundancy and incomplete annotations in existing fact-checking benchmarks may still allow models\nto preserve correct predictions after ‘gold’ evidence removal, maki\n[3] (16_SCoRe_self-correct_RL_2409.12917.pdf) makes in turn 1. In the lower example, the model is able to correct a reasoning error.\n3. Preliminaries and Problem Setup\nOur goal is to develop an approach for training LLMs to improve their own predictions entirely on selfgenerated data. As discussed so far,",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk is not retrieved (dense rank 72) despite sufficient chunk coverage, indicating a term mismatch between query and gold text."
+    },
+    {
+      "qid": "ts067",
+      "type": "single",
+      "question": "What additional supervision does the Rigorous Evidence Ablation Learning (REAL) framework provide beyond standard supervised fine-tuning?",
+      "gold_quote": "REAL additionally supervises the verifier’s\nbehaviour under evidence-ablated conditions where the supporting\nevidence has been intentionally removed.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 16,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 10,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.23
+      },
+      "top3": "[1] (14_REAL_2609.08943.pdf) and evidence grounding, we propose REAL (Rigorous Evidence\nAblation Learning), a training framework that promotes evidencedependent verification through counterfactual evidence supervision\nfor the LLM-as-verifier models. Experiments on four fact-checking\ndatas\n[2] (14_REAL_2609.08943.pdf) evidence, but are partially sustained through parametric knowledge\nacquired during pre-training. Such behaviour undermines evidencedependent verification, since the final prediction can remain stable\ndespite changes in the supporting context.\nTo address this l\n[3] (14_REAL_2609.08943.pdf) during verification. To address this issue, we propose Rigorous\nEvidence Ablation Learning (REAL), a training framework that explicitly supervises verifier behaviour under both complete evidence\nand ablated evidence conditions through counterfactual evidence\ns",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was present in the candidate pool (top20) and ranked 10 after reranking, indicating it was retrieved but demoted out of the top‑5 by the reranker."
+    },
+    {
+      "qid": "ts025",
+      "type": "single",
+      "question": "What task is used to further pretrain the LM in CorefRoBERTA?",
+      "gold_quote": "Here, they further pretrain the\nLM on a task that involves prediction of referents\nof a masked mention to capture co-referential relations in context.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 274,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 1.0
+      },
+      "top3": "[1] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) desired output, y, the log-likelihood loss, LNLL = ↙1\n|y|\n#|y|\nt=1 log pϖ(yt | x, y<t). MLMs are ﬁnetuned on the same objective with | y |= 1. Instead of ﬁne-tuning a pre-trained CLM exclusively\non the desired target task, ﬁne-tuning them ﬁrst on a variety of \n[2] (14_REAL_2609.08943.pdf) Strong performance may partly reflect prior exposure to relevant\nfacts included in pretraining data, making it difficult to determine\nwhether predictions are primarily supported by retrieved evidence\nor memorised knowledge [5, 16, 69]. Consequently, superior v\n[3] (09_Sufficient_Context_ICLR2025.pdf) inputs (see Section 5.2). Second, it offers a controllable mechanism for tuning abstention, which\nallows for different operating settings in differing applications, such as strict accuracy compliance in\nmedical domains or maximal coverage on creative generatio",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk is present in the index but its wording differs from the question, resulting in low dense‑retrieval similarity (rank 274) and exclusion from the candidate pool."
+    },
+    {
+      "qid": "ts081",
+      "type": "single",
+      "question": "How many health-related claims in the HealthFC dataset are labeled as Not Enough Information (NEI)?",
+      "gold_quote": "202 Supported, 125 Refuted, and 423 NEI\nclaims",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 190,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.25
+      },
+      "top3": "[1] (03_OpenFC_2609.33579.pdf) 2020). The aggregate claim labels are 655 Supports, 253\nRefutes, 153 Disputed, and 474 NEI. Unlike FEVER-style\nthree-way datasets, Disputed explicitly captures claims for\nwhich both supporting and refuting evidence was found. We\nuse Climate-FEVER only as an OO\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) highlighted. In some cases, a claim may be considered unveriﬁable (Not Enough Information;\nNEI) if enough information could not be found on Wikipedia to arrive at one of the two other\nverdicts. In contrast to the FEVER dataset, we also collected annotated evid\n[3] (07a_TabVer_TACL2024.pdf) tables (i.e., not ones selected via a retrieval system\nfrom a knowledge source) throughout our experiments. The resulting dataset consists of 2,011\nclaims, with 35%, 61.7%, and 3.2% being supported, refuted, and NEI claims, respectively (cf.\nAppendix Table 8).",
+      "category": "vocabulary_mismatch",
+      "rationale": "Only 25% of question words appear in the gold chunk, indicating a wording mismatch that prevented dense retrieval from ranking it highly."
+    },
+    {
+      "qid": "ts088",
+      "type": "single",
+      "question": "What does the Interleaved retrieval-augmented generation method involve?",
+      "gold_quote": "(b) Interleaved: the model alternates reasoning with\nadditional retrieval calls, updating a partial answer/state.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 37,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.2
+      },
+      "top3": "[1] (11_HALT_2608.02009.pdf) 1\nIntroduction\nRetrieval-augmented generation (RAG) systems\nground language models in external evidence. In\nagentic RAG, this retrieval step becomes an iterative search process: the model generates queries, retrieves evidence, and conditions subsequent queries\n[2] (10_Ji_2026_survey_2601.00536.pdf) such tasks. Retrieval-augmented generation (RAG)\ncouples a retriever with an LLM and has achieved\nstrong performance on knowledge-intensive QA\n(Lewis et al., 2020; Gao et al., 2023b), while more\nrecent agent-style systems model question answering as a sequence\n[3] (09_Sufficient_Context_ICLR2025.pdf) Stéphane Clinchant. Bergen: A benchmarking library for retrieval-augmented generation. arXiv preprint\narXiv:2407.01102, 2024.\nDongyu Ru, Lin Qiu, Xiangkun Hu, Tianhang Zhang, Peng Shi, Shuaichen Chang, Jiayang Cheng, Cunxiang\nWang, Shichao Sun, Huanyu Li, et a",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk is present in the index but shares only 20% of question words, indicating low lexical overlap that prevented retrieval into the candidate pool."
+    },
+    {
+      "qid": "ts094",
+      "type": "single",
+      "question": "What two-step process is used to ensure high-quality evidence annotation in the AVeriTeC 2023 dataset?",
+      "gold_quote": "Claims are first selected and normalized. Then,\ntwo rounds of question-answer pair generation and evidence sufficiency check ensure high-quality\nevidence annotation.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 252,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.56
+      },
+      "top3": "[1] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) answering, providing a structured representation of\nthe evidential reasoning process. The annotation\nprocess for AVERITEC was designed to ensure (1)\nthat claims are understandable independently of the\nfact-checking articles they were sourced from, (2)\nthat the\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) MultiFC (Augenstein et al., 2019) the evidence is\nannotated automatically and thus cannot be relied\nupon for evaluation (Glockner et al., 2022).\nThe\nrecently\nproposed\nAVERITEC\ndataset (Schlichtkrull et al., 2023a) addressed these\nlimitations. It consists of re\n[3] (02_AVeriTeC_2023_dataset_paper.pdf) each annotated with question-answer pairs decomposing the fact-checking process, as well as\njustifications. Our multi-step annotation process guarantees high-quality annotations, providing\nevidence sufficiency and avoiding temporal leakage; it also results in ",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk exists but only ~56% of question words overlap, indicating poor lexical match that prevented it from entering the retrieval candidate pool."
+    },
+    {
+      "qid": "ts042",
+      "type": "single",
+      "question": "What is the purpose of Stage I in the SCoRe method?",
+      "gold_quote": "The first stage (Stage I) serves the role of initialization where we train\nthe model to decouple its behavior across the two attempts by attempting to optimize second-attempt\naccuracy while explicitly constraining the distribution of first attempts to the base model.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 7,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 9,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.5
+      },
+      "top3": "[1] (16_SCoRe_self-correct_RL_2409.12917.pdf) performance improvements without Stage I or without reward shaping in SCoRe are small when measured by the difference in\naccuracy over the two attempts. Utilizing STaR generally leads to worse performance even when it is run from an effective\nStage I checkpoin\n[2] (12b_Ev2R_2411.05375.pdf) The scorer computes a score s as follows:\ns = log p(y | P(I, c, ˆE), θ)\nwhere P(I, c, ˆE) is the prompt including an instruction I, the input claim c, and the retrieved\nevidence ˆE, and θ denotes the parameters of the\nLLM. We apply chain-of-thought prompting (\n[3] (04_Stop-RAG_2510.14337.pdf) on that state, and scoring the outputs against A0. Formally, for t = 1, . . . , T −1:\nr(st, STOP) = 1\nN\nN\nX\ni=1\nS\n\u0010\nˆA(i)\n0 (st), A0\n\u0011\n,\n(13)\nr(st, CONT) =\n(\n1\nN\nPN\ni=1 S\n\u0010\nˆA(i)\n0 (sT ), A0\n\u0011\n,\n(t = T −1),\n0,\n(otherwise),\n(14)\nwhere S is an arbitrary scoring ",
+      "category": "reranker_demoted",
+      "rationale": "Gold chunk was in the candidate pool (rank 7 dense, top20 C2) but the re‑ranker demoted it to final rank 9, outside the top‑5."
+    },
+    {
+      "qid": "ts069",
+      "type": "single",
+      "question": "Why do verdict prediction models that rely overly on surface-level patterns typically underperform on FEVEROUS?",
+      "gold_quote": "As a result, reasoning accurately over single pieces of information\nbecomes more important as a single incorrect fact leads to the entire refutation of the claim.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 2,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 10,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.9
+      },
+      "top3": "[1] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Thus, verdict prediction models relying overly on surface-level patterns typically underperform\non FEVEROUS (Bouziane et al., 2021), while planning-based approaches that decompose the\nveriﬁcation process, as described in Section 2.3, show promise (Pan et al., \n[2] (12b_Ev2R_2411.05375.pdf) judgments on criteria such as verdict agreement,\nevidence relevance, and coverage of reference\ndata, indicating Ev2R assesses retrieved evidence\nrather than verdict correctness alone.\nAssessment\nrelying\non\nclosed\nknowledge\nsources & surface-level matching of e\n[3] (13_AmbiFC_TACL2024.pdf) based on their accuracy of in predicting the veracity\nfor each (c, P). Similar to FEVER-score (Thorne\net al., 2018), we require models to correctly predict the evidence and veracity label (Ev.+Ver.). We\nscore models via the averaged instance-level product of t",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was retrieved in the candidate pool (rank 2 dense, top20 C2) but fell to rank 10 after reranking, indicating demotion by the reranker."
+    },
+    {
+      "qid": "ts044",
+      "type": "single",
+      "question": "What does a 'not enough evidence verdict' indicate in the AVeriTeC 2023 dataset paper?",
+      "gold_quote": "not enough evidence verdicts, which is a label for claims where evidence could not be found.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 40,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.25
+      },
+      "top3": "[1] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) the set supported, refuted, not enough evidence,\nor conflicting evidence/cherrypicking. Unlike the\noriginal AVERITEC dataset, we did not require\nparticipants to submit a justification for the verdict.\n2.1\nDataset\nParticipants are asked to use the public AVERIT\n[2] (02_AVeriTeC_2023_dataset_paper.pdf) structured representation of the evidence and reasoning supporting or refuting the claim. The free-text\njustifications detail how the evidence is used to reach the verdict, including cases of conflicting\nevidence, matching best practises for human fact-checker\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) (see Figure 1 for an example). This evidence had\nto be available before the claim was made, and\nwas additionally verified to adequately support\nthe verdict, thus avoiding the issues of temporal\nleakage and evidence insufficiency identified in\nearlier datasets ",
+      "category": "vocabulary_mismatch",
+      "rationale": "Only 25% of question words appear in the gold chunk, indicating a vocabulary mismatch that prevented dense retrieval from ranking it highly."
+    },
+    {
+      "qid": "ts061",
+      "type": "single",
+      "question": "What does including the question-only score enable in the AVERITEC evaluation?",
+      "gold_quote": "Including the question-only score allows comparison of systems along this axis as well.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 112,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.5
+      },
+      "top3": "[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) 0.31760.001\nTable 2: Overall results for the AVERITEC shared task. Performance is evaluated on the total of 1000 hidden test\nset examples. Scores are given in Ev2R Recall for question-only, question-answer performance, and the total score.\nquantization (Gergan\n[2] (02_AVeriTeC_2023_dataset_paper.pdf) 8\nLimitations\nThe evaluation metric we have presented alongside AVERITEC contains a significant limitation:\nno efforts are made to ensure answers and source documents are consistent. As only 53% of gold\nanswers are fully extractive, it is expected that abstrac\n[3] (06a_AVeriTeC_shared_task_2024_overview_2410.23850.pdf) taken with a grain of salt.\nHuman evaluation of evidence predictions offers valuable insights into the limitations of the\nAVERITEC score, and suggests directions for\nfuture research.\nA notable observation is the\ndiscrepancy between human evaluation and the\nAVE",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk has only 50% question word overlap and ranks 112 in dense retrieval, indicating it was not surfaced due to lexical mismatch."
+    },
+    {
+      "qid": "ts051",
+      "type": "single",
+      "question": "What type of evidence do veracity prediction systems typically have to consider to increase evidence coverage?",
+      "gold_quote": "The latter typically also\nhave to consider noisy evidence during veracity prediction to increase evidence coverage",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 23,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.89
+      },
+      "top3": "[1] (14_REAL_2609.08943.pdf) 3.2\nFact-Checking System Evaluation\nExisting evaluation protocols for fact-checking systems primarily\nassess two independent aspects: (1) whether a model predicts the\ncorrect veracity label supported by identified evidence, and (2)\nwhether the predicted eviden\n[2] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Chapter 2: Background and literature review\ndeﬁne a good explanation speciﬁcally for fact veriﬁcation systems. These criteria are constrained\nto the veracity prediction component of the fact-checking pipeline since evidence retrieval\ntypically exclusively reli\n[3] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) teams to omitting these labels from their predictions altogether. Moreover, systems that calibrate\ntheir veracity predictions to favor refuted claims\ngain an advantage (as long as they returned adequate evidence), as refuted claims dominate the\ndataset, compri",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk is present and mostly matches the question words, but dense retrieval ranked it 23rd and it did not enter the top‑20 candidate pool, indicating a vocabulary/semantic mismatch."
+    },
+    {
+      "qid": "ts095",
+      "type": "single",
+      "question": "What does the AMBIFC dataset aim to contribute to research?",
+      "gold_quote": "By publishing AMBIFC along with its\nannotations, we aim to contribute to research integrating annotations into trained models.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 101,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.75
+      },
+      "top3": "[1] (13_AmbiFC_TACL2024.pdf) AMBIFC, a large fact-checking dataset derived\nfrom real-world information needs, sourced from\nreal-world yes/no questions of BoolQ (Clark et al.,\n2019). AMBIFC contains evidence annotations at\nthe passage and sentence level from full Wikipedia\npages, from a mi\n[2] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) MultiFC (Augenstein et al., 2019) the evidence is\nannotated automatically and thus cannot be relied\nupon for evaluation (Glockner et al., 2022).\nThe\nrecently\nproposed\nAVERITEC\ndataset (Schlichtkrull et al., 2023a) addressed these\nlimitations. It consists of re\n[3] (03_OpenFC_2609.33579.pdf) controlled policy comparison. Provider-native search, direct generation, and AFC systems differ in their backends\nor interaction pipelines and are included as heterogeneous\nend-to-end references rather than policy-only controls. OOD\ndatasets remain more challe",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk is present in the index but ranks low (101) due to wording differences between question and chunk, preventing it from entering the candidate pool."
+    },
+    {
+      "qid": "ts019",
+      "type": "single",
+      "question": "At which stage does the Graph-of-Thoughts (GoT) framework typically expand to its maximum width, demanding substantial processing resources?",
+      "gold_quote": "The computational burden becomes especially acute near the evidence retrieval\nstage, where the GoT typically expands to its maximum width, demanding substantial processing resources.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 1,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 230,
+        "gold_chunk_in_C2_candidate_pool_top20": false,
+        "gold_chunk_rank_in_final_top10": null,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.73
+      },
+      "top3": "[1] (06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf) thoughts as vertices and their dependencies as\nedges. An edge (t1, t2) signifies that t1 serves\nas input for generating t2. Unlike other prompting\nmethods, GoT uniquely permits the construction of\nan arbitrary directed graph, enabling the aggregation of indivi\n[2] (10_Ji_2026_survey_2601.00536.pdf) in our framework are instantiated across the 104\nmulti-hop QA / RAG papers in our Topic 4 sample.\nAlong Axis A (overall execution plan), more than\nhalf of the systems (56/104, 53.8%) still follow\na frozen-pool “retrieve–then–read” pattern, while\n39/104 (37.5%)\n[3] (01_Aly_2024_Neuro-symbolic_fact_verification_PhD_thesis.pdf) Proceedings of the 2023 IEEE/ACM International Conference on Advances in Social Networks\nAnalysis and Mining, ASONAM ’23, pages 164–170, New York, NY, USA. Association for\nComputing Machinery.\nFranz Nowak, Anej Svete, Alexandra Butoi, and Ryan Cotterell. 2024.",
+      "category": "vocabulary_mismatch",
+      "rationale": "The gold chunk is present in the index but its dense retrieval rank is 230, indicating the query wording did not match the chunk well enough to retrieve it into the candidate pool."
+    },
+    {
+      "qid": "ts059",
+      "type": "single",
+      "question": "How many teams achieved faster runtimes than the baseline’s average of 33.88s per claim?",
+      "gold_quote": "With these efficiency modifications, five out of seven teams (HUMANE, Yellow Flash, FZIGOT, EFC, and Checkmate) achieved faster runtimes than the baseline’s\naverage of 33.88s per claim.",
+      "facts": {
+        "gold_chunks_in_index_meeting_50pct_rule": 1,
+        "chunks_touching_gold_span": 2,
+        "best_dense_rank_of_gold_chunk_in_whole_corpus": 5,
+        "gold_chunk_in_C2_candidate_pool_top20": true,
+        "gold_chunk_rank_in_final_top10": 10,
+        "ligature_or_overlong_token_count_in_gold_quote": 0,
+        "question_words_found_in_gold_chunk": 0.88
+      },
+      "top3": "[1] (06b_AVeriTeC_shared_task_2025_overview_fever-1.15.pdf) average of 33.88s per claim.\nThe only non-baseline system that does not use\nmodel quantization is CTU AIC. Instead, Team\nCTU AIC uses the largest model with the maximum possible context size that fits on the VM’s\nGPU while satisfying the efficiency constraint,\n[2] (06d_Graph-of-Thoughts_Rolinger_Liu_FEVER2025.pdf) official published leaderboard3. Notably, scores for\nthe development split are significantly higher than\nthose on the test split. This discrepancy aligns\nwith observations from the baseline model provided by the shared task organizers, which achieved\nAVeriTeC \n[3] (12b_Ev2R_2411.05375.pdf) and high score (0.435 or higher). This classification enabled systematic examination of system\nperformance across different scoring levels. Using stratified sampling, we selected 560 claims to\nensure an even distribution across the dataset.\nHuman ratings and a",
+      "category": "reranker_demoted",
+      "rationale": "The gold chunk was present in the candidate pool (top20) but the reranker demoted it to rank 10, keeping it out of the top‑5 results."
+    }
+  ]
+}

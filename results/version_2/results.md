@@ -1,0 +1,151 @@
+# Results
+
+_git 7536aa6ccb on eval/rag-benchmark, dirty=True_
+
+## S2 Retrieval (test split; mean [95% bootstrap CI over questions])
+
+n single = 100, n multi = 20. Multi-passage Hit@k = ALL gold spans in top-k; Recall@k = fraction of gold spans found. For single-passage questions Recall@k == Hit@k.
+
+
+### single-passage
+
+| cond | hit@1 | hit@3 | hit@5 | hit@10 | recall@1 | recall@3 | recall@5 | recall@10 | mrr@1 | mrr@3 | mrr@5 | mrr@10 | ndcg@1 | ndcg@3 | ndcg@5 | ndcg@10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| C1 | 0.360 [0.270, 0.460] | 0.550 [0.450, 0.650] | 0.610 [0.510, 0.700] | 0.710 [0.620, 0.800] | 0.360 [0.270, 0.460] | 0.550 [0.450, 0.650] | 0.610 [0.510, 0.700] | 0.710 [0.620, 0.800] | 0.360 [0.270, 0.460] | 0.443 [0.355, 0.532] | 0.456 [0.370, 0.543] | 0.470 [0.386, 0.554] | 0.360 [0.270, 0.460] | 0.422 [0.340, 0.505] | 0.450 [0.369, 0.531] | 0.485 [0.408, 0.561] |
+| C2 | 0.600 [0.500, 0.690] | 0.680 [0.580, 0.770] | 0.740 [0.650, 0.820] | 0.810 [0.730, 0.880] | 0.600 [0.500, 0.690] | 0.680 [0.580, 0.770] | 0.740 [0.650, 0.820] | 0.810 [0.730, 0.880] | 0.600 [0.500, 0.690] | 0.635 [0.542, 0.722] | 0.648 [0.558, 0.733] | 0.656 [0.568, 0.739] | 0.600 [0.500, 0.690] | 0.580 [0.492, 0.663] | 0.606 [0.521, 0.685] | 0.637 [0.558, 0.712] |
+| C3 | 0.630 [0.530, 0.720] | 0.700 [0.610, 0.790] | 0.750 [0.660, 0.830] | 0.890 [0.820, 0.950] | 0.630 [0.530, 0.720] | 0.700 [0.610, 0.790] | 0.750 [0.660, 0.830] | 0.890 [0.820, 0.950] | 0.630 [0.530, 0.720] | 0.660 [0.568, 0.747] | 0.671 [0.581, 0.754] | 0.689 [0.605, 0.767] | 0.630 [0.530, 0.720] | 0.608 [0.521, 0.690] | 0.633 [0.550, 0.712] | 0.694 [0.622, 0.760] |
+| S | 0.530 [0.430, 0.630] | 0.600 [0.500, 0.690] | 0.700 [0.610, 0.790] | 0.750 [0.660, 0.830] | 0.530 [0.430, 0.630] | 0.600 [0.500, 0.690] | 0.700 [0.610, 0.790] | 0.750 [0.660, 0.830] | 0.530 [0.430, 0.630] | 0.562 [0.468, 0.655] | 0.584 [0.494, 0.672] | 0.591 [0.503, 0.678] | 0.530 [0.430, 0.630] | 0.572 [0.478, 0.665] | 0.612 [0.525, 0.698] | 0.629 [0.544, 0.712] |
+| C2-nodiv | 0.600 [0.500, 0.690] | 0.770 [0.680, 0.850] | 0.790 [0.710, 0.870] | 0.830 [0.750, 0.900] | 0.600 [0.500, 0.690] | 0.770 [0.680, 0.850] | 0.790 [0.710, 0.870] | 0.830 [0.750, 0.900] | 0.600 [0.500, 0.690] | 0.677 [0.592, 0.758] | 0.682 [0.598, 0.761] | 0.687 [0.604, 0.765] | 0.600 [0.500, 0.690] | 0.653 [0.572, 0.729] | 0.660 [0.580, 0.734] | 0.680 [0.603, 0.750] |
+
+### multi-passage
+
+| cond | hit@1 | hit@3 | hit@5 | hit@10 | recall@1 | recall@3 | recall@5 | recall@10 | mrr@1 | mrr@3 | mrr@5 | mrr@10 | ndcg@1 | ndcg@3 | ndcg@5 | ndcg@10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| C1 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.050 [0.000, 0.150] | 0.250 [0.100, 0.450] | 0.150 [0.050, 0.250] | 0.225 [0.125, 0.325] | 0.275 [0.150, 0.400] | 0.425 [0.250, 0.600] | 0.300 [0.100, 0.500] | 0.367 [0.175, 0.567] | 0.377 [0.192, 0.568] | 0.391 [0.210, 0.581] | 0.300 [0.100, 0.500] | 0.228 [0.115, 0.347] | 0.249 [0.129, 0.374] | 0.300 [0.175, 0.428] |
+| C2 | 0.000 [0.000, 0.000] | 0.200 [0.050, 0.400] | 0.200 [0.050, 0.400] | 0.300 [0.100, 0.500] | 0.225 [0.125, 0.325] | 0.375 [0.200, 0.550] | 0.425 [0.275, 0.575] | 0.525 [0.350, 0.675] | 0.450 [0.250, 0.650] | 0.500 [0.300, 0.700] | 0.520 [0.320, 0.720] | 0.531 [0.336, 0.725] | 0.450 [0.250, 0.650] | 0.345 [0.191, 0.504] | 0.369 [0.223, 0.522] | 0.420 [0.274, 0.568] |
+| C3 | 0.000 [0.000, 0.000] | 0.150 [0.000, 0.300] | 0.250 [0.100, 0.450] | 0.400 [0.200, 0.600] | 0.250 [0.150, 0.350] | 0.400 [0.250, 0.550] | 0.500 [0.350, 0.650] | 0.600 [0.425, 0.750] | 0.500 [0.300, 0.700] | 0.575 [0.375, 0.775] | 0.595 [0.405, 0.785] | 0.601 [0.411, 0.785] | 0.500 [0.300, 0.700] | 0.371 [0.230, 0.509] | 0.426 [0.289, 0.561] | 0.478 [0.337, 0.616] |
+| S | 0.000 [0.000, 0.000] | 0.050 [0.000, 0.150] | 0.100 [0.000, 0.250] | 0.150 [0.000, 0.301] | 0.150 [0.050, 0.250] | 0.275 [0.150, 0.400] | 0.325 [0.175, 0.475] | 0.450 [0.325, 0.600] | 0.300 [0.100, 0.500] | 0.400 [0.200, 0.600] | 0.412 [0.225, 0.600] | 0.438 [0.262, 0.623] | 0.300 [0.100, 0.500] | 0.277 [0.150, 0.411] | 0.303 [0.169, 0.445] | 0.351 [0.224, 0.485] |
+| C2-nodiv | 0.000 [0.000, 0.000] | 0.100 [0.000, 0.250] | 0.200 [0.050, 0.400] | 0.350 [0.150, 0.550] | 0.225 [0.125, 0.325] | 0.325 [0.175, 0.475] | 0.400 [0.250, 0.575] | 0.525 [0.350, 0.700] | 0.450 [0.250, 0.650] | 0.500 [0.300, 0.700] | 0.512 [0.312, 0.713] | 0.529 [0.333, 0.725] | 0.450 [0.250, 0.650] | 0.324 [0.185, 0.470] | 0.365 [0.218, 0.517] | 0.411 [0.269, 0.552] |
+
+### Config and latency (cold, ms/query, single-passage questions)
+
+| cond | config | chunks | retrieval ms (mean/p50/p95) | rerank ms (mean/p50/p95) |
+|---|---|---|---|---|
+| C1 | `dense|512|128|all-MiniLM-L6-v2|pool-|rr0|div1` | 5569 | 43/22/95 | - |
+| C2 | `dense|512|128|all-MiniLM-L6-v2|pool20|rr1|div1` | 5569 | 23/21/37 | 93/83/150 |
+| C3 | `hybrid|512|128|all-MiniLM-L6-v2|pool20|rr1|div1` | 5569 | 70/67/105 | 129/121/206 |
+| S | `dense|512|0|BAAI/bge-small-en-v1.5|pool10|rr1|div1` | 4701 | 71/69/100 | 60/55/117 |
+| C2-nodiv | `dense|512|128|all-MiniLM-L6-v2|pool20|rr1|div0` | 5569 | 34/33/50 | 155/150/264 |
+
+### Paired differences (A - B), same questions. ABSOLUTE = difference in the metric; RELATIVE = (mean_A - mean_B) / mean_B
+
+| A-B | type | metric | mean A | mean B | absolute diff [95% CI] | relative diff [95% CI] |
+|---|---|---|---|---|---|---|
+| C2-C1 | single | hit@1 | 0.600 | 0.360 | +0.240 [+0.140, +0.340] | +66.7% [+34.2%, +115.4%] |
+| C2-C1 | single | hit@5 | 0.740 | 0.610 | +0.130 [+0.040, +0.220] | +21.3% [+6.5%, +40.0%] |
+| C2-C1 | single | recall@10 | 0.810 | 0.710 | +0.100 [+0.030, +0.170] | +14.1% [+4.0%, +26.2%] |
+| C2-C1 | single | mrr@10 | 0.656 | 0.470 | +0.186 [+0.112, +0.262] | +39.6% [+21.8%, +62.7%] |
+| C2-C1 | single | ndcg@5 | 0.606 | 0.450 | +0.156 [+0.081, +0.233] | +34.6% [+16.7%, +58.9%] |
+| C2-C1 | single | ndcg@10 | 0.637 | 0.485 | +0.152 [+0.088, +0.219] | +31.3% [+16.8%, +49.9%] |
+| C2-C1 | multi | hit@1 | 0.000 | 0.000 | +0.000 [+0.000, +0.000] | n/a [n/a, n/a] |
+| C2-C1 | multi | hit@5 | 0.200 | 0.050 | +0.150 [-0.050, +0.350] | +300.0% [-66.7%, +600.0%] |
+| C2-C1 | multi | recall@10 | 0.525 | 0.425 | +0.100 [+0.000, +0.200] | +23.5% [+0.0%, +66.7%] |
+| C2-C1 | multi | mrr@10 | 0.531 | 0.391 | +0.139 [-0.047, +0.322] | +35.6% [-9.7%, +122.0%] |
+| C2-C1 | multi | ndcg@5 | 0.369 | 0.249 | +0.120 [-0.019, +0.258] | +48.1% [-6.6%, +147.2%] |
+| C2-C1 | multi | ndcg@10 | 0.420 | 0.300 | +0.120 [-0.002, +0.235] | +40.2% [-0.6%, +101.1%] |
+| C3-C2 | single | hit@1 | 0.630 | 0.600 | +0.030 [-0.020, +0.080] | +5.0% [-3.3%, +14.8%] |
+| C3-C2 | single | hit@5 | 0.750 | 0.740 | +0.010 [-0.050, +0.070] | +1.4% [-7.2%, +10.8%] |
+| C3-C2 | single | recall@10 | 0.890 | 0.810 | +0.080 [+0.010, +0.160] | +9.9% [+1.1%, +21.6%] |
+| C3-C2 | single | mrr@10 | 0.689 | 0.656 | +0.033 [-0.018, +0.087] | +5.0% [-2.6%, +14.2%] |
+| C3-C2 | single | ndcg@5 | 0.633 | 0.606 | +0.027 [-0.023, +0.082] | +4.5% [-3.7%, +14.4%] |
+| C3-C2 | single | ndcg@10 | 0.694 | 0.637 | +0.057 [+0.004, +0.112] | +8.9% [+0.6%, +19.0%] |
+| C3-C2 | multi | hit@1 | 0.000 | 0.000 | +0.000 [+0.000, +0.000] | n/a [n/a, n/a] |
+| C3-C2 | multi | hit@5 | 0.250 | 0.200 | +0.050 [-0.100, +0.200] | +25.0% [-50.0%, +250.0%] |
+| C3-C2 | multi | recall@10 | 0.600 | 0.525 | +0.075 [+0.000, +0.150] | +14.3% [+0.0%, +36.4%] |
+| C3-C2 | multi | mrr@10 | 0.601 | 0.531 | +0.071 [-0.004, +0.181] | +13.3% [-0.6%, +43.4%] |
+| C3-C2 | multi | ndcg@5 | 0.426 | 0.369 | +0.057 [-0.028, +0.146] | +15.6% [-6.5%, +54.6%] |
+| C3-C2 | multi | ndcg@10 | 0.478 | 0.420 | +0.058 [+0.001, +0.122] | +13.8% [+0.2%, +36.3%] |
+| S-C2 | single | hit@1 | 0.530 | 0.600 | -0.070 [-0.170, +0.030] | -11.7% [-27.0%, +5.5%] |
+| S-C2 | single | hit@5 | 0.700 | 0.740 | -0.040 [-0.130, +0.050] | -5.4% [-17.1%, +7.5%] |
+| S-C2 | single | recall@10 | 0.750 | 0.810 | -0.060 [-0.150, +0.030] | -7.4% [-17.4%, +3.8%] |
+| S-C2 | single | mrr@10 | 0.591 | 0.656 | -0.065 [-0.152, +0.022] | -9.9% [-22.1%, +3.4%] |
+| S-C2 | single | ndcg@5 | 0.612 | 0.606 | +0.006 [-0.078, +0.090] | +1.0% [-12.1%, +15.9%] |
+| S-C2 | single | ndcg@10 | 0.629 | 0.637 | -0.008 [-0.087, +0.071] | -1.3% [-13.1%, +11.8%] |
+| S-C2 | multi | hit@1 | 0.000 | 0.000 | +0.000 [+0.000, +0.000] | n/a [n/a, n/a] |
+| S-C2 | multi | hit@5 | 0.100 | 0.200 | -0.100 [-0.350, +0.150] | -50.0% [-100.0%, +200.0%] |
+| S-C2 | multi | recall@10 | 0.450 | 0.525 | -0.075 [-0.275, +0.150] | -14.3% [-44.8%, +35.7%] |
+| S-C2 | multi | mrr@10 | 0.438 | 0.531 | -0.093 [-0.333, +0.146] | -17.5% [-52.3%, +37.5%] |
+| S-C2 | multi | ndcg@5 | 0.303 | 0.369 | -0.066 [-0.256, +0.117] | -17.8% [-56.4%, +44.4%] |
+| S-C2 | multi | ndcg@10 | 0.351 | 0.420 | -0.070 [-0.251, +0.107] | -16.6% [-49.3%, +33.6%] |
+
+S identical to C2: False. Chroma parity (exact cosine vs Chroma HNSW, top-10 overlap): {'mean_top10_overlap_with_exact': 0.895, 'min': 0.1, 'n_queries': 120}.
+
+## Dev grid: see dev_grid.md. Selected S = {'name': 'S', 'size': 512, 'overlap': 0, 'embedder': 'BAAI/bge-small-en-v1.5', 'mode': 'dense', 'pool': 10, 'rerank': True, 'diversity': True, 'top_k': 10} (dev nDCG@5 0.7715); n_dev = 40
+
+## S3 Answers + judge
+
+answer=gpt-oss-20b, judge=nemotron-3-super-120b, subset={'single': 45, 'multi': 15, 'unanswerable': 20}. Definitions: {'correct_yes': "judge says 'yes' vs gold answer (partial counts as not correct); answerable questions only", 'faithful': 'judge says every claim is supported by the retrieved context', 'abstain_rate_unanswerable': 'share of unanswerable questions where the system declined', 'hallucinated_answer_rate_unanswerable': '1 - abstain rate: the system gave a substantive answer to an unanswerable question'}
+
+| cond | n ans | correct (yes) | correct (yes+partial) | faithful (all answers) | faithful (non-abstained) | abstain on answerable | n unans | abstain on unanswerable | hallucinated answer on unanswerable | failed |
+|---|---|---|---|---|---|---|---|---|---|---|
+| C1 | 60 | 0.750 [0.633, 0.850] | 0.817 [0.717, 0.917] | 0.833 [0.733, 0.917] | 0.956 [0.889, 1.000] | 0.250 [0.150, 0.367] | 20 | 1.000 [1.000, 1.000] | 0.000 [0.000, 0.000] | 0 |
+| C2 | 60 | 0.767 [0.650, 0.867] | 0.817 [0.717, 0.900] | 0.833 [0.733, 0.917] | 0.882 [0.784, 0.961] | 0.150 [0.067, 0.250] | 20 | 1.000 [1.000, 1.000] | 0.000 [0.000, 0.000] | 0 |
+| S | 60 | 0.683 [0.567, 0.800] | 0.767 [0.650, 0.867] | 0.800 [0.700, 0.900] | 0.956 [0.889, 1.000] | 0.250 [0.150, 0.367] | 20 | 1.000 [1.000, 1.000] | 0.000 [0.000, 0.000] | 0 |
+
+| A-B | metric | mean A | mean B | absolute diff [95% CI] | relative diff [95% CI] | n |
+|---|---|---|---|---|---|---|
+| C2-C1 | correct_yes(answerable) | 0.767 | 0.750 | +0.017 [-0.083, +0.133] | +2.2% [-11.4%, +18.6%] | 60 |
+| C2-C1 | faithful(answerable) | 0.833 | 0.833 | +0.000 [-0.117, +0.117] | +0.0% [-13.2%, +15.6%] | 60 |
+| C2-C1 | hallucinated_answer(unanswerable) | 0.000 | 0.000 | +0.000 [+0.000, +0.000] | n/a [n/a, n/a] | 20 |
+| S-C2 | correct_yes(answerable) | 0.683 | 0.767 | -0.083 [-0.200, +0.033] | -10.9% [-25.0%, +4.7%] | 60 |
+| S-C2 | faithful(answerable) | 0.800 | 0.833 | -0.033 [-0.133, +0.067] | -4.0% [-16.0%, +8.5%] | 60 |
+| S-C2 | hallucinated_answer(unanswerable) | 0.000 | 0.000 | +0.000 [+0.000, +0.000] | n/a [n/a, n/a] | 20 |
+
+## S4 RAGAS continuity (original 21 queries, legacy corpus)
+
+judge=nemotron-3-super-120b, answer=gpt-oss-20b, ragas 0.4.3, corpus: legacy (20 stub PDFs + Attention Is All You Need), production default config 512/128/MiniLM
+
+| cond | context precision | faithfulness | failed (CP, F) |
+|---|---|---|---|
+| C1 | 0.7020 [0.5540, 0.8421] | 0.8333 [0.7143, 0.9524] | {'context_precision': 0, 'faithfulness': 0} |
+| C2 | 0.8337 [0.7172, 0.9339] | 0.8492 [0.7222, 0.9524] | {'context_precision': 0, 'faithfulness': 0} |
+
+C2-C1|context_precision: mean A 0.8337, mean B 0.7020, absolute +0.1317 [-0.0364, +0.3077], relative +18.8% [-4.4%, +53.4%] (n=21)
+
+C2-C1|faithfulness: mean A 0.8492, mean B 0.8333, absolute +0.0159 [-0.1429, +0.1667], relative +1.9% [-15.7%, +22.2%] (n=21)
+
+Original README claim: {'dense_only_context_precision': 0.869, 'hybrid_context_precision': 0.9167, 'abs_delta': 0.0477, 'rel_delta_pct': 5.5, 'source': "README.md 'Before/After Comparison' (added in commit 115e8b5, 2026-08-25)"}
+
+
+## S5 Error analysis: see error_analysis.md
+
+
+# S4b: RAGAS on the test split (optional)
+
+**n = 30 single-passage questions (fixed subset of the S3 test subset); the judge is a single LLM (nemotron-3-super-120b).** Means with 95% bootstrap CIs; NaN samples are excluded (never scored as 0).
+
+| condition | metric | mean [95% CI] | n used | NaN excluded | status |
+|---|---|---|---|---|---|
+| C1 | context_precision | 0.6210 [0.5018, 0.7358] | 30 | 0 | ok |
+| C1 | faithfulness | 0.7833 [0.6444, 0.9111] | 30 | 0 | ok |
+| C2 | context_precision | 0.5849 [0.4707, 0.6942] | 30 | 0 | ok |
+| C2 | faithfulness | 0.7733 [0.6355, 0.8944] | 30 | 0 | ok |
+
+## Paired difference C2 - C1 (same questions with both scores present)
+
+- context_precision: C2 0.5849 vs C1 0.6210; absolute -0.0361 [-0.1679, +0.1054]; relative -5.8% [-24.9%, +19.8%]; n pairs = 30
+- faithfulness: C2 0.7733 vs C1 0.7833; absolute -0.0100 [-0.1722, +0.1556]; relative -1.3% [-20.5%, +22.6%]; n pairs = 30
+
+
+## Human check (labels in eval/human_check_*.csv)
+
+```
+QUESTIONS (n=20 of 20 labelled): valid 11, ambiguous 7, invalid 2.
+  valid 55% (95% CI 34%-74%); not invalid 90% (95% CI 70%-97%); invalid 10% (95% CI 3%-30%).
+  Question filter vs human: percent agreement 55.0%; kappa 0.000 (uninformative: the filter label is constant (it never rejects), so kappa is 0 by construction when labels vary).
+  By type: multi: 0/3 valid (2 ambiguous, 1 invalid); single: 11/17 valid (5 ambiguous, 1 invalid).
+  Not valid: tm003 (multi: ambiguous), ts006 (single: ambiguous), tm007 (multi: invalid), ts033 (single: ambiguous), ts043 (single: invalid), ts023 (single: ambiguous), ts051 (single: ambiguous), ts001 (single: ambiguous), tm001 (multi: ambiguous)
+JUDGE FAITHFULNESS vs HUMAN (n=20 of 20 labelled): percent agreement 85.0% (17/20, 95% CI 64%-95%); Cohen's kappa 0.483.
+  Human: 16 faithful / 4 not faithful. Judge: 17 faithful / 3 not faithful. Both faithful 15, both not faithful 2.
+  Judge more lenient than the human (judge faithful, human not) on 2: tm010, ts073; judge stricter (judge not faithful, human faithful) on 1: ts068.
+```
